@@ -1,0 +1,3274 @@
+<mat-toolbar color="primary" class="navbar">
+  <div>www.declararenta.com</div>
+  <div>
+    <a mat-fab color="primary" routerLink="/" aria-placeholder="Salir">
+      <mat-icon>home</mat-icon>
+      <br>
+      Salir     
+    </a>
+  </div>
+</mat-toolbar>
+
+<br>
+<mat-tab-group mat-stretch-tabs class="matTabGroup">
+
+    <!--**********************************START MAT-TAB INFORMACION PERSONAL******************************-->  
+    
+    <mat-tab label="INFORMACION PERSONAL"> 
+      <br>
+      <br>
+      <h3 id="ingresos"><strong>INFORMACION PERSONAL</strong></h3>
+      <h3>Cuéntanos un poco más sobre ti respondiendo las siguientes preguntas:</h3>  
+      <br>  
+    <!--**-->
+    <div class="containerPersonal">  
+  
+ <form [formGroup]="form" (ngSubmit)="personal($event)">
+      <ul>
+        <li>
+   <mat-label><h3>¿Este año declaras renta por primera vez?</h3></mat-label>
+  <mat-form-field appearance="fill">
+    <mat-label>Seleccione</mat-label>
+    <mat-select formControlName="personalPrimera" (selectionChange)="eventoRentaPrimeraVez($event)">
+      <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('personalPrimera').hasError('required')">
+     Campo requerido
+    </mat-error>
+  </mat-form-field>
+  <mat-divider></mat-divider>
+  </li>
+  
+  <li *ngIf="rentaPrimeraVez">
+    <mat-label><h3>¿Realizaste una solicitud de devolución de saldo a favor por tu declaración de renta del año anterior?</h3></mat-label>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione</mat-label>
+      <mat-select formControlName="personalSegunda">
+        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    </li>
+
+    <li *ngIf="rentaPrimeraVez">
+      <mat-label><h3>¿Declaraste Renta el año pasado, es decir el 2018?</h3></mat-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione</mat-label>
+        <mat-select formControlName="personalTercera">
+          <mat-option value="Si"(click)="showRenta2018()"(click)="hideRentaOtrosPeriodos()">Si</mat-option>
+          <mat-option value="No"(click)="hideRenta2018()"(click)="showRentaOtrosPeriodos()">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      </li>
+
+  <li>
+  <mat-label><h3>¿Tienes habilitado el mecanismo de firma electrónica para presentar tu declaración de renta en el portal de la DIAN?</h3></mat-label>
+  <mat-form-field appearance="fill">
+    <mat-label>Seleccione</mat-label>
+    <mat-select formControlName="personalCuarta">
+      <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('personalCuarta').hasError('required')">
+      Campo requerido
+    </mat-error>
+  </mat-form-field>
+  </li>   
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button mat-raised-button color="warn" type="submit"
+>Guardar</button> 
+</form>
+</div>
+
+    <!--*************************************FINISH MAT-TAB INFORMACION PERSONAL****************************************-->  
+
+    <!--**************************************START MAT-TAB BIENES******************************************-->
+    <mat-tab label="BIENES" *ngIf="cambioTabBienes">
+      <br>
+      <br>
+   <!--*******************************-->   
+ <div *ngIf="bienesAllContainer === true">
+    <div class="container" id="ingresos">
+      <div class="row justify-content-md-center">      
+         <mat-label><h3><strong>BIENES INMUEBLES Y MUEBLES</strong></h3></mat-label>     
+      </div>
+      </div>     
+      <h3>Selecciona los BIENES que tenías a Dic 31 de 2019.
+Tener en cuenta los bienes que compraste en años anteriores y siguen a tu nombre.</h3>
+<br>
+  <div class="row">
+      <mat-card class="employee" *ngIf="financialMarco === true">             
+        <mat-card-header>
+            <mat-card-title><h4><strong>Productos Financieros</strong></h4></mat-card-title>
+        </mat-card-header>    
+        <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/banks.png">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="primary"(click)="showFinancial()"(click)="hideCasaLote()"
+          (click)="hideCarroMoto()"(click)="hideOtrasInversiones()"><h5>Mostrar</h5></a>
+          
+          <a mat-button routerLink="."(click)="hideFinancial()"(click)="showOtrasInversiones2()"(click)="showFinancial2()"
+          (click)="showCarroMoto2()" (click)="showCasaLote2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card>      
+   
+  
+      <mat-card class="employee" *ngIf="casaLoteMarco=== true">   
+          <mat-card-header>
+            <mat-card-title labelPosition="before"><h4><strong>Bienes Raíces</strong></h4></mat-card-title>
+        </mat-card-header>
+        <br>
+        <div class="container">
+          <img mat-card-image src="assets/images/home.jpg">
+        </div>
+           <mat-card-actions>
+            <a mat-mini-fab routerLink="."color="primary"(click)="showCasaLote()"(click)="hideOtrasInversiones()"
+            (click)="hideFinancial()"(click)="hideCarroMoto()"><h5>Mostrar</h5></a>
+            
+            <a mat-button routerLink="."(click)="hideCasaLote()"(click)="showFinancial2()"(click)="showCarroMoto2()"
+            (click)="showOtrasInversiones2()"(click)="showCasaLote2()"><h5><strong>Salir</strong></h5></a>
+           </mat-card-actions>   
+        </mat-card> 
+    
+        <mat-card class="employee" *ngIf="carroMotoMarco=== true">         
+        <mat-card-header>
+            <mat-card-title labelPosition="justify-content-md-center"><h4><strong>&nbsp;&nbsp;&nbsp;Vehículos&nbsp;&nbsp;&nbsp;</strong></h4></mat-card-title>
+        </mat-card-header>
+        <br>
+        <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/car.jpg">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="primary" (click)="showCarroMoto()"(click)="hideCasaLote()"
+          (click)="hideFinancial()"(click)="hideOtrasInversiones()"><h5>Mostrar</h5></a>
+         
+          <a mat-button routerLink="."(click)="hideCarroMoto()"(click)="showFinancial2()"(click)="showOtrasInversiones2()"
+          (click)="showCasaLote2()"(click)="showCarroMoto2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card>      
+
+        <mat-card class="employee" *ngIf="otrasInversionesMarco === true">
+        <mat-card-header>
+            <mat-card-title labelPosition="justify-content-md-center" ><h4><strong>Otros Bienes</strong></h4></mat-card-title>
+        </mat-card-header>
+        <br>
+        <br>
+        
+      <div class="container">
+        <img  mat-card-image src="assets/images/investment.jpg">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="primary" (click)="showOtrasInversiones()"(click)="hideCasaLote()"
+          (click)="hideCarroMoto()"(click)="hideFinancial()"><h5>Mostrar</h5></a>
+          
+          <a mat-button routerLink="."(click)="hideOtrasInversiones()"(click)="showOtrasInversiones2()"
+          (click)="showCarroMoto2()"(click)="showCasaLote2()"(click)="showFinancial2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card>  
+
+  </div>
+</div>
+  <br>
+
+  <!--******start financial***--> 
+
+  <div style="padding-left: 10px;" *ngIf="financial">
+    <h4>Selecciona únicamente los productos financieros que tenías al 31 de diciembre de 2019:</h4>
+    
+    <div class="container">
+    <div class="row">
+      <div class="col">
+        <br>  
+        <label class="financierosColor"><strong>BANCOS,&nbsp;&nbsp;COOPERATIVAS DE AHORRO Y COMPAÑÍAS DE FINANCIAMIENTO</strong></label>             
+            <br>
+            <br>
+            <h4>¿Cuenta de ahorros?</h4>
+            <mat-slide-toggle [(ngModel)]="certificadoCuentaAhorro"
+            ></mat-slide-toggle>
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h4>¿Cuenta Corriente?</h4>
+            <mat-slide-toggle [(ngModel)]="certificadoCuentaCorriente"
+            ></mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h4>¿Fondos de Inversión (Fiducuenta, Fidurenta, Plan Semilla…)?</h4>
+            <mat-slide-toggle [(ngModel)]="certificadoFiduciaria"
+            ></mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h4>¿CDT?</h4>
+            <mat-slide-toggle [(ngModel)]="CDT"
+            ></mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h4>¿Tarjeta de Crédito?</h4>
+            <mat-slide-toggle [(ngModel)]="tarjetaCredito"
+            ></mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h4>¿Crédito Hipotecario o Leasin Habitacional?</h4>
+            <mat-slide-toggle [(ngModel)]="creditoHipotecario"
+            ></mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <br>
+            <br>
+            <h4>¿Algún otro Crédito?</h4>
+            <mat-slide-toggle [(ngModel)]="otrosCreditos"
+            ></mat-slide-toggle> 
+            <mat-divider></mat-divider>    
+        
+      </div>
+      <div class="col">
+        <br>
+
+        <label class="financierosColor"><strong>PRODUCTOS NO BANCARIOS</strong></label>        
+        <br>
+        <br>
+        <h4>¿Acciones de Sociedades Comerciales?</h4>
+        <mat-slide-toggle [(ngModel)]="accionesPrivadas"
+        ></mat-slide-toggle>
+        <mat-divider></mat-divider>
+        <br>
+        <br>
+        <h4>¿Prestamos "de" y "a" terceros?</h4>
+        <mat-slide-toggle [(ngModel)]="prestamosTerceros"
+        ></mat-slide-toggle>
+        <mat-divider></mat-divider>
+        <br>
+        <br>
+        <h4>¿Efectivo?</h4>
+        <mat-slide-toggle [(ngModel)]="efectivo"
+        ></mat-slide-toggle> 
+        <mat-divider></mat-divider>  
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>        
+        <div class="button">
+          <button mat-raised-button color="warn" type="submit" class="button"(click)="hideFinancial()"(click)="showOtrasInversiones2()"(click)="showFinancial2()"
+          (click)="showCarroMoto2()" (click)="showCasaLote2()">Guardar|Continuar</button>   
+        </div>
+      </div>
+
+    </div>
+  </div>
+ </div>
+  <!--*******finish financial*************-->
+
+  <!--********start casaLote**************--> 
+  <div *ngIf="casaLote === true">
+    
+   <form [formGroup]="form2" (ngSubmit)="bienRaizForm($event)">
+    <ol>
+    <li>
+    <div class="">
+      <div class="row">
+         <div class="col-sm">
+            <h4>¿Tenías bienes inmuebles como casa(s) o lote(s) a tu nombre a 31 de diciembre de 2019, los cuales se encontraban registrados en Oficinas de Instrumentos Públicos?</h4>
+             </div>
+                <div class="col-sm">
+                <mat-radio-group (change)="casaLoteEvent($event)" formControlName="bienRaiz">
+                <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group> 
+              <mat-error *ngIf="form2.get('bienRaiz').hasError('required')
+              && form2.get('bienRaiz').touched">
+                Campo requerido
+              </mat-error>                           
+             </div>         
+        </div>
+    </div>         
+    </li>    
+  </ol> 
+  <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit"[disabled]="form2.invalid"
+    (click)="bienRaizForm($event)"(click)="hideCasaLote()"(click)="showFinancial2()"(click)="showCarroMoto2()"
+    (click)="showOtrasInversiones2()"(click)="showCasaLote2()">Guardar|Continuar</button>   
+  </div>
+  </form>
+</div>    
+<!--*******finish casaLote***********-->  
+
+<!--*******start carroMoto***********--> 
+<div *ngIf="carroMoto === true">
+  
+  <form [formGroup]="form3" (ngSubmit)="vehiculosForm($event)">
+  <ol>
+  <li>
+  <div class="">
+    <div class="row">
+       <div class="col-sm">
+          <h4>¿Tenías vehículos automotores como carro(s) o moto(s) registrados a tu nombre a 31 de diciembre de 2019, los cuales se encontraban inscritos en Oficinas de Tránsito y Transporte?</h4>
+           </div>
+            <div class="col-sm">
+              <mat-radio-group (change)="carroMotoEvent($event)" formControlName="vehiculos">
+              <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group> 
+              <mat-error *ngIf="form3.get('vehiculos').hasError('required')
+              && form3.get('vehiculos').touched">
+                Campo requerido
+              </mat-error>           
+           </div>         
+      </div>
+  </div>  
+  </li>
+  <br>
+</ol> 
+<div class="buttonNormal">
+  <button mat-raised-button color="warn" type="submit"[disabled]="form3.invalid"
+  (click)="vehiculosForm($event)"(click)="hideCarroMoto()"(click)="showFinancial2()"(click)="showOtrasInversiones2()"
+  (click)="showCasaLote2()"(click)="showCarroMoto2()">Guardar|Continuar</button>   
+</div>
+</form>
+</div>
+<!--*******finish carroMoto***********--> 
+
+<!--*******start otrasInversiones***********--> 
+<div *ngIf="otrasInversiones === true">  
+ 
+  <form [formGroup]="form4" (ngSubmit)="otrosBienesForm($event)">
+  <ol>  
+  <li>
+    <div class="">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿Deseas declarar bienes de tu propiedad adicionales a las demás categorias?</h4>
+        </div>
+        <div class="col-sm">
+          <mat-radio-group (change)="otrosBienesEvent($event)" formControlName="otrosBienes">
+            <mat-radio-button *ngFor="let op of opciones" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="form4.get('otrosBienes').hasError('required')
+          && form4.get('otrosBienes').touched">
+            Campo requerido
+          </mat-error>                           
+        </div>         
+      </div>
+  </div>
+  </li>
+</ol> 
+<div class="buttonNormal">
+  <button mat-raised-button color="warn" type="submit"[disabled]="form4.invalid"
+  (click)="otrosBienesForm($event)"(click)="hideOtrasInversiones()"(click)="showOtrasInversiones2()"
+  (click)="showCarroMoto2()"(click)="showCasaLote2()"(click)="showFinancial2()">Guardar|Continuar</button>   
+</div>
+</form>
+</div>
+<!--*******finish carroMoto***********-->                  
+</mat-tab>
+<!--*******************************FINISH MAT-TAB BIENES*******************************************-->
+
+<!--*******************************START MAT-TAB INGRESOS******************************************************--> 
+<mat-tab label="INGRESOS">       
+<!--**-->  
+    <br>
+    <div  *ngIf="incomeAllContainer === true">
+     <mat-label><h3>Selecciona los tipos de ingresos que tuviste durante el año 2019:</h3></mat-label>   
+   
+    <div class="container" id="ingresos">
+     <div class="row justify-content-md-center" class="ingresosColor">
+      <mat-label ><h3><strong>INGRESOS LABORALES O PENSIONALES</strong></h3></mat-label> 
+     </div>     
+     </div>    
+<!--*********START INCOME ICONS***********-->
+
+<!--***** start ingresos laborales ICONS*******-->  
+     <div class="row">
+
+         <mat-card class="employee" *ngIf="salariosMarco ===true">              
+         <mat-card-header>
+             <mat-card-title><h4><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salarios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></h4></mat-card-title>
+         </mat-card-header>
+         <br>   
+         <div class="container">   
+         <img  mat-card-image src="assets/images/employee.png">
+         </div> 
+         <br>        
+          <mat-card-actions>
+           <a mat-mini-fab routerLink="." color="primary" (click)="showSalary()" (click)="hideHonorarios()"(click)="hideOwnBussiness()" (click)="hideRetirement()"
+           (click)="hideLeaseAllContainer()" (click)="hideSalesAllContainer()" (click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+           
+           <a mat-button routerLink="."(click)="showLeaseAllContainer()" (click)="showSalesAllContainer()"(click)="showSalesAllContainer()"(click)="hideSalary()"(click)="showSalary2()"
+           (click)="showHonorarios2()"(click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showOcasionalesAllContainer()" ><h5><strong>Salir</strong></h5></a>
+          </mat-card-actions>   
+       </mat-card>      
+  
+  
+         <mat-card class="employee" *ngIf="honorariosMarco === true">   
+          <mat-card-header>
+            <mat-card-title><h4><strong>Honorarios, Servicios y Comisiones</strong></h4></mat-card-title>
+        </mat-card-header>
+        <div class="container">
+          <img mat-card-image src="assets/images/salary.jpg">
+        </div>
+           <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="primary" (click)="showHonorarios()"(click)="hideSalary()" (click)="hideOwnBussiness()" (click)="hideRetirement()" 
+          (click)="hideLeaseAllContainer()" (click)="hideSalesAllContainer()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+            
+          <a mat-button routerLink="." (click)="hideHonorarios()" (click)="showHonorarios2()" (click)="showSalary2()" (click)="showOcasionalesAllContainer()" 
+            (click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showLeaseAllContainer()" (click)="showSalesAllContainer()"><h5><strong>Salir</strong></h5></a>
+           </mat-card-actions>   
+        </mat-card>     
+
+   
+        <mat-card class="employee" *ngIf="ownBussinessMarco === true">           
+         <mat-card-header>
+           <br>
+             <mat-card-title><h4><strong>Negocio Propio</strong></h4></mat-card-title>
+         </mat-card-header>
+         <br>
+         <div class="container">
+         <img  mat-card-image src="assets/images/ownBussiness.png">
+         </div>
+          <mat-card-actions>
+           <a mat-mini-fab routerLink="."color="primary" (click)="showOwnBussiness()" (click)="hideHonorarios()" (click)="hideSalary()"
+            (click)="hideRetirement()" (click)="hideLeaseAllContainer()" (click)="hideSalesAllContainer()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+           
+           <a mat-button routerLink="." (click)="hideOwnBussiness()" (click)="showHonorarios2()" (click)="showLeaseAllContainer()"(click)="showOcasionalesAllContainer()" 
+           (click)="showSalesAllContainer()" (click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showSalary2()"><h5><strong>Salir</strong></h5></a>
+          </mat-card-actions>   
+       </mat-card>      
+
+   
+         <mat-card class="employee" *ngIf="retirementMarco === true">
+         <mat-card-header>
+             <mat-card-title><h4><strong>&nbsp;&nbsp;&nbsp;Pensiones&nbsp;&nbsp;</strong></h4></mat-card-title>
+         </mat-card-header>
+         <br>
+         <br>
+         <div class="container">
+         <img  mat-card-image src="assets/images/retirement.png">
+       </div>
+          <mat-card-actions>
+           <a mat-mini-fab routerLink="."color="primary" (click)="showRetirement()" (click)="hideHonorarios()" (click)="hideSalary()" (click)="hideOwnBussiness()"
+           (click)="hideLeaseAllContainer()" (click)="hideSalesAllContainer()" (click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+           
+           <a mat-button routerLink="." (click)="hideRetirement()" (click)="showIncomeAllContainer()"(click)="showSalary2()" (click)="showSalesAllContainer()"(click)="showOcasionalesAllContainer()" 
+           (click)="showHonorarios2()" (click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showLeaseAllContainer()"><h5><strong>Salir</strong></h5></a>
+          </mat-card-actions>   
+       </mat-card>      
+   
+   </div>
+  </div>
+   <br> 
+   <!--***** finish ingresos laborales ICON*******-->
+
+    <!--****start ingresos por arrendamiento ICON*******-->   
+    
+    <div *ngIf="leaseAllContainer == true">
+
+      <div class="container" id="ingresos">
+        <div class="row justify-content-md-center" class="ingresosColor">      
+           <label><h3><strong>INGRESOS POR ARRENDAMIENTO</strong></h3></label>  
+           <mat-icon>swap_vert</mat-icon>   
+        </div>
+        </div>  
+        
+        <div class="row">  
+      
+         <mat-card class="employee" *ngIf="leaseRealEstateMarco === true">             
+          <mat-card-header>
+              <mat-card-title><h4><strong>Arrendamiento Bienes Raíces</strong></h4></mat-card-title>
+          </mat-card-header>    
+          <br>
+        <div class="container">
+          <img  mat-card-image src="assets/images/leaseRealEstate.png">
+        </div>
+           <mat-card-actions>
+            <a mat-mini-fab routerLink="."color="primary" (click)="showLeaseRealEstate()" (click)="hideIncomeAllContainer()" (click)="hideLeaseCar()" (click)="hideLeaseMachinery()"
+            (click)="hideLeaseOthersGoods()" (click)="hideSalesAllContainer()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+            
+            <a mat-button routerLink="." (click)="hideLeaseRealEstate()"(click)="showLeaseRealEstate2()" (click)="showIncomeAllContainer()"(click)="showOcasionalesAllContainer()" 
+            (click)="showSalesAllContainer()"(click)="showLeaseCar2()" (click)="showLeaseMachinery2()" (click)="showLeaseOthersGoods2()"><h5><strong>Salir</strong></h5></a>
+           </mat-card-actions>   
+        </mat-card>      
+
+    
+          <mat-card class="employee" *ngIf="leaseCarMarco=== true">   
+            <mat-card-header>
+              <mat-card-title labelPosition="before"><h4><strong>Arrendamiento Vehículos</strong></h4></mat-card-title>
+          </mat-card-header>
+          <br>
+          <div class="container">
+            <img mat-card-image src="assets/images/leaseCar.png">
+          </div>
+             <mat-card-actions>
+              <a mat-mini-fab routerLink="."color="primary" (click)="showLeaseCar()" (click)="hideIncomeAllContainer()"(click)="hideSalesAllContainer()"
+              (click)="hideLeaseRealEstate()"(click)="hideLeaseMachinery()" (click)="hideLeaseOthersGoods()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+              
+              <a mat-button routerLink="." (click)="hideLeaseCar()" (click)="showIncomeAllContainer()" (click)="showLeaseRealEstate2()"(click)="showOcasionalesAllContainer()" 
+              (click)="showSalesAllContainer()" (click)="showLeaseMachinery2()"(click)="showLeaseOthersGoods2()"(click)="showLeaseCar2()"><h5><strong>Salir</strong></h5></a>
+             </mat-card-actions>   
+          </mat-card> 
+    
+    
+          <mat-card class="employee" *ngIf="leaseMachineryMarco === true">         
+          <mat-card-header>
+              <mat-card-title labelPosition="justify-content-md-center"><h4><strong>Arrendamiento Maquinaria</strong></h4></mat-card-title>
+          </mat-card-header>
+          <br>
+        <div class="container">
+          <img  mat-card-image src="assets/images/leaseMachinery.jpg">
+        </div>
+        <br>
+           <mat-card-actions>
+            <a mat-mini-fab routerLink="."color="primary" (click)="showLeaseMachinery()"(click)="hideIncomeAllContainer()" (click)="hideLeaseCar()"
+            (click)="hideLeaseRealEstate()"(click)="hideLeaseOthersGoods()" (click)="hideSalesAllContainer()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+           
+            <a mat-button routerLink="." (click)="hideLeaseMachinery()" (click)="showIncomeAllContainer()" (click)="showSalesAllContainer()"(click)="showOcasionalesAllContainer()" 
+             (click)="showLeaseCar2()"(click)="showLeaseMachinery2()"(click)="showLeaseRealEstate2()" (click)="showLeaseOthersGoods2()"><h5><strong>Salir</strong></h5></a>
+           </mat-card-actions>   
+        </mat-card>      
+   
+    
+          <mat-card class="employee" *ngIf="leaseOthersGoodsMarco === true">
+          <mat-card-header>
+              <mat-card-title labelPosition="justify-content-md-center" ><h4><strong>Arrendamiento Otros Bienes</strong></h4></mat-card-title>
+          </mat-card-header>
+          <br>
+        <div class="container">
+          <img  mat-card-image src="assets/images/leaseOtherGood.png">
+        </div>
+           <mat-card-actions>
+            <a mat-mini-fab routerLink="."color="primary" (click)="showLeaseOthersGoods()"(click)="hideIncomeAllContainer()"(click)="hideLeaseCar()"(click)="hideLeaseMachinery()" (click)="hideLeaseRealEstate()" 
+            (click)="hideSalesAllContainer()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+            
+            <a mat-button routerLink="." (click)="hideLeaseOthersGoods()" (click)="showIncomeAllContainer()"(click)="showSalesAllContainer()"(click)="showOcasionalesAllContainer()" 
+            (click)="showLeaseMachinery2()"(click)="showLeaseOthersGoods2()" (click)="showLeaseRealEstate2()" (click)="showLeaseCar2()"><h5><strong>Salir</strong></h5></a>
+           </mat-card-actions>   
+        </mat-card> 
+        
+      </div>          
+    </div>
+    <br>
+  <!--****finish ingresos por arrendamiento ICON*******-->     
+
+  <!--********start ingresos venta de bienes ICON*****************-->   
+  <div *ngIf="salesAllContainer === true">
+    
+    <div class="container" id="ingresos">
+    <div class="row justify-content-md-center" class="ingresosColor">   
+      <label><h3><strong>INGRESOS POR VENTA DE BIENES</strong></h3></label>
+      <mat-icon>swap_vert</mat-icon>      
+    </div>   
+    </div> 
+
+    <div class="row">
+  
+      <mat-card class="employee" *ngIf="salesCarMarco === true">             
+      <mat-card-header>
+          <mat-card-title><h4><strong>&nbsp;Venta Vehículos&nbsp;&nbsp;</strong></h4></mat-card-title>
+      </mat-card-header> 
+      <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/saleCar.png">
+      </div>           
+       <mat-card-actions>
+        <a mat-mini-fab routerLink="."color="primary" (click)="showSalesCar()" (click)="hideIncomeAllContainer()" (click)="hideLeaseAllContainer()"(click)="hideSalesRealEstate()"
+        (click)="hideSalesShare()" (click)="hideSalesOthersGoods()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+        
+        <a mat-button routerLink="."(click)="hideSalesCar()"(click)="showSalesCar2()"(click)="showIncomeAllContainer()" (click)="showLeaseAllContainer()"
+        (click)="showSalesRealEstate2()" (click)="showSalesShare2()" (click)="showSalesOthersGoods2()"(click)="showOcasionalesAllContainer()" ><h5><strong>Salir</strong></h5></a>
+       </mat-card-actions>   
+    </mat-card>      
+   
+
+    <mat-card class="employee" *ngIf="salesRealEstateMarco === true">   
+      <mat-card-header>
+        <mat-card-title><h4><strong>&nbsp;&nbsp;Venta Bien Raíz&nbsp;&nbsp;</strong></h4></mat-card-title>
+    </mat-card-header>
+    <br>
+    <br>
+    <div class="container">
+      <img mat-card-image src="assets/images/saleHouse.jpg">
+    </div>
+     <mat-card-actions>
+        <a mat-mini-fab routerLink="."color="primary" (click)="showSalesRealEstate()" (click)="hideIncomeAllContainer()"(click)="hideLeaseAllContainer()"
+        (click)="hideSalesCar()"(click)="hideSalesShare()"(click)="hideSalesOthersGoods()" (click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+        
+        <a mat-button routerLink="." (click)="hideSalesRealEstate()" (click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showOcasionalesAllContainer()" 
+        (click)="showSalesCar2()" (click)="showSalesRealEstate2()"(click)="showSalesShare2()" (click)="showSalesOthersGoods2()"><h5><strong>Salir</strong></h5></a>
+       </mat-card-actions>   
+    </mat-card>
+
+
+      <mat-card class="employee" *ngIf="salesSharesMarco === true">         
+      <mat-card-header>
+          <mat-card-title><h4><strong>&nbsp;&nbsp;Venta Acciones&nbsp;&nbsp;</strong></h4></mat-card-title>
+      </mat-card-header>
+      <br>
+    <div class="container">
+      <img  mat-card-image src="assets/images/saleShares.jpg">
+    </div>
+       <mat-card-actions>
+        <a mat-mini-fab routerLink="."color="primary"(click)="showSalesShare()"(click)="hideIncomeAllContainer()"(click)="hideLeaseAllContainer()"
+        (click)="hideSalesCar()"(click)="hideSalesRealEstate()"(click)="hideSalesOthersGoods()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+       
+        <a mat-button routerLink="."(click)="hideSalesShare()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showOcasionalesAllContainer()" 
+        (click)="showSalesShare2()"(click)="showSalesOthersGoods2()" (click)="showSalesRealEstate2()"(click)="showSalesCar2()"><h5><strong>Salir</strong></h5></a>
+       </mat-card-actions>   
+    </mat-card>      
+
+  
+  <mat-card class="employee" *ngIf="salesOthersGoodsMarco === true">
+  <mat-card-header>
+      <mat-card-title><h4><strong>&nbsp;&nbsp;Otras Ventas&nbsp;&nbsp;</strong></h4></mat-card-title>
+  </mat-card-header>
+  <br>
+  <br>
+  <div class="container">
+  <img mat-card-image src="assets/images/salesOtherGoods.jpg">
+  </div>
+   <mat-card-actions>
+    <a mat-mini-fab routerLink="."color="primary" (click)="showSalesOthersGoods()"(click)="hideIncomeAllContainer()"(click)="hideLeaseAllContainer()"
+    (click)="hideSalesCar()"(click)="hideSalesRealEstate()"(click)="hideSalesShare()"(click)="hideOcasionalesAllContainer()"><h5>Mostrar</h5></a>
+    
+    <a mat-button routerLink="."(click)="hideSalesOthersGoods()" (click)="showSalesOthersGoods2()" (click)="showIncomeAllContainer()"(click)="showOcasionalesAllContainer()" 
+    (click)="showLeaseAllContainer()"(click)="showSalesRealEstate2()"(click)="showSalesShare2()"(click)="showSalesCar2()"><h5><strong>Salir</strong></h5></a>
+   </mat-card-actions>   
+  </mat-card>      
+  
+   </div>
+  </div>
+  <br>
+    <!--********finish ingresos venta de bienes ICON*****************-->  
+
+   <!--*************start ingresos ocasionales ICON****************-->   
+   <div *ngIf="ocasionalesAllContainer === true">
+    
+    <div class="container" id="ingresos">
+    <div class="row justify-content-md-center" class="ingresosColor">   
+      <label><h3><strong>INGRESOS OCASIONALES</strong></h3></label>   
+      <mat-icon>swap_vert</mat-icon>      
+    </div>
+    </div> 
+
+    <div class="row">
+
+      <mat-card class="employee" *ngIf="heritageMarco === true">             
+      <mat-card-header>
+          <mat-card-title><h4><strong>Herencia o Donación</strong></h4></mat-card-title>
+      </mat-card-header> 
+      <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/heritage.png">
+      </div>           
+       <mat-card-actions>
+        <a mat-mini-fab routerLink="."color="primary" (click)="hideIncomeAllContainer()" (click)="hideLeaseAllContainer()"(click)="hideSalesAllContainer()"(click)="showHeritage()"(click)="hideIndemnization()" (click)="hideDivorce()"(click)="hideInsurances()"><h5>Mostrar</h5></a>
+        
+        <a mat-button routerLink="."(click)="hideHeritage()"(click)="showIncomeAllContainer()" (click)="showLeaseAllContainer()" (click)="showSalesAllContainer()" 
+        (click)="showHeritage2()"(click)="showDivorce2()" (click)="showIndemnization2()"(click)="showInsurances2()"><h5><strong>Salir</strong></h5></a>
+       </mat-card-actions>   
+    </mat-card>      
+ 
+
+    <mat-card class="employee" *ngIf="divorceMarco === true">   
+      <mat-card-header>
+        <mat-card-title><h4><strong>Liquidación S. Conyugal</strong></h4></mat-card-title>
+    </mat-card-header>
+    <br>
+    <div class="container">
+      <img mat-card-image src="assets/images/divorce.jpg">
+    </div>
+     <mat-card-actions>
+        <a mat-mini-fab routerLink="."color="primary" (click)="showDivorce()"(click)="hideIncomeAllContainer()"(click)="hideLeaseAllContainer()" (click)="hideSalesAllContainer()"
+        (click)="hideHeritage()"(click)="hideIndemnization()" (click)="hideInsurances()"><h5>Mostrar</h5></a>
+        
+        <a mat-button routerLink="."(click)="hideDivorce()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showSalesAllContainer()" (click)="showHeritage2()"
+        (click)="showDivorce2()"(click)="showIndemnization2()"(click)="showInsurances2()"><h5><strong>Salir</strong></h5></a>
+       </mat-card-actions>   
+    </mat-card>
+
+  <!----------Indemnizaciones Suspendido temporalmente----
+      <mat-card class="employee" *ngIf="indemnizationMarco === true">         
+      <mat-card-header>
+          <mat-card-title><h4><strong>Indemnización&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></h4></mat-card-title>
+      </mat-card-header>
+      <br>
+      <br>
+    <div class="container">
+      <img  mat-card-image src="assets/images/indemnization.png">
+    </div>
+       <mat-card-actions>
+        <a mat-mini-fab routerLink="."color="primary" (click)="showIndemnization()" (click)="hideIncomeAllContainer()"(click)="hideLeaseAllContainer()"(click)="hideSalesAllContainer()"
+        (click)="hideHeritage()"(click)="hideDivorce()"(click)="hideInsurances()"><h5>Mostrar</h5></a>
+       
+        <a mat-button routerLink="." (click)="hideIndemnization()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showSalesAllContainer()"(click)="showHeritage2()"
+        (click)="showDivorce2()"(click)="showIndemnization2()"(click)="showInsurances2()"><h5><strong>Salir</strong></h5></a>
+       </mat-card-actions>   
+    </mat-card>      
+----------------------------->
+  
+  <mat-card class="employee" *ngIf="insurancesMarco === true">
+  <mat-card-header>
+      <mat-card-title><h4><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seguros&nbsp;&nbsp;&nbsp;</strong></h4></mat-card-title>
+  </mat-card-header>
+  <br>
+  <br>
+  <div class="container">
+  <img mat-card-image src="assets/images/insurance.png">
+  </div>
+   <mat-card-actions>
+    <a mat-mini-fab routerLink="."color="primary"(click)="showInsurances()"(click)="hideIncomeAllContainer()"(click)="hideLeaseAllContainer()"(click)="hideSalesAllContainer()"
+    (click)="hideIndemnization()"(click)="hideHeritage()"(click)="hideDivorce()"><h5>Mostrar</h5></a>
+    
+    <a mat-button routerLink="."(click)="hideInsurances()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showSalesAllContainer()"
+    (click)="showDivorce2()"(click)="showHeritage2()"(click)="showInsurances2()"(click)="showIndemnization2()"><h5><strong>Salir</strong></h5></a>
+   </mat-card-actions>   
+  </mat-card>   
+
+  </div>
+  </div>
+<!--*************finish ingresos ocasionales ICON****************-->   
+
+<!--**FINISH INCOME ICONS******-->
+
+<!--***Start  Salary ***-->  
+    <div  *ngIf="salary === true">
+
+      <ol>
+      <h2 id="homeLife">Ingresos correspondientes a Salarios
+        <br> (producto de una relación laboral, como contratos a termino fijo e indefinido)
+      </h2>
+      <h3>Por favor responde las siguientes preguntas:</h3>     
+      <mat-divider></mat-divider>
+      <br>     
+      
+    <form [formGroup]="form5" (ngSubmit)="laboralesForm($event)">
+    <li>
+    <div class="">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Tu empleador realizó pagos de alimentación a tu favor durante el 2019 asociados a este salario?
+              Por Ej: bonos Sodexo, Big pass, o Voygo.
+            </h4>
+          </div>
+          <div class="col-sm">
+            <mat-radio-group (change)="alimentacionEvent($event)" (change)="showLaboralesPrincipal()"
+            formControlName="alimentacion">
+                <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+            </mat-radio-group> 
+            <mat-error *ngIf="form5.get('alimentacion').hasError('required')">
+              Campo requerido
+             </mat-error>        
+          </div>         
+        </div>
+    </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <li>
+      <div class="">
+          <div class="row">
+            <div class="col-sm">
+              <h4>¿Hiciste parte de un Fondo de Empleados durante el año 2019?</h4>
+            </div>
+            <div class="col-sm">
+              <mat-radio-group (change)="fondoEmpleadosEvent($event)" (change)="showLaboralesPrincipal()"
+              formControlName="fondoEmpleados">
+                  <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group>  
+              <mat-error *ngIf="form5.get('fondoEmpleados').hasError('required')">
+                Campo requerido
+               </mat-error>         
+            </div>         
+          </div>
+      </div>
+      </li>
+    </form> 
+   
+      <mat-divider></mat-divider>
+      <br>
+      <li>     
+        <div class="">
+            <div class="row">
+              <div class="col-sm">
+                <h4>¿Recibiste indemnizaciones o subsidios de caja de compensación durante el 2019 asociados a este salario?</h4>
+              </div>
+              <div class="col-sm">
+                <mat-radio-group (change)="fundEmployee($event)" (change)="showLaboralesPrincipal()">
+                    <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+                </mat-radio-group>           
+              </div>         
+            </div>
+        </div>            
+        <mat-divider></mat-divider>
+
+        <div class="" *ngIf="employee" id="homeLife">
+          <br>
+          <h3><strong>Selecciona las indemnizaciones o subsidios que te apliquen por este salario que recibiste durante el 2019</strong></h3>
+          <mat-divider></mat-divider>
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>- ¿Recibiste indemnizaciones por protección a la maternidad durante el 2019 asociadas a este salario?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="maternidad">
+                </mat-slide-toggle>          
+            </div>         
+          </div>
+          <mat-divider></mat-divider>     
+         <br>
+
+      <div class="">
+        <div class="row">
+          <div class="col-sm">
+            <h4>- ¿Recibiste indemnizaciones por accidente de trabajo o enfermedad durante el 2019 asociados a este salario?</h4>
+          </div>
+          <div class="col-sm">
+              <mat-slide-toggle [(ngModel)]="accidenteLaboral">
+              </mat-slide-toggle>      
+          </div>         
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-sm">
+        <h4>_ ¿Recibiste algún subsidio por caja de compensación durante el 2019 asociado a este salario?</h4>
+      </div>
+      <div class="col-sm">
+          <mat-slide-toggle [(ngModel)]="cajaCompensacion">
+          </mat-slide-toggle>      
+      </div>
+    </div>
+    <mat-divider></mat-divider>          
+    <br>
+
+    <div class="row">
+      <div class="col-sm">
+        <h4>_ ¿Recibiste pagos por gastos de entierro del trabajador durante el 2019?</h4>
+      </div>
+      <div class="col-sm">
+          <mat-slide-toggle [(ngModel)]="funerarios">
+          </mat-slide-toggle>          
+      </div>
+    </div>
+    <mat-divider></mat-divider>          
+    <br>  
+  
+  </div>
+</li>
+<br> 
+
+    <li>      
+      <div class="">
+        <div class="row">
+           <div class="col-sm">
+              <h4>¿Recibiste este salario por alguna relación que tuviste con una entidad pública durante el 2019, en alguno de los siguientes conceptos?</h4>
+               </div>
+                  <div class="col-sm">
+                  <mat-radio-group (change)="publicSalaryEvent($event)">
+                  <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+                  </mat-radio-group>                              
+               </div>         
+          </div>
+      </div>
+      <br>
+
+      <div class="" *ngIf="publicSalary" id="homeLife">
+        <br>
+
+        <h3><strong>Selecciona las relaciones con entidades públicas te que apliquen por este salario que recibiste durante el 2019</strong></h3>
+         <mat-divider></mat-divider>
+
+          <div class="row">
+            <div class="col-sm">             
+            <h4>_ ¿Recibiste este salario por tu trabajo para la ONU o alguno de sus organismos especializados durante el 2019? Por ejemplo: el Banco Mundial, el Banco Interamericano de Desarrollo, etc.</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle >
+                </mat-slide-toggle>    
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <br>
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste este salario por tu trabajo como servidor público, diplomático, consular o administrativo del Ministerio de Relaciones Exteriores durante el 2019?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="exteriores">
+                </mat-slide-toggle>     
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br> 
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste este salario por tu trabajo como oficial o suboficial del Ejército, Fuerza Aérea, Armada Nacional o Policía Nacional de Colombia durante el 2019?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="fuerzasArmadas">
+                </mat-slide-toggle> 
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br>
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste una bonificación dentro de un plan de retiro de una entidad pública durante el 2019 asociada a este salario?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="planRetiro">
+                </mat-slide-toggle>   
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br>
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste una bonificación por retiro voluntario de la reserva de primera y segunda clase de la Armada Nacional durante el 2019 asociada a este salario?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="retiroReserva">
+                </mat-slide-toggle>
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br>
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste un seguro o compensación por muerte de miembros de las Fuerzas Militares durante el 2019?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="compensacionMuerte">
+                </mat-slide-toggle>
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br>
+          
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste este salario por tu trabajo como rector o profesor de una universidad oficial en Colombia durante el 2019?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle>
+                </mat-slide-toggle>
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br>
+          
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste pagos por apoyos económicos para educación financiados con recursos públicos durante el 2019, asociados a este salario?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="apoyosEconomicos">
+                </mat-slide-toggle>
+            </div>
+          </div>
+          <mat-divider></mat-divider>          
+          <br>
+
+          <div class="row">
+            <div class="col-sm">
+              <h4>_ ¿Recibiste este salario por tu participación en proyectos científicos avalados por Colciencias durante el 2019?</h4>
+            </div>
+            <div class="col-sm">
+                <mat-slide-toggle [(ngModel)]="colciencias">
+                </mat-slide-toggle>
+            </div>
+          </div>        
+          <br>
+                      
+        </div>
+      </li>     
+</ol>
+<div class="buttonNormal">
+  <button mat-raised-button color="warn" type="submit"(click)="laboralesForm($event)"[disabled]="form5.invalid"
+  (click)="showLeaseAllContainer()" (click)="showSalesAllContainer()"(click)="showSalesAllContainer()"(click)="hideSalary()"(click)="showSalary2()"
+   (click)="showHonorarios2()"(click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showOcasionalesAllContainer()">Guardar|Continuar</button>   
+</div>
+
+</div>
+
+<!--*Salary finish*-->  
+
+<!--*Start honorarios*-->  
+ <div *ngIf="honorarios === true">
+<ul>
+<h2 id="homeLife">Honorarios, Servicios y Comisiones
+  <br>
+  (para pagos producto de una relación contractual, como contratos de prestación de servicios)
+</h2>
+<h4>Selecciona el factor que predominó en la realización de tus trabajos realizados durante el 2019 (puedes seleccionar varias opciones):</h4>
+
+<mat-divider></mat-divider>
+<br>
+ <li type="square"> 
+ <div class="row">
+  <div class="col-sm">
+    <h4>Factor intelectual (por ejemplo: asesorías o consultorías, trabajo administrativo o creativo)?</h4>
+  </div>
+  <div class="col-sm">
+    <mat-radio-group aria-label="Select an option">
+      <mat-slide-toggle [(ngModel)]="intelectual">
+      </mat-slide-toggle>
+    </mat-radio-group>           
+  </div>
+</div>
+<mat-divider></mat-divider>
+</li>
+
+
+<li type="square">
+<div class="row">
+  <div class="col-sm">
+    <h4>Factor manual (por ejemplo: trabajos de aseo, de transporte o manufactura?</h4>
+  </div>
+  <div class="col-sm">
+    <mat-radio-group aria-label="Select an option">
+      <mat-slide-toggle [(ngModel)]="manual">
+      </mat-slide-toggle>
+    </mat-radio-group>           
+  </div>
+</div>
+<mat-divider></mat-divider>
+</li>
+<br>
+
+<li type="square">
+  <div class="row">
+    <div class="col-sm">
+      <h4>No estoy seguro (no hay ningún problema si no estás seguro)</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle [(ngModel)]="honorariosDesconocidos">
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>
+  <br>
+  <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit"(click)="hideHonorarios()" (click)="showHonorarios2()" (click)="showSalary2()" (click)="showOcasionalesAllContainer()" 
+    (click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showLeaseAllContainer()" (click)="showSalesAllContainer()"
+    >Guardar|Continuar</button>   
+  </div>
+</ul>
+</div>
+<!--*finish honorarios*-->  
+
+<!--*Start ownBussiness*-->  
+<div *ngIf="ownBussiness === true">
+  <ul>
+  <h2 id="homeLife">Negocio Propio</h2>
+
+  <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+<form [formGroup]="form6" (ngSubmit)="negocioPropioForm($event)">
+  <li type="square"> 
+  <div class="">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿Percibiste ingresos relacionados con un negocio propio durante el 2019; por ejemplo, si eres comerciante o tienes un negocio de repostería a domicilio.?</h4>
+        </div>
+        <div class="col-sm">          
+            <mat-radio-group (change)="propioNegocioEvent($event)" formControlName="negocioPropio">
+              <mat-radio-button labelPosition="before" *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-radio-button>
+          </mat-radio-group>  
+          <mat-error *ngIf="form6.get('negocioPropio').hasError('required')">
+            Campo requerido
+          </mat-error>           
+        </div>         
+      </div>    
+    </div>
+    </li>
+    <div class="buttonNormal">
+      <button mat-raised-button color="warn" type="submit"[disabled]="form6.invalid"(click)="negocioPropioForm($event)"
+      (click)="hideOwnBussiness()" (click)="showHonorarios2()" (click)="showLeaseAllContainer()"(click)="showOcasionalesAllContainer()" 
+     (click)="showSalesAllContainer()" (click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showSalary2()" 
+     >Guardar|Continuar</button>   
+    </div>
+  </form>    
+   </ul>
+  </div>
+  <!--*finish ownBussiness*-->  
+  
+<!--***Start Retirement***-->  
+<div *ngIf="retirement === true">
+  <form [formGroup]="form7" (ngSubmit)="pensionesForm($event)">
+  <ul>
+  <h2 id="homeLife">Pensiones de Jubilación</h2>
+  <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+  <li>
+  <div class="row">
+    <div class="col-sm">
+      <h4>¿En el año 2019 percibiste ingresos por concepto de pagos por pensión de jubilición, invalidez,
+         vejez, sobrevivientes o riesgos profesionales?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group (change)="pensionesEvent($event)"
+      formControlName="pensiones1" >
+        <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+      </mat-radio-group>    
+      <mat-error *ngIf="form7.get('pensiones1').hasError('required')">
+        Campo requerido
+      </mat-error>       
+    </div>         
+  </div>
+  </li>
+
+  <li>
+    <div class="row">
+      <div class="col-sm">
+        <h4>¿Hiciste parte de un fondo de empleados durante el año 2019?</h4>
+      </div>
+      <div class="col-sm">
+        <mat-radio-group (change)="pensionesEvent2($event)"
+        formControlName="pensiones2">
+          <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+        </mat-radio-group>     
+        <mat-error *ngIf="form7.get('pensiones2').hasError('required')">
+          Campo requerido
+        </mat-error>      
+      </div>         
+    </div>
+    </li>
+   </ul>
+   <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit" [disabled]="form7.invalid"(click)="pensionesForm($event)"
+    (click)="hideRetirement()" (click)="showIncomeAllContainer()"(click)="showSalary2()" (click)="showSalesAllContainer()"(click)="showOcasionalesAllContainer()" 
+    (click)="showHonorarios2()" (click)="showOwnBussiness2()" (click)="showRetirement2()" (click)="showLeaseAllContainer()"
+    >Guardar|Continuar</button>   
+  </div>
+  </form>
+  </div>
+  <!--*finish Retirement***-->  
+          
+  <!--***Start leaseRealEstate***-->  
+<div *ngIf="leaseRealEstate === true">
+  <form [formGroup]="form8" (ngSubmit)="arrendamientoBienRaizForm($event)">
+  <ul>
+  <h2 id="homeLife">Arrendamiento de Bienes inmuebles</h2>
+  <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+  <li type="square"> 
+  <div class="">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿Percibiste ingresos por arrendamientos de bienes inmuebles durante el 2019. Por ejemplo, si alquilaste un apartamento, una casa, una oficina, un finca, etc.?</h4>
+        </div>
+        <div class="col-sm">          
+            <mat-radio-group (change)="arrendamientoBienRaizEvent($event)"
+            formControlName="arrendamientoBienRaiz">
+              <mat-radio-button labelPosition="before" *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-radio-button>
+          </mat-radio-group>  
+          <mat-error *ngIf="form8.get('arrendamientoBienRaiz').hasError('required')">
+            Campo requerido
+          </mat-error>         
+        </div>         
+      </div>    
+    </div>
+    </li>
+  <mat-divider></mat-divider> 
+  <br>    
+   </ul>
+   <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit"(click)="arrendamientoBienRaizForm($event)"[disabled]="form8.invalid"
+    (click)="hideLeaseRealEstate()"(click)="showLeaseRealEstate2()" (click)="showIncomeAllContainer()"(click)="showOcasionalesAllContainer()" 
+    (click)="showSalesAllContainer()"(click)="showLeaseCar2()" (click)="showLeaseMachinery2()" (click)="showLeaseOthersGoods2()"
+    >Guardar|Continuar</button>   
+  </div>
+   </form>
+  </div>
+  <br>
+  <!--*finish leaseRealEstate***--> 
+
+   <!--***Start leaseCar***-->  
+<div *ngIf="leaseCar === true">
+  <form [formGroup]="form9"(ngSubmit)="arrendamientoVehiculosForm($event)">
+  <ul>
+  <h2 id="homeLife">Arrendamiento de Vehículos</h2>
+  <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+  <li type="square"> 
+    <div class="">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Percibiste ingresos por el alquiler o el arrendamiento de vehículos automotores durante el 2019, como: taxis, buses, busetas, entre otros.?</h4>
+          </div>
+          <div class="col-sm">          
+              <mat-radio-group (change)="arrendamientoVehiculosEvent($event)"
+               formControlName="arrendamientoVehiculos">
+                <mat-radio-button labelPosition="before" *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-radio-button>
+            </mat-radio-group> 
+            <mat-error *ngIf="form9.get('arrendamientoVehiculos').hasError('required')">
+              Campo requerido
+            </mat-error>          
+          </div>         
+        </div>    
+      </div>
+      </li>
+    <mat-divider></mat-divider> 
+    <br> 
+   </ul>
+   <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit"(click)="arrendamientoVehiculosForm($event)"[disabled]="form9.invalid"
+    (click)="hideLeaseCar()" (click)="showIncomeAllContainer()" (click)="showLeaseRealEstate2()"(click)="showOcasionalesAllContainer()" 
+     (click)="showSalesAllContainer()" (click)="showLeaseMachinery2()"(click)="showLeaseOthersGoods2()"(click)="showLeaseCar2()">Guardar|Continuar</button>   
+  </div>
+   </form>
+  </div>
+  <!--*finish leaseCar***--> 
+
+    <!--***Start leaseMachinery***-->  
+<div *ngIf="leaseMachinery === true">
+  <form [formGroup]="form10" (ngSubmit)="arrendamientoMaquinariaForm($event)">
+  <ul>
+  <h2 id="homeLife">Arrendamiento de Maquinaria</h2>
+  <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+  <li type="square"> 
+    <div class="">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Percibiste ingresos por el alquiler, arrendamiento o la prestación de servicios con maquinaria durante el 2019, como por ejemplo: volquetas, retroexcavadoras, tractores, etc.?</h4>
+          </div>
+          <div class="col-sm">          
+              <mat-radio-group (change)="arrendamientoMaquinariaEvent($event)"
+              formControlName="arrendamientoMaquinaria">
+                <mat-radio-button labelPosition="before" *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-radio-button>
+            </mat-radio-group> 
+            <mat-error *ngIf="form10.get('arrendamientoMaquinaria').hasError('required')">
+              Campo requerido
+            </mat-error>           
+          </div>         
+        </div>    
+      </div>
+      </li>
+    <mat-divider></mat-divider> 
+    <br> 
+    </ul>
+    <div class="buttonNormal">
+      <button mat-raised-button color="warn" type="submit"(click)="arrendamientoMaquinariaForm($event)"[disabled]="form10.invalid"
+      (click)="hideLeaseMachinery()" (click)="showIncomeAllContainer()" (click)="showSalesAllContainer()"(click)="showOcasionalesAllContainer()" 
+             (click)="showLeaseCar2()"(click)="showLeaseMachinery2()"(click)="showLeaseRealEstate2()" (click)="showLeaseOthersGoods2()">Guardar|Continuar</button>   
+    </div>
+     </form>
+  </div>
+  <!--*finish leaseMachineryr***--> 
+
+  <!--***Start leaseOthersGoods***-->  
+    <div *ngIf="leaseOthersGoods === true">
+     
+      <form [formGroup]="form11"(ngSubmit)="arrendamientoOtrosBienesForm($event)">
+      <ul>      
+        <h2 id="homeLife">Arrendamiento de Otros Bienes</h2>
+        <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+  <li type="square"> 
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el 2019 percibiste ingresos por el arrendamiento de otros bienes diferentes a inmuebles, vehículos y maquinaria, tales como derechos de propiedad intelectual, entre otros?</h4>
+          </div>
+          <div class="col-sm">          
+              <mat-radio-group (change)="arrendamientoOtrosBienesEvent($event)"
+              formControlName="arrendamientoOtrosBienes">
+                <mat-radio-button labelPosition="before" *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-radio-button>
+            </mat-radio-group> 
+            <mat-error *ngIf="form11.get('arrendamientoOtrosBienes').hasError('required')">
+              Campo requerido
+            </mat-error>           
+          </div>         
+        </div>    
+      </li>
+    <mat-divider></mat-divider> 
+    <br>    
+       </ul>
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="arrendamientoOtrosBienesForm($event)"[disabled]="form11.invalid"
+        (click)="hideLeaseOthersGoods()" (click)="showIncomeAllContainer()"(click)="showSalesAllContainer()"(click)="showOcasionalesAllContainer()" 
+        (click)="showLeaseMachinery2()"(click)="showLeaseOthersGoods2()" (click)="showLeaseRealEstate2()" (click)="showLeaseCar2()"
+        >Guardar|Continuar</button>   
+      </div>
+       </form>
+      </div>
+      <!--*finish leaseOthersGoods***--> 
+
+       <!--***Start SaleCar***-->  
+    <div *ngIf="salesCar === true">
+
+      <form [formGroup]="form12" (ngSubmit)="ventaVehiculosForm($event)">
+      <ul>
+      <h2 id="homeLife">Venta de Vehículos</h2>
+
+      <h4>Por favor responde la siguiente pregunta:</h4>  
+  <mat-divider></mat-divider>
+  <br>
+  <li type="square"> 
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el año 2019 percibiste ingresos por la venta de vehículos automotores, como carro o moto?</h4>
+          </div>
+          <div class="col-sm">          
+              <mat-radio-group (change)="ventaVehiculosEvent($event)"
+              formControlName="ventaVehiculos">
+                <mat-radio-button labelPosition="before" *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-radio-button>
+            </mat-radio-group> 
+            <mat-error *ngIf="form12.get('ventaVehiculos').hasError('required')">
+              Campo requerido
+            </mat-error>           
+          </div>         
+        </div>    
+      </li>
+    <mat-divider></mat-divider>   
+  </ul>
+  <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit"(click)="ventaVehiculosForm($event)"[disabled]="form12.invalid"
+    (click)="hideSalesCar()"(click)="showSalesCar2()"(click)="showIncomeAllContainer()" (click)="showLeaseAllContainer()"
+    (click)="showSalesRealEstate2()" (click)="showSalesShare2()" (click)="showSalesOthersGoods2()"(click)="showOcasionalesAllContainer()" 
+    >Guardar|Continuar</button>   
+  </div> 
+  </form>
+</div>
+      <!--****finish saleCar***--> 
+
+        <!--***Start salesRealEstate***-->  
+    <div *ngIf="salesRealEstate === true">
+      <form [formGroup]="form13" (ngSubmit)="ventaBienRaizForm($event)">
+      <ul>
+      <h2 id="homeLife">Venta de Bienes Inmuebles</h2>
+      <h4>Por favor responde las siguientes preguntas solamente si realizaste actividades de venta de inmuebles durante el año 2019:<br>
+        (Nota:Recuerda que al final de este proceso podrás ingresar la información relacionada con la venta de hasta tres (3) bienes raíces vendidos.)
+      </h4>  
+      <mat-divider></mat-divider>
+      <br>
+    
+      <li type="square">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿Esta propiedad vendida durante el 2019 era tu vivienda de habitación principal?</h4>
+        </div>
+        <div class="col-sm">     
+            <mat-radio-group (change)="ventaInmueblesEvent($event)"(change)="ventaInmueblesEvent2()"
+            formControlName="ventaBienRaiz1">        
+            <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+            </mat-radio-group>  
+            <mat-error *ngIf="form13.get('ventaBienRaiz1').hasError('required')">
+              Campo requerido
+            </mat-error>              
+        </div>
+      </div>
+      </li>
+          
+      <div class="" *ngIf="ventaInmueblesInterno"  id="homeLife">
+        <div class="row">
+          <div class="col-sm">
+            <h4>- ¿Destinaste la totalidad del dinero recibido durante el 2019 por esta venta para usos relacionados a vivienda?</h4>
+          </div>
+          <div class="col-sm">
+            <mat-radio-group aria-label="Select an option" labelPosition="before"formControlName="ventaBienRaiz2">
+                <mat-radio-button value="1">Si</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+            </mat-radio-group>    
+            <mat-error *ngIf="form13.get('ventaBienRaiz2').hasError('required')">
+              Campo requerido
+            </mat-error>        
+          </div>         
+        </div>  
+      </div>
+      <mat-divider></mat-divider>
+      <br> 
+
+      <li>
+      <div class="">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Esta venta realizada durante el 2019 se da con la finalidad de realizar sobre el inmueble un proyecto de renovación urbana?</h4>
+          </div>
+          <div class="col-sm">
+            <mat-radio-group aria-label="Select an option" labelPosition="before"formControlName="ventaBienRaiz3">
+                <mat-radio-button (change)="ventaInmueblesEvent2()" value="1">Si</mat-radio-button>
+                <mat-radio-button (change)="ventaInmueblesEvent2()"value="2">No</mat-radio-button>
+            </mat-radio-group>     
+            <mat-error *ngIf="form13.get('ventaBienRaiz3').hasError('required')">
+              Campo requerido
+            </mat-error>       
+          </div>         
+        </div>  
+      </div>
+    </li>
+      <mat-divider></mat-divider>
+      <br> 
+
+      <li>
+        <div class="">
+          <div class="row">
+            <div class="col-sm">
+              <h4>¿Esta venta realizada durante el 2019 corresponde a la primera venta de una vivienda de interés social o interés prioritario?</h4>
+            </div>
+            <div class="col-sm">
+              <mat-radio-group aria-label="Select an option" labelPosition="before" formControlName="ventaBienRaiz4">
+                  <mat-radio-button (change)="ventaInmueblesEvent2()" value="1" >Si</mat-radio-button>
+                  <mat-radio-button (change)="ventaInmueblesEvent2()" value="2">No</mat-radio-button>
+              </mat-radio-group>  
+              <mat-error *ngIf="form13.get('ventaBienRaiz4').hasError('required')">
+                Campo requerido
+              </mat-error>          
+            </div>         
+          </div>  
+        </div>
+      </li>
+        <mat-divider></mat-divider>
+        <br> 
+       </ul>
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="ventaBienRaizForm($event)"[disabled]="form13.invalid"
+        (click)="hideSalesRealEstate()" (click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showOcasionalesAllContainer()" 
+        (click)="showSalesCar2()" (click)="showSalesRealEstate2()"(click)="showSalesShare2()" (click)="showSalesOthersGoods2()"
+        >Guardar|Continuar</button>   
+      </div> 
+      </form>
+      </div>
+      <!--****finish salesRealEstate***--> 
+
+       <!--***Start salesShares***-->  
+    <div *ngIf="salesShares === true">
+      <form [formGroup]="form14"(ngSubmit)="ventaAccionesForm($event)">
+      <ul>
+      <h2 id="homeLife">Venta de Acciones</h2>
+      <h4>Por favor responde la siguiente pregunta:</h4>  
+      <mat-divider></mat-divider>
+      <br>
+  
+      <li type="square">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el año 2019 vendiste acciones, cuotas o partes de interés de tu propiedad, ya sea directamente o a través de una comisionista de bolsa?</h4>
+          </div>
+          <div class="col-sm">     
+              <mat-radio-group (change)="ventaAccionesEvent($event)" formControlName="ventaAcciones">        
+              <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group>  
+              <mat-error *ngIf="form14.get('ventaAcciones').hasError('required')">
+                Campo requerido
+              </mat-error>                  
+          </div>
+        </div>
+        </li>
+        <mat-divider></mat-divider>
+        <br>
+       </ul>
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="ventaAccionesForm($event)"[disabled]="form14.invalid"
+        (click)="hideSalesShare()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showOcasionalesAllContainer()" 
+        (click)="showSalesShare2()"(click)="showSalesOthersGoods2()" (click)="showSalesRealEstate2()"(click)="showSalesCar2()"
+        >Guardar|Continuar</button>   
+      </div>
+       </form>
+      </div>
+      <!--****finish salesShares***--> 
+
+         <!--***Start salesOthersGood***-->  
+    <div *ngIf="salesOthersGoods === true">
+      <form [formGroup]="form15"(ngSubmit)="ventaOtrosBienesForm($event)">
+      <ul>
+      <h2 id="homeLife">Venta de Otros Bienes</h2>
+      <h4>Por favor responde la siguiente pregunta:</h4>  
+      <mat-divider></mat-divider>
+      <br>
+      <li type="square">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Duranate el año 2019 tuviste ingresos por la venta de otros bienes, tales como: joyas, obras de arte, muebles, etc.</h4>
+          </div>
+          <div class="col-sm">     
+              <mat-radio-group (change)="ventaOtrosBienesEvent($event)"formControlName="ventaOtrosBienes">        
+              <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group>   
+              <mat-error *ngIf="form15.get('ventaOtrosBienes').hasError('required')">
+                Campo requerido
+              </mat-error>              
+          </div>
+        </div>
+        </li>
+        <mat-divider></mat-divider>
+        <br>         
+       </ul>
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="ventaOtrosBienesForm($event)"[disabled]="form15.invalid"
+        (click)="hideSalesOthersGoods()" (click)="showSalesOthersGoods2()" (click)="showIncomeAllContainer()"(click)="showOcasionalesAllContainer()" 
+        (click)="showLeaseAllContainer()"(click)="showSalesRealEstate2()"(click)="showSalesShare2()"(click)="showSalesCar2()"
+        >Guardar|Continuar</button>   
+      </div>
+       </form>
+      </div>
+
+          <!--***Start heritage***-->  
+    <div *ngIf="heritage === true">
+      <form [formGroup]="form16"(ngSubmit)="herenciaForm($event)">
+      <ul>
+      <h2 id="homeLife">Herencia, Legado o Donación</h2>
+      <h4>Por favor responde la siguiente pregunta:</h4>
+      <mat-divider></mat-divider>      
+      <br>
+      <li type="square">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el año 2019 recibiste herencias, legados o donaciones? <br>
+               (Nota:Recuerda que las herencias y legados son derechos que una persona fallecida deja en favor de sus herederos y las donaciones son dineros que se reciben de forma gratuita.)</h4>
+          </div>
+          <div class="col-sm">     
+              <mat-radio-group (change)="herenciaEvent($event)" formControlName="herencia">        
+              <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group>   
+              <mat-error *ngIf="form16.get('herencia').hasError('required')">
+                Campo requerido
+              </mat-error>             
+          </div>
+        </div>
+        </li>
+        <mat-divider></mat-divider>
+        <br>        
+       </ul>
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="herenciaForm($event)"[disabled]="form16.invalid"
+        (click)="hideHeritage()"(click)="showIncomeAllContainer()" (click)="showLeaseAllContainer()" (click)="showSalesAllContainer()" 
+        (click)="showHeritage2()"(click)="showDivorce2()" (click)="showIndemnization2()"(click)="showInsurances2()"
+        >Guardar|Continuar</button>   
+      </div>
+       </form>
+      </div>
+      
+  <!--***finish heritage*********--> 
+
+   <!--***Start Divorce***-->  
+   <div *ngIf="divorce === true">
+    
+    <form [formGroup]="form17"(ngSubmit)="conyugalForm($event)">
+    <ul>
+      <h2 id="homeLife">Liquidación de Sociedad Conyugal</h2>
+      <h4>Por favor responde la siguiente pregunta:</h4>
+      <mat-divider></mat-divider>    
+      <br>  
+      <li type="square">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el año 2019 liquidaste tu sociedad conyugal y pasaron a tu nombre bienes de tu expareja y/o tuviste ingreso por la liquidación de esta sociedad.? </h4>
+          </div>
+          <div class="col-sm">     
+              <mat-radio-group (change)="conyugalEvent($event)" formControlName="conyugal">        
+              <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group> 
+              <mat-error *ngIf="form17.get('conyugal').hasError('required')">
+                Campo requerido
+              </mat-error>                
+          </div>
+        </div>
+        </li>
+        <mat-divider></mat-divider>
+        <br>        
+       </ul> 
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="conyugalForm($event)"[disabled]="form17.invalid"
+        (click)="hideDivorce()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showSalesAllContainer()" (click)="showHeritage2()"
+        (click)="showDivorce2()"(click)="showIndemnization2()"(click)="showInsurances2()"
+        >Guardar|Continuar</button>   
+      </div>
+      </form>  
+    </div>    
+  <!--***finish divorce*********--> 
+
+  <!--***Start Indemnization (suspendido temporalmente)********* 
+  <div *ngIf="indemnization === true">
+    <ul>
+    <h2 id="homeLife">Indemnizaciones</h2>
+
+
+    <li>
+      <div class="">
+          <div class="row">
+            <div class="col-sm">
+              <h4>¿Durante el 2019 recibiste un subsidio, indemnización o recompensa dentro de Colombia?</h4>
+            </div>
+            <div class="col-sm">
+              <mat-radio-group (change)="indemnizationEvent($event)">
+                  <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group>           
+            </div>         
+          </div>
+      </div>        
+      <br>
+
+      <div class="" *ngIf="indemnization1" id="homeLife">
+
+        <h3><strong>¿Cuál de las siguientes indemnizaciones y/o subsidios del Estado colombiano recibiste durante el 2019?</strong></h3>
+
+        <div class="row">
+          <div class="col-sm">
+            <h4>- ¿Durante el 2019 recibiste apoyos económicos para financiar programas educativos?
+            </h4>
+          </div>
+          <div class="col-sm">
+            <mat-radio-group aria-label="Select an option">
+              <mat-slide-toggle>
+              </mat-slide-toggle>
+            </mat-radio-group>           
+          </div>         
+        </div>
+        <mat-divider></mat-divider>     
+       <br>
+
+    <div class="">
+      <div class="row">
+        <div class="col-sm">
+          <h4>- ¿Durante el 2019 recibiste indemnizaciones judiciales, o pagos por demandas contra el Estado?</h4>
+        </div>
+        <div class="col-sm">
+          <mat-radio-group aria-label="Select an option">
+            <mat-slide-toggle>
+            </mat-slide-toggle>
+          </mat-radio-group>           
+        </div>         
+      </div>
+      <mat-divider></mat-divider>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-sm">
+      <h4>_ ¿Durante el 2019 recibiste subsidios para la compra de vivienda?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle>
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>
+  <mat-divider></mat-divider>          
+  <br>
+
+  <div class="row">
+    <div class="col-sm">
+      <h4>_ ¿Durante el 2019 recibiste subsidios para la producción agrícola?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle>
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>
+  <mat-divider></mat-divider>          
+  <br>  
+
+  <div class="row">
+    <div class="col-sm">
+      <h4>_ ¿Durante el 2019 recibiste una recompensa de parte de organismo del Estado colombiano?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle>
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>
+  <mat-divider></mat-divider>          
+  <br> 
+
+</div>
+</li>
+<br>         
+   <mat-divider></mat-divider>
+    <br>      
+     </ul>
+    </div>    
+  ***finish indemnization(Suspendido Temporalmente)*********--> 
+
+  <!--***Start insurances***-->  
+  <div *ngIf="insurances === true">
+   <form [formGroup]="form18"(ngSubmit)="segurosForm($event)">
+    <ul>
+      <h2 id="homeLife">Seguros</h2>
+      <h4>Por favor responde la siguiente pregunta:</h4>
+      <mat-divider></mat-divider>
+      <br>      
+      <li type="square">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el año 2019 recibiste pagos provenientes de aseguradoras por la reclamación de seguros de daños; con cubrimientos de daño emergente y 
+              lucro cesante, y de vida en general? </h4>
+          </div>
+          <div class="col-sm">     
+              <mat-radio-group (change)="segurosEvent($event)" formControlName="seguros">        
+              <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+              </mat-radio-group> 
+              <mat-error *ngIf="form18.get('seguros').hasError('required')">
+                Campo requerido
+              </mat-error>                
+          </div>
+        </div>
+        </li>
+        <mat-divider></mat-divider>
+        <br>        
+       </ul> 
+       <div class="buttonNormal">
+        <button mat-raised-button color="warn" type="submit"(click)="segurosForm($event)"[disabled]="form18.invalid"
+        (click)="hideInsurances()"(click)="showIncomeAllContainer()"(click)="showLeaseAllContainer()"(click)="showSalesAllContainer()"
+        (click)="showDivorce2()"(click)="showHeritage2()"(click)="showInsurances2()"(click)="showIndemnization2()"
+        >Guardar|Continuar</button>   
+      </div>
+    </form>      
+  </div>    
+  <!--***finish indemnization*********--> 
+
+  <!--***********************finish mat-tab INGRESOS*********--> 
+  
+  
+<!--************************Star mat-tab DEDUCCIONES***********************************-->  
+<mat-tab label="DEDUCCIONES">        
+  <!--**-->  
+
+  <div class="" *ngIf="deductionsAllContainer == true">
+    <br>
+    <br>
+
+    <div class="container" id="ingresos">
+      <div class="row justify-content-md-center">      
+         <mat-label><h3><strong>DESCUENTOS POR DEDUCCIONES</strong></h3></mat-label>     
+      </div>
+      </div>     
+      <h3>Selecciona los casos que te aplicaron durante el año 2019:</h3>
+
+ <div class="row">
+
+        <mat-card class="employee" *ngIf ="healthCareMarco == true">             
+        <mat-card-header>
+            <mat-card-title><h4><strong>Medicina Prepagada</strong></h4></mat-card-title>
+        </mat-card-header>    
+        <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/healthCare.png">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="warn"(click)="showHealthCare()" (click)="hideDonations()"
+          (click)="hideDependencies()"(click)="hideSocialSecurity()"(click)="hideAhorrosAFC()"(click)="hidePensionesVoluntarias()"><h5>Mostrar</h5></a>
+          
+          <a mat-button routerLink="."(click)="hideHealthCare()" (click)="showDonations2()" (click)="showSocialSecurity2()"(click)="showDependencies2()"
+          (click)="showHealthCare2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card>    
+   
+      <mat-card class="employee" *ngIf="dependenciesMarco == true">   
+          <mat-card-header>
+            <mat-card-title labelPosition="before"><h4><strong>Dependientes</strong></h4></mat-card-title>
+        </mat-card-header>
+        <br>
+        <br>
+        <div class="container">
+          <img mat-card-image src="assets/images/dependencies.jpg">
+        </div>
+           <mat-card-actions>
+            <a mat-mini-fab routerLink="."color="warn" (click)="showDependencies()"(click)="hideDonations()"(click)="hideSocialSecurity()"
+            (click)="hideHealthCare()"(click)="hideAhorrosAFC()"(click)="hidePensionesVoluntarias()"><h5>Mostrar</h5></a>
+            
+            <a mat-button routerLink="."(click)="hideDependencies()"(click)="showDependencies2()"(click)="showDonations2()"(click)="showHealthCare2()"
+            (click)="showInsurances2()"(click)="showSocialSecurity2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"><h5><strong>Salir</strong></h5></a>
+           </mat-card-actions>   
+        </mat-card> 
+    
+        <mat-card class="employee" *ngIf="socialSecurityMarco == true">         
+        <mat-card-header>
+            <mat-card-title labelPosition="justify-content-md-center"><h4><strong>Pagos Seguridad Social</strong></h4></mat-card-title>
+        </mat-card-header>
+      <div class="container">
+        <img  mat-card-image src="assets/images/socialSecurity.png">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="warn" (click)="showSocialSecurity()"(click)="hideDonations()"
+          (click)="hideHealthCare()"(click)="hideDependencies()"(click)="hideAhorrosAFC()"(click)="hidePensionesVoluntarias()"><h5>Mostrar</h5></a>
+         
+          <a mat-button routerLink="."(click)="hideSocialSecurity()"(click)="showHealthCare2()"(click)="showDependencies2()"
+          (click)="showDonations2()"(click)="showSocialSecurity2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card>    
+  
+
+        <!--*****************donacionesMarco (suspendida temporalmente)******
+      <mat-card class="employee" *ngIf = "donationsMarco == true">
+        <mat-card-header>
+            <mat-card-title labelPosition="justify-content-md-center" ><h4><strong>Donaciones</strong></h4></mat-card-title>
+        </mat-card-header>
+        <br>
+        <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/donations.png">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="warn"(click)="showDonations()"(click)="hideHealthCare()"(click)="hideAhorrosAFC()"
+          (click)="hideSocialSecurity()"(click)="hideDependencies()"(click)="hidePensionesVoluntarias()"><h5>Mostrar</h5></a>
+          
+          <a mat-button routerLink="."(click)="hideDonations()"(click)="showHealthCare2()"(click)="hideAhorrosAFC()"(click)="hidePensionesVoluntarias()"
+          (click)="showDependencies2()"(click)="showSocialSecurity2()"(click)="showDonations2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card> 
+      ******************************************-->      
+   
+        <mat-card class="employee" *ngIf = "pensionesVoluntariasMarco == true">
+        <mat-card-header>
+            <mat-card-title labelPosition="justify-content-md-center" ><h4><strong>Pensiones Voluntarias
+              /Cesantías</strong></h4></mat-card-title>
+        </mat-card-header>
+      <div class="container">
+        <img  mat-card-image src="assets/images/pensionVoluntaria.png">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="warn"(click)="showPensionesVoluntarias()"(click)="hideHealthCare()"
+          (click)="hideSocialSecurity()"(click)="hideDependencies()"(click)="hideAhorrosAFC()"(click)="hideDonations()"><h5>Mostrar</h5></a>
+          
+          <a mat-button routerLink="."(click)="hidePensionesVoluntarias()"(click)="showHealthCare2()"(click)="showAhorrosAFC2()"
+          (click)="showDependencies2()"(click)="showSocialSecurity2()"(click)="showDonations2()"(click)="showPensionesVoluntarias2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card> 
+  
+ 
+        <mat-card class="employee" *ngIf="ahorrosAFCMarco == true">
+        <mat-card-header>
+            <mat-card-title labelPosition="justify-content-md-center" ><h4><strong>Ahorros AFC</strong></h4></mat-card-title>
+        </mat-card-header>
+        <br>
+        <br>
+      <div class="container">
+        <img  mat-card-image src="assets/images/AFC.png">
+      </div>
+         <mat-card-actions>
+          <a mat-mini-fab routerLink="."color="warn"(click)="showAhorrosAFC()"(click)="hideHealthCare()"(click)="hidePensionesVoluntarias()"
+          (click)="hideSocialSecurity()"(click)="hideDependencies()"(click)="hideDonations()"><h5>Mostrar</h5></a>
+          
+          <a mat-button routerLink="."(click)="hideAhorrosAFC()"(click)="showDonations2()"(click)="showHealthCare2()"(click)="showPensionesVoluntarias2()"
+          (click)="showDependencies2()"(click)="showSocialSecurity2()"(click)="showDonations2()"(click)="showAhorrosAFC2()"><h5><strong>Salir</strong></h5></a>
+         </mat-card-actions>   
+      </mat-card>  
+      
+    </div>
+          
+  </div>
+  <br>
+  <!--******--> 
+
+ <!--***Start healthCare***-->  
+ <div *ngIf="healthCare === true">
+  <form [formGroup]="form19"(ngSubmit)="prepagadaForm($event)">
+  <ul>
+    <h2 id="homeLife">Medicina Prepagada</h2>
+    <h4>Por favor responde la siguiente pregunta:</h4>
+    <mat-divider></mat-divider>
+    <br>
+    <li type="square">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿Durante el año 2019 hiciste pagos a medicina prepagada o adquiriste alguna póliza de salud?</h4>
+        </div>
+        <div class="col-sm">     
+            <mat-radio-group (change)="prepagadaEvent($event)" formControlName="prepagada">        
+            <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+            </mat-radio-group>       
+            <mat-error *ngIf="form19.get('prepagada').hasError('required')">
+              Campo requerido
+            </mat-error>         
+        </div>
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+      <br>        
+     </ul>
+     <div class="buttonNormal">
+      <button mat-raised-button color="warn" type="submit"(click)="prepagadaForm($event)"[disabled]="form19.invalid"
+      (click)="hideHealthCare()" (click)="showDonations2()" (click)="showSocialSecurity2()"(click)="showDependencies2()"
+      (click)="showHealthCare2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"
+      >Guardar|Continuar</button>   
+    </div> 
+     </form> 
+  </div>  
+<!--***finish healthCare*********--> 
+
+<!--***Start dependencies***-->  
+<div *ngIf="dependencies === true">
+<form [formGroup]="form20"(ngSubmit)="dependientesForm($event)">
+  <ul>
+    <h2 id="homeLife">Dependientes Económicos</h2>
+    <h4>Por favor responde la siguiente pregunta:</h4>
+    <mat-divider></mat-divider> 
+    <br>   
+    <li type="square">
+      <div class="row">
+        <div class="col-sm">
+          <h4>Selecciona esta opción si durante el año 2019 tuviste dependientes económicos. <br><br>
+            (Nota: Puedes reportar hijos menores de 18 años o mayores de 18 años y menores de 23 años que estén estudiando; cónyuge, padres y hermanos si en 2019 tuvieron ingresos anuales inferiores a $8.910.000 o si tienen alguna discapacidad).</h4>
+        </div>
+        <div class="col-sm">     
+            <mat-radio-group (change)="dependientesEvent($event)" formControlName="dependientes">        
+            <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+            </mat-radio-group>    
+            <mat-error *ngIf="form20.get('dependientes').hasError('required')">
+              Campo requerido
+            </mat-error>             
+        </div>
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+      <br>        
+     </ul> 
+     <div class="buttonNormal">
+      <button mat-raised-button color="warn" type="submit"(click)="dependientesForm($event)"[disabled]="form20.invalid"
+      (click)="hideHealthCare()" (click)="showDonations2()" (click)="showSocialSecurity2()"(click)="showDependencies2()"
+      (click)="showHealthCare2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"
+      >Guardar|Continuar</button>   
+    </div>
+     </form>
+  </div>  
+<!--***finish dependencies*********--> 
+
+<!--********Start donations(suspendida temporalmente)*****************  
+<div *ngIf="donations === true">
+  <ul>
+  <h2 id="homeLife">Donaciones</h2>
+  <br>
+  <h4>Selecciona el tipo de donaciones realizaste durante el 2019:</h4>
+  
+  <mat-divider></mat-divider>
+  <br>
+   <li type="square"> 
+   <div class="row">
+    <div class="col-sm">
+      <h4>¿Durante el 2019 realizaste donaciones a entidades sin animo de lucro?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle>
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>  
+  </li>
+  <mat-divider></mat-divider>
+  <br>
+
+   <li type="square"> 
+   <div class="row">
+    <div class="col-sm">
+      <h4>¿Durante el 2019 realizaste donaciones o inversiones en investigación, desarrollo tecnológico o innovación?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle>
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>  
+  </li>
+
+  <li type="square"> 
+    <div class="row">
+     <div class="col-sm">
+       <h4>¿Durante el 2019 realizaste donaciones a programas creados por instituciones de educación superior?</h4>
+     </div>
+     <div class="col-sm">
+       <mat-radio-group aria-label="Select an option">
+         <mat-slide-toggle>
+         </mat-slide-toggle>
+       </mat-radio-group>           
+     </div>
+   </div>  
+   </li>
+   <mat-divider></mat-divider>
+   <br> 
+    
+  </ul>
+  </div>
+  **********finish donations(suspendida temporalmente)*******--> 
+  
+<!--****Start socialSecurity*************-->  
+<div *ngIf="socialSecurity === true">
+<form [formGroup]="form21"(ngSubmit)="seguridadSocialForm($event)">
+  <ul>
+    <h2 id="homeLife">Pagos Seguridad Social</h2>
+    <h4>Por favor responde la siguiente pregunta:</h4>
+    <mat-divider></mat-divider>
+    <br>    
+    <li type="square">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿Durante el año 2019 hiciste aportes a seguridad social sobre los ingresos que tuviste como trabajador independiente o contratista?</h4>
+        </div>
+        <div class="col-sm">     
+            <mat-radio-group (change)="seguridadSocialEvent($event)" formControlName="seguridadSocial">        
+            <mat-radio-button *ngFor="let op of options" value="{{op.codigo}}" labelPosition="before">{{op.texto}}</mat-radio-button>
+            </mat-radio-group>    
+            <mat-error *ngIf="form21.get('seguridadSocial').hasError('required')">
+              Campo requerido
+            </mat-error>             
+        </div>
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+      <br>        
+     </ul>
+     <div class="buttonNormal">
+      <button mat-raised-button color="warn" type="submit"(click)="seguridadSocialForm($event)"[disabled]="form21.invalid"
+      (click)="hideSocialSecurity()"(click)="showHealthCare2()"(click)="showDependencies2()"
+      (click)="showDonations2()"(click)="showSocialSecurity2()"(click)="showPensionesVoluntarias2()"(click)="showAhorrosAFC2()"
+      >Guardar|Continuar</button>   
+    </div>
+    </form>
+  </div>
+  <!--*finish socialSecurity*--> 
+
+  <!--****Start pensionesVoluntarias*************-->  
+<div *ngIf="pensionesVoluntarias === true">
+  <ul>
+  <h2 id="homeLife">Pensiones Voluntarias y Cesantías</h2>
+
+  <li type="square"> 
+    <div class="row">
+     <div class="col-sm">
+       <h4>Selecciona esta casilla si durante el año 2019 tuviste cesantías o hiciste
+         aportes voluntarios a fondos de pensiones obligatorios:
+       </h4>
+     </div>
+     <div class="col-sm">
+       <mat-radio-group aria-label="Select an option">
+         <mat-slide-toggle [(ngModel)]="voluntarios">
+         </mat-slide-toggle>
+       </mat-radio-group>           
+     </div>
+   </div>  
+   </li>
+   <mat-divider></mat-divider>
+   <br>    
+  </ul>
+  <div class="buttonNormal">
+    <button mat-raised-button color="warn" type="submit"
+    (click)="hidePensionesVoluntarias()"(click)="showHealthCare2()"(click)="showAhorrosAFC2()"
+    (click)="showDependencies2()"(click)="showSocialSecurity2()"(click)="showDonations2()"(click)="showPensionesVoluntarias2()"
+    >Guardar|Continuar</button>   
+  </div>
+  </div>
+  <!--*finish pensionesVoluntarias*-->
+
+  <!--****Start pensionesVoluntarias*************-->  
+<div *ngIf="ahorrosAFC === true">
+  <ul>
+  <h2 id="homeLife">Cuenta de Ahorro y Fomento a la Construcción (AFC)</h2>
+
+   <li type="square"> 
+   <div class="row">
+    <div class="col-sm">
+      <h4>Selecciona la opción si a 31 de diciembre de 2019 tuviste una cuenta de Ahorro y Fomento para la Construcción (AFC):</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle [(ngModel)]="AFC">
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>  
+  </li>
+  <mat-divider></mat-divider>
+  <br>    
+  </ul>
+  <div class="buttonNormal">
+      <button mat-raised-button color="warn" type="submit"(click)="hideAhorrosAFC()"(click)="showDonations2()"(click)="showHealthCare2()"(click)="showPensionesVoluntarias2()"
+      (click)="showDependencies2()"(click)="showSocialSecurity2()"(click)="showDonations2()"(click)="showAhorrosAFC2()"
+      >Guardar|Continuar</button>   
+    </div>
+  </div>
+  <!--****finish ahorrosAFC***-->
+ 
+  </mat-tab>
+
+  <!--**********************finish mat-tab DEDUCCIONES************************************-->          
+     
+<!--**********************start mat-tab DOCUMENTOS************************************-->          
+  
+<mat-tab label="DOCUMENTOS">
+<br>
+ <!-- ******************start documents Información Personal***** --> 
+
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+             <h3><strong>PERSONAL</strong></h3>
+            </mat-panel-title>
+            <mat-panel-description>
+              Click para diligenciar
+            <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>        
+
+<!-- *** -->
+<ul>
+
+<li>
+  <label for="input-file-id" class="md-button md-raised md-primary">copia del RUT</label><br>
+  <input class="ng-hide" id="input-file-id" multiple type="file" />
+</li>
+<br>
+<mat-divider></mat-divider>
+<br>
+
+<li>
+  <label for="input-file-id" class="md-button md-raised md-primary">Información tuya reportada por terceros a la DIAN (Medios Magnéticos)</label><br>
+  <input class="ng-hide" id="input-file-id" multiple type="file" />
+</li>
+<br>
+<mat-divider></mat-divider>
+<br>
+  
+<div *ngIf="renta2018">
+<li>
+  <label for="input-file-id" class="md-button md-raised md-primary">Formulario de Declaración de Renta del año 2018</label><br>
+  <input class="ng-hide" id="input-file-id" multiple type="file"/> 
+</li>
+<br>
+</div>
+
+<div *ngIf="rentaOtrosPeriodos">    
+<li>
+  <label for="input-file-id" class="md-button md-raised md-primary">Formulario de Declaración de Renta del último año declarado(*opcional)</label><br>
+  <input class="ng-hide" id="input-file-id" multiple type="file"/>  
+</li>
+<br>
+</div>
+
+</ul>
+<!-- *** --> 
+    <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+<!-- *****************************finish documents Información Personal******** --> 
+
+<!-- ******************************start documents Bienes********************** --> 
+  
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3><strong>BIENES</strong></h3>        
+        </mat-panel-title>
+        <mat-panel-description>
+          Click para diligenciar
+          <mat-icon>account_balance</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+  <!-- ** -->
+  <div *ngIf ="certificadoCuentaCorriente || CDT || certificadoFiduciaria || certificadoCuentaAhorro || 
+  tarjetaCredito || creditoHipotecario || otrosCreditos || accionesPrivadas || prestamosTerceros || efectivo">
+    <h2><strong>Productos Financieros</strong></h2>
+  </div>
+
+<div *ngIf = "certificadoCuentaCorriente">
+   
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Certificado Cta. Corriente
+       <mat-icon matTooltip="Como se denomine:
+        &nbsp;&nbsp;-Certificado bancario anual de retención en la fuente&nbsp;&nbsp;-Certificado tributario&nbsp;&nbsp;-Certificado de saldo e intereses
+        &nbsp;&nbsp;-Constancia cuentas de ahorro y cuentas corrientes">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button mat-stroked-button color="primary" (click)="corrienteDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+    <input type="file">
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+  <!-- ** -->
+
+  <div *ngIf = "CDT">
+    <div class="row">
+      <mat-label>
+        <mat-icon>arrow_right</mat-icon>      
+        Certificado Tributario CDT
+         <mat-icon matTooltip="Como se denomine:
+          &nbsp;&nbsp;-Certificado anual de retención en la fuente e información adicional CDT&nbsp;&nbsp;-Certificado de interés CDT
+          &nbsp;&nbsp;-Certificado de saldos e intereses CDT.">question_answer</mat-icon>
+      </mat-label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+      <button mat-stroked-button color="primary" (click)="CDTDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+      <input type="file">
+     <br>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    </div>
+    <br>
+
+<!-- ** -->
+
+  <div *ngIf = "certificadoFiduciaria">
+    <div class="row">
+      <mat-label>
+        <mat-icon>arrow_right</mat-icon>      
+        Certificado Tributario Fiduciaria
+         <mat-icon matTooltip="Como se denomine:
+          &nbsp;&nbsp;-Certificado de retención en la fuente Sociedad Fiduciaria&nbsp;&nbsp;-Certificado de retención en la fuente Fondo de Inversión Colectiva.">question_answer</mat-icon>
+      </mat-label>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+      <button mat-stroked-button color="primary" (click)="fondoInversionDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+      <input type="file">
+     <br>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    </div>
+    <br>
+
+<!-- ** -->       
+<div *ngIf="certificadoCuentaAhorro">
+
+  <div class="row">
+  <mat-label>
+    <mat-icon>arrow_right</mat-icon>      
+    Certificado Cta. Ahorros
+     <mat-icon matTooltip="Como se denomine:
+      &nbsp;&nbsp;-Certificado bancario anual de retención en la fuente&nbsp;&nbsp;-Certificado tributario
+      &nbsp;&nbsp;-Constancia cuentas de ahorro y cuentas corrientes&nbsp;&nbsp;-Certificado de saldo e intereses">question_answer</mat-icon>
+  </mat-label>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <button mat-stroked-button color="primary" (click)="openDialog()"  matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <input type="file">
+ <br>
+</div>
+<br>
+<mat-divider></mat-divider>
+</div>
+<br>
+<!-- ** --> 
+
+<div *ngIf = "tarjetaCredito">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Certificado Tributario T.Crédito
+       <mat-icon matTooltip="Como se denomine:
+        &nbsp;&nbsp;-Certificado anual de retención en la fuente&nbsp;&nbsp;-Certificado de intereses pagados Tarjeta de Crédito
+        &nbsp;&nbsp;-Certificado de saldos e intereses Tarjeta de Crédito &nbsp;&nbsp;-Certificado Anual de Consumo e Inversiones de Tarjeta de Crédito">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button mat-stroked-button color="primary" (click)="tarjetaCreditoDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+    <input type="file">
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->   
+<div *ngIf = "creditoHipotecario">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Certificado Tributario C.Hipotecario
+       <mat-icon matTooltip="Como se denomine:
+        &nbsp;&nbsp;-Certificado de crédito hipotecario o leasing habitacional&nbsp;&nbsp;-Certificado de prestamos Hipotecarios de Vivienda
+        &nbsp;&nbsp;-Certificado Tributario.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button mat-stroked-button color="primary" (click)="creditoHipotecarioDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+    <input type="file">
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+  
+<div *ngIf = "otrosCreditos">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Certificado de otros créditos
+       <mat-icon matTooltip="Como se denomine:
+        &nbsp;&nbsp;-Certificado anual de retención en la fuente e información adicional&nbsp;&nbsp;-Certificado Tributario
+        &nbsp;&nbsp;-Certificado de Saldos e Intereses.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button mat-stroked-button color="primary" (click)="otrosCreditosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+    <input type="file">
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+
+<div *ngIf = "accionesPrivadas">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Acciones Sociedades Comerciales
+       <mat-icon matTooltip="Información contenida en el certificado de compra de acciones y dividendos">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   
+    <button mat-stroked-button color="primary" (click)="accionesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+<div *ngIf = "prestamosTerceros">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Préstamos "de" y "a" terceros
+       <mat-icon matTooltip="Recuerda que todos los certificados de deuda con particulares deben estar soportados en documentos autenticados por notaria">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button mat-stroked-button color="primary" (click)="prestamosTercerosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+
+<div *ngIf = "efectivo">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Efectivo
+       <mat-icon matTooltip="Es la cantidad de efectivo que deseas declarar como parte de tus bienes, por este motivo no existe un documento que lo certifique.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button mat-stroked-button color="primary" (click)="efectivoDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+
+<div *ngIf = "casaLoteInterno">
+  <h2><strong>Bienes Raíces</strong></h2>
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Escritura Pública Bien Raíz
+       <mat-icon matTooltip="Este documento público certifica la propiedad sobre un bien raíz, contiene información como: fecha de escritura, nombre completo, documento de identidad y valor del bien.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <button mat-stroked-button color="primary" (click)="bienRaizDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+<div *ngIf = "casaLoteInterno">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Recibo del Impuesto Predial
+       <mat-icon matTooltip="Esta información es opcional, no te preocupes si no la tienes.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <button mat-stroked-button color="primary" (click)="predialDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+
+<!-- ** -->
+<div *ngIf = "carroMotoInterno">
+  <h2><strong>Vehículos</strong></h2>
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+   Factura de compra de Vehículos
+       <mat-icon matTooltip="Si no la tienes, no hay inconveniente, puedes tomar la información de la liquidación del impuesto vehicular del 2018. Si no 
+       tienes ninguna de las dos, puedes ingresar un valor y fecha de compra aproximados.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="vehiculosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+
+<!-- ** -->
+
+<div *ngIf = "otrosBienesInterno">
+  <h2><strong>Otros Bienes</strong></h2>
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+   Factura de compra Bienes
+       <mat-icon matTooltip="Es la factura de compra de cualquier otro articulo que desees incluir en tu declaración de renta, para el caso de compra de bienes sobre planos debes ingresar la información contenida en el contrato de promesa de venta o certificado de fiducia.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="otrosBienesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  </div>
+  <br>
+<!-- *************** --> 
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+        <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+<!-- *************************finish documents Bienes*************** --> 
+<!-- *************************start documents Ingresos************* -->
+
+<mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3><strong>INGRESOS</strong></h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          Click para diligenciar
+          <mat-icon>leaderboard</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <!-- ************ -->
+      <div *ngIf="laboralesPrincipal">
+        <h2><strong>Salarios</strong></h2>
+      </div>
+        <div *ngIf="laboralesPrincipal">
+        <div class="row">
+          <mat-label>
+            <mat-icon>arrow_right</mat-icon>      
+         Certificado de Ingresos y Retenciones
+             <mat-icon matTooltip="Es el documento en el cual tu empleador reporta los pagos y las retenciones en la fuente que te fueron practicados en el año 2019.">question_answer</mat-icon>
+          </mat-label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+          <button mat-stroked-button color="primary" (click)="laboralesDialog()" matTooltip="Puedes subir los valores manualmente, o si te resulta más facil, carga el documento
+          con la opción de selección de archivos.">Ingrese Información</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <br>
+         <input type="file">
+         <br>
+        </div>
+        <br>
+      </div>
+        <mat-divider></mat-divider>
+        <br>
+              
+<!-- ********* --> 
+<div *ngIf = "alimentacion">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+   Pagos por concepto de alimentación
+       <mat-icon matTooltip="Esta información la puedes obtener directamente con la persona natural o entidad que te realizó el pago.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="alimentacionDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+      
+<div *ngIf = "fondoEmpleados">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+   Certificado Fondo de Empleados
+       <mat-icon matTooltip="Este documento expedido por el fondo de empleados al cual te encuentras afiliado contiene información como: saldo de ahorros, saldo de aportes, saldo de los CDT, Saldo de préstamos, intereses pagados y retenciones que tenías en el fondo de empleados a 31 de diciembre de 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="fondoEmpleadosDialog()" matTooltip="Permite subir los valores manualmente,o si te resulta más facil, carga el documento
+    con la opción de selección de archivos.">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+   <input type="file">
+  <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="maternidad">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Indemnización por Maternidad
+       <mat-icon matTooltip="Esta información la encuentras en el Certificado de Pagos por Protección a la Maternidad.
+       Recuerda que este tipo de indemnizaciones son diferentes a los pagos recibidos por licencia de maternidad.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="maternidadDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="accidenteLaboral">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Indemnización por Accidente Laboral
+       <mat-icon matTooltip="Esta información la encuentras en el certificado de pagos por indemnizaciones por accidente de trabajo o enfermedad.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="accidenteLaboralDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="cajaCompensacion">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+     Subsidio Caja de Compensación
+       <mat-icon matTooltip="la información se contiene en el Certificado de Subsidio de Caja de Compensación Familiar,
+       en la cual se verifica el valor recibido por subsidio de vivienda, desempleo, etc.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="cajaCompensacionDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="funerarios">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+     Pago Auxilio Funerario
+       <mat-icon matTooltip="Corresponde al certificado de auxilio funerario, el cual es pagado por parte del fondo de pensiones o la administradora de riesgos laborales para cubrir los gastos de entierro de un trabajador afiliado.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+       
+    <button mat-stroked-button color="primary" (click)="funerariosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="exteriores">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+     Certificado Min.Rel.Exteriores
+       <mat-icon matTooltip="Este documento certifica el valor de los ingresos recibidos por tu trabajo como vinculado diplomático en el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="exterioresDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<!-- *************** --> 
+<div *ngIf ="fuerzasArmadas">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+     Certificado Fuerzas Armadas
+       <mat-icon matTooltip="Este documento certifica el valor de los ingresos recibidos por tu trabajo en las Fuerzas Armadas.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+       
+    <button mat-stroked-button color="primary" (click)="fuerzasArmadasDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="planRetiro">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>      
+      Bonificación Plan retiro E. pública
+       <mat-icon matTooltip="EL Certificado de Bonificación Plan de Retiro de Entidad Pública permite identificar los ingresos percibidos por este concepto.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="planRetiroDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="retiroReserva">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+      Retiro Reserva Armada
+       <mat-icon matTooltip="EL Certificado de Bonificación por retiro voluntario de la reserva de la Armada Nacional, es el documento que 
+       certifica los ingresos recibidos por este concepto.Esta información permite tomar una deducción para disminuir tu impuesto de renta a pagar.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="retiroReservaDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="compensacionMuerte">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+     Seguro o Compensación por Muerte
+       <mat-icon matTooltip="El Certificado de seguro por muerte o compensación por muerte es el documento que certifica los ingresos recibidos por este concepto.
+       Esta información permite tomar una deducción para disminuir tu impuesto de renta a pagar.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="compensacionMuerteDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="apoyosEconomicos">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Apoyos Económicos Educación
+       <mat-icon matTooltip="El Certificado de Pagos por Apoyos Económicos para Educación Financiados con Recursos Públicos es el documento certifica los ingresos recibidos por este concepto.
+       Esta información permite tomar una deducción para disminuir tu impuesto de renta a pagar.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="apoyosEconomicosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="colciencias">
+  <div class="row">
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Proyectos Científicos Colciencias
+       <mat-icon matTooltip="El Certificado de pago dentro de proyectos científicos avalado por Colciencias es el documento que certifica los ingresos recibidos por este concepto.
+       Esta información permite tomar una deducción para disminuir tu impuesto de renta a pagar.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="colcienciasDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf="intelectual || manual || honorariosDesconocidos">
+<h2><strong>Honorarios, Servicios o Comisiones como Independiente</strong></h2>
+</div>
+
+<div *ngIf ="intelectual || honorariosDesconocidos">
+  <h4><strong>Factor Intelectual y Otros</strong></h4>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Ingresos y Gastos
+       <mat-icon matTooltip="Este documento certifica el valor de los ingresos percibidos por la prestación de un servicio, donde el factor INTELECTUAL fue determinante.(*Nota: Aplica también cuando no se encuentre seguro en relación al factor intelectual o manual de su contrato.)">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="intelectualDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+
+<div *ngIf ="manual">
+  <h4><strong>Factor Manual</strong></h4>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Ingresos y Gastos
+       <mat-icon matTooltip="Este documento certifica el valor de los ingresos percibidos  la prestación de un servicio, donde el factor MANUAL fue determinante.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="manualDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="propioNegocio">
+  <h2><strong>Negocio Propio</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Ingresos y Gastos
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos percibidos como actividad de un negocio propio durante el 2019; por ejemplo, si eres comerciante o tienes un negocio de repostería a domicilio.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="negocioPropioDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf="pensiones || pensiones2">
+
+</div>
+<div *ngIf ="pensiones || pensiones2"> 
+  <h2><strong>Pensiones</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Colilla de pago Pensión
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos por pensión de jubiliación, invalidéz, vejez, sobrevivientes o riesgos profesionales durante el 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="pensionesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="pensiones2">
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Cert. Fondo Empleados(Pensionados)
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos por pensión de jubiliación, invalidéz, vejez, sobrevivientes o riesgos profesionales durante el 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="pensionesDialog2()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf="arrendamientoBienRaiz || arrendamientoVehiculos ||arrendamientoMaquinaria || arrendamientoOtrosBienes ">
+  <h2><strong>Arrendamientos</strong></h2>
+</div>
+<div *ngIf ="arrendamientoBienRaiz">
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Arrendamiento Bien Raiz
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos por arrendamientos de bienes inmuebles durante el 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="arrendamientoBienRaizDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="arrendamientoVehiculos">
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Arrendamiento Vehículos
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos por arrendamientos de vehículos durante el 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="arrendamientoVehiculosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="arrendamientoMaquinaria">
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Arrendamiento Maquinaria
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos por arrendamientos de maquinarias durante el 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="arrendamientoMaquinariaDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br>
+  <mat-divider></mat-divider> 
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="arrendamientoOtrosBienes">
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Arrendamiento Otros Bienes
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos por arrendamientos de otros bienes diferentes a vehículos, inmuebles o maquinarias, tales como derechos de propiedad intelectual, etc.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="arrendamientoOtrosBienesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="ventaVehiculos">
+  <h2><strong>Venta de Vehículos</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Factura compra/venta Vehículos
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes de la venta de un vehículo, como carro ó moto durante el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="ventaVehiculosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** --> 
+<div *ngIf ="ventaInmueblesInterno2">
+  <h2><strong>Venta de Bienes Raíces</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Venta Bienes Raíces
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes de la venta de un bien inmueble en el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="ventaBienRaizDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** -->
+<div *ngIf ="ventaAcciones">
+  <h2><strong>Venta de Acciones</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Venta Acciones
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes de la venta de acciones o partes de interés de tu propiedad durante el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+       
+    <button mat-stroked-button color="primary" (click)="ventaAccionesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** -->
+<div *ngIf ="ventaOtrosBienes">
+  <h2><strong>Otras Ventas</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Venta Otros Bienes
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes de la venta de bienes ubicados en la categoría 'Otras' durante el 2019, tales como: joyas, obras de arte, muebles, etc.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="ventaOtrosBienesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** -->
+<div *ngIf ="herencia">
+  <h2><strong>Herencia, Legado o Donación</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Escritura Pública
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes de herencias, legados o donaciones,recibidos durante el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="herenciaDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** -->
+<div *ngIf ="conyugal">
+  <h2><strong>Liquidación de Sociedad Conyugal</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Escritura Pública
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes de la liquidación de tu sociedad conyugal durante el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="conyugalDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** -->
+<div *ngIf ="seguros">
+  <h2><strong>Reclamación de Seguros</strong></h2>
+  <div class="row">    
+    <mat-label>
+      <mat-icon>arrow_right</mat-icon>     
+    Información Seguros
+       <mat-icon matTooltip="Esta información está relacionada con los ingresos provenientes del pago de seguros de daños y vida durante el año 2019.">question_answer</mat-icon>
+    </mat-label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+    <button mat-stroked-button color="primary" (click)="segurosDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <br>
+  </div>
+  <br> 
+  <mat-divider></mat-divider>
+  </div>
+  <br>
+<!-- *************** -->
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+        <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+      </mat-action-row>
+    </mat-expansion-panel>     
+
+<!-- ******************** finish documents Ingresos************* -->
+
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3><strong>DEDUCCIONES</strong></h3>
+              </mat-panel-title>
+              <mat-panel-description>
+                Click para diligenciar
+                <mat-icon>account_balance_wallet</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+        <!-- ******** -->
+        <div *ngIf ="prepagada">
+          <h2><strong>Medicina Prepagada</strong></h2>
+          <div class="row">    
+            <mat-label>
+              <mat-icon>arrow_right</mat-icon>     
+            Pagos Medicina Prepagada
+               <mat-icon matTooltip="Esta información está relacionada con los gastos ocasionados por los pagos de la medicina prepagada durante 2019.">question_answer</mat-icon>
+            </mat-label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               
+            <button mat-stroked-button color="primary" (click)="prepagadaDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <br>
+          </div>
+          <br> 
+          <mat-divider></mat-divider>
+          </div>
+          <br>
+        <!-- *************** -->
+        <div *ngIf ="dependientes">
+          <h2><strong>Dependientes Económicos</strong></h2>
+          <div class="row">    
+            <mat-label>
+              <mat-icon>arrow_right</mat-icon>     
+          Información Dependientes
+               <mat-icon matTooltip="Esta información está relacionada con los gastos por dependientes económicos. Estos pagos pueden disminuir tu impuesto de renta a pagar.">question_answer</mat-icon>
+            </mat-label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               
+            <button mat-stroked-button color="primary" (click)="dependientesDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <br>
+          </div>
+          <br> 
+          <mat-divider></mat-divider>
+          </div>
+          <br>
+        <!-- *************** -->
+        <div *ngIf ="seguridadSocial">
+          <h2><strong>Aportes como Independiente a Seguridad Social</strong></h2>
+          <div class="row">    
+            <mat-label>
+              <mat-icon>arrow_right</mat-icon>     
+          Información Aportes
+               <mat-icon matTooltip="Esta información está relacionada con los gastos pagados por seguridad social como independiente durante el año 2019.">question_answer</mat-icon>
+            </mat-label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               
+            <button mat-stroked-button color="primary" (click)="seguridadSocialDialog()" matTooltip="Permite subir los valores manualmente">Ingrese Información</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <br>
+          </div>
+          <br> 
+          <mat-divider></mat-divider>
+          </div>
+          <br>
+        <!-- *************** --> 
+         <div *ngIf="voluntarios">
+            <h2><strong>Pensiones y Cesantías Voluntarias</strong></h2>
+          <div class="row">
+            <mat-label>
+              <mat-icon>arrow_right</mat-icon>      
+           Certificado de Retención en la Fuente
+               <mat-icon matTooltip="Este documento también puede denominarse como Certificado Tributario de Pensiones y Cesantías.">question_answer</mat-icon>
+            </mat-label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
+            <button mat-stroked-button color="primary" (click)="voluntariasDialog()" matTooltip="Puedes subir los valores manualmente, o si te resulta más facil, carga el documento
+            con la opción de selección de archivos.">Ingrese Información</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <br>
+           <input type="file">
+           <br>
+          </div>
+          <br>
+        </div>
+          <mat-divider></mat-divider>
+          <br>
+         
+        <!-- *************** --> 
+        <div *ngIf="AFC">
+          <h2><strong>Ahorros AFC</strong></h2>
+        <div class="row">
+          <mat-label>
+            <mat-icon>arrow_right</mat-icon>      
+         Certificado de Retención AFC
+             <mat-icon matTooltip="Este documento también puede denominarse Certificado Tributario de la cuenta AFC.">question_answer</mat-icon>
+          </mat-label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+          <button mat-stroked-button color="primary" (click)="AFCDialog()" matTooltip="Puedes subir los valores manualmente, o si te resulta más facil, carga el documento
+          con la opción de selección de archivos.">Ingrese Información</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <br>
+         <input type="file">
+         <br>
+        </div>
+        <br>
+      </div>
+        <br>
+      <!--******************-->
+        
+                    
+                 
+        
+    
+
+          <!--******** -->
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+        <button mat-button color="primary" (click)="nextStep()">Fin</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+  </mat-accordion>
+
+

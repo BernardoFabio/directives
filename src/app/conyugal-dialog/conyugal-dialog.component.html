@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>LIQUIDACIÓN DE SOCIEDAD CONYUGAL
+    <mat-icon matTooltip="Debes ingresar los valores totales recibidos a tu favor en el año 2019, reconocidos dentro del proceso de liquidación de sociedad conyugal.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+  
+    <form [formGroup]="contactForm" (ngSubmit)="conyugalForm($event)">
+    <ul>
+     <h4>Por favor diligencia la siguiente información:</h4>
+ 
+     <li>
+      <h3>Valor de los bienes y/o ingresos recibidos durante el año 2019:</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorLiquidacionConyugal">
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('valorLiquidacionConyugal').hasError('required')
+              && contactForm.get('valorLiquidacionConyugal').touched">
+                Campo requerido
+              </mat-error> 
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorLiquidacionConyugal | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+    </ul>
+
+    </form>
+   
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="conyugalForm($event)"
+    mat-flat-button color="primary">Guardar respuestas
+  </button>
+  </mat-dialog-actions>
+  
+  

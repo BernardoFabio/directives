@@ -1,0 +1,126 @@
+<h2 mat-dialog-title>INFORMACIÓN DE TÍTULOS DE INVERSIÓN CERTIFICADOS A DEPOSITO - CDTS
+    <mat-icon matTooltip="Recuerda: Si tienes varios de estos productos a 31 de diciembre de  2019, debes ingresar la suma total">description</mat-icon>
+</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="contactForm" (ngSubmit)="CDT($event)">
+  <ul>
+   <h4>Por favor responde las siguientes preguntas:</h4>
+    
+    <li>
+    <h3>Saldo a 31 dic 2019 - Totales</h3>  
+    <div class="container">
+      <div class="row">           
+  
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Saldo Total </mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="saldoCDT">
+          </mat-form-field>
+          <mat-error *ngIf="contactForm.get('saldoCDT').hasError('required')
+          && contactForm.get('saldoCDT').touched" >
+            Campo requerido
+          </mat-error>                 
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+         <p>${{contactForm.value.saldoCDT | number:"2.1-2"}}</p>
+          </div>      
+        </div>  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li>
+  
+  <li>
+    <h3>Rendimientos financieros o intereses pagados -Totales</h3>  
+    <div class="container">
+      <div class="row">      
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Rendimientos</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="interesesCDT">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('interesesCDT').hasError('required')
+          && contactForm.get('interesesCDT').touched">
+            Campo requerido
+          </mat-error>              
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+          <p>${{contactForm.value.interesesCDT | number:"2.1-2"}}</p>            
+          </div>      
+        </div>  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li> 
+
+  <li>
+    <h3>Valor retención en la fuente renta - Totales</h3>  
+    <div class="container">
+      <div class="row">       
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Retención</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="retencionCDT">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('retencionCDT').hasError('required')
+          && contactForm.get('retencionCDT').touched">
+            Campo requerido
+          </mat-error>             
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+       <p>${{contactForm.value.retencionCDT | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li> 
+  
+  <li>
+    <h3>Valor GMF - Totales</h3><h6>(Gravamen Movimientos Financieros ó 4 x 1000)</h6>
+    <div class="container">
+      <div class="row">           
+  
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>*Esta información es opcional</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="GMFCDT">
+          </mat-form-field>        
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+          <p>${{contactForm.value.GMFCDT | number:"2.1-2"}}</p>
+              
+          </div>      
+        </div>
+  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li>
+  </ul>
+</form>
+ 
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="CDT($event)"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+  

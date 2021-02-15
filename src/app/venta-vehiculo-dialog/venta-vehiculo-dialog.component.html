@@ -1,0 +1,412 @@
+<h2 mat-dialog-title>VENTA DE VEHÍCULOS 
+    <mat-icon matTooltip="Debes ingresar los valores requeridos por cada vehículo vendido durante el año 2019">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+      <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Cuántos vehículos, como carro o moto, vendiste durante el año 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoNumeroVehiculos($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+    <br>
+
+<!--**************************Start Vehículo 1*************************--> 
+    <ol>
+     <h2 class="color" style="text-align: center;"><strong>Vehículo No.1</strong></h2> 
+<form [formGroup]="contactForm"(ngSubmit)="vehiculosForm($event)">
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este vehículo?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoVehiculoUno($event)"
+                formControlName="titularVehiculo">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularVehiculo').hasError('required')
+          && contactForm.get('titularVehiculo').touched">
+            Campo requerido
+          </mat-error>   
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="vehiculoUno">
+        <h3>¿Cuál es el porcentaje  de la propiedad del vehículo que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentaje">
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('porcentaje').hasError('required')
+          && contactForm.get('porcentaje').touched">
+            Campo requerido
+          </mat-error>          
+          </div>
+
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentaje | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+   
+    <li>
+     <h3>Ingresa el valor de venta:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVenta">
+            </mat-form-field>
+            <mat-error *ngIf="contactForm.get('valorVenta').hasError('required')
+          && contactForm.get('valorVenta').touched">
+            Campo requerido
+          </mat-error>           
+          </div>
+
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVenta | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider> 
+      
+      <li>
+      <h3>Retención en la fuente practicada en el 2019 por estos ingresos:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencionVenta">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencionVenta | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider>     
+    
+    <li>
+        <h3>¿Fecha de venta aproximada?</h3>  
+        <div class="container">
+          <div class="row">            
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Selecciona una fecha</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaVenta">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>     
+            <mat-error *ngIf="contactForm.get('fechaVenta').hasError('required')
+          && contactForm.get('fechaVenta').touched">
+            Campo requerido
+          </mat-error>          
+          </div>                  
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+        <br>
+    </form>
+
+</ol>
+<!--**************************Finish Vehículo 1*************************--> 
+
+<!--**************************Start Vehículo 2**************************--> 
+<ol *ngIf="numeroVehiculo2">
+  <h2 class="color" style="text-align: center;"><strong>Vehículo No.2</strong></h2> 
+
+  <form [formGroup]="contactForm"(ngSubmit)="vehiculosForm($event)">
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este vehículo?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoVehiculoUno($event)"
+                formControlName="titularVehiculo_1">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularVehiculo_1').hasError('required')
+          && contactForm.get('titularVehiculo_1').touched">
+            Campo requerido
+          </mat-error>   
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="vehiculoUno">
+        <h3>¿Cuál es el porcentaje  de la propiedad del vehículo que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentaje_1">
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('porcentaje_1').hasError('required')
+          && contactForm.get('porcentaje_1').touched">
+            Campo requerido
+          </mat-error>          
+          </div>
+
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentaje_1 | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+   
+    <li>
+     <h3>Ingresa el valor de venta:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVenta_1">
+            </mat-form-field>
+            <mat-error *ngIf="contactForm.get('valorVenta_1').hasError('required')
+          && contactForm.get('valorVenta_1').touched">
+            Campo requerido
+          </mat-error>           
+          </div>
+
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVenta_1 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider> 
+      
+      <li>
+      <h3>Retención en la fuente practicada en el 2019 por estos ingresos:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencionVenta_1">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencionVenta_1 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider>     
+    
+    <li>
+        <h3>¿Fecha de venta aproximada?</h3>  
+        <div class="container">
+          <div class="row">            
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Selecciona una fecha</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaVenta_1">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>     
+            <mat-error *ngIf="contactForm.get('fechaVenta_1').hasError('required')
+          && contactForm.get('fechaVenta_1').touched">
+            Campo requerido
+          </mat-error>          
+          </div>                  
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+        <br>
+    </form>
+
+       
+</ol>
+<!--****************************finish Vehículo 2*******************--> 
+
+<!--**************************Start Vehículo 3**************************--> 
+<ol *ngIf="numeroVehiculo3">
+  <h2 class="color" style="text-align: center;"><strong>Vehículo No.3</strong></h2> 
+
+  <form [formGroup]="contactForm"(ngSubmit)="vehiculosForm($event)">
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este vehículo?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoVehiculoUno($event)"
+                formControlName="titularVehiculo_2">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularVehiculo_2').hasError('required')
+          && contactForm.get('titularVehiculo_2').touched">
+            Campo requerido
+          </mat-error>   
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="vehiculoUno">
+        <h3>¿Cuál es el porcentaje  de la propiedad del vehículo que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentaje_2">
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('porcentaje_2').hasError('required')
+          && contactForm.get('porcentaje_2').touched">
+            Campo requerido
+          </mat-error>          
+          </div>
+
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentaje_2 | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+   
+    <li>
+     <h3>Ingresa el valor de venta:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVenta_2">
+            </mat-form-field>
+            <mat-error *ngIf="contactForm.get('valorVenta_2').hasError('required')
+          && contactForm.get('valorVenta_2').touched">
+            Campo requerido
+          </mat-error>           
+          </div>
+
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVenta_2 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider> 
+      
+      <li>
+      <h3>Retención en la fuente practicada en el 2019 por estos ingresos:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencionVenta_2">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencionVenta_2 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider>     
+    
+    <li>
+        <h3>¿Fecha de venta aproximada?</h3>  
+        <div class="container">
+          <div class="row">            
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Selecciona una fecha</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaVenta_2">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>     
+            <mat-error *ngIf="contactForm.get('fechaVenta_2').hasError('required')
+          && contactForm.get('fechaVenta_2').touched">
+            Campo requerido
+          </mat-error>          
+          </div>                  
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+        <br>
+    </form>
+
+</ol>
+<!--****************************finish Vehículo 3*******************-->  
+ 
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="vehiculosForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+  
+  
+  

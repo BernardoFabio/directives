@@ -1,0 +1,150 @@
+<h2 mat-dialog-title>ACCIONES DE SOCIEDADES COMERCIALES 
+    <mat-icon matTooltip="Debes ingresar los valores correspondientes a tus acciones en sociedades Comerciales">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="contactForm" (ngSubmit)="acciones">  
+    <ul>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <!--**************-->
+     <li>
+      <h3>Valor de compra de tus acciones:</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorCompraAcciones">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('valorCompraAcciones').hasError('required')
+            && contactForm.get('valorCompraAcciones').touched">
+              Campo requerido
+            </mat-error>      
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorAccionesCompra| number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+     <!--**************-->
+
+<li>
+  <h3>En que fecha compraste estas acciones?</h3>  
+  <div class="container">
+    <div class="row">
+
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>Selecciona una fecha</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="fechaCompraAcciones">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-error *ngIf="contactForm.get('fechaCompraAcciones').hasError('required')
+      && contactForm.get('fechaCompraAcciones').touched">
+        Campo requerido
+      </mat-error>
+
+    </div>
+  </div>
+  <mat-divider></mat-divider>  
+</li>
+         
+  <!--**************-->  
+     <li>
+      <h3>¿Recibiste dividendos de estas acciones durante el 2019?</h3>  
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoAccionesDialog($event)"
+                formControlName="dividendosAcciones">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field> 
+              <mat-error *ngIf="contactForm.get('dividendosAcciones').hasError('required')
+              && contactForm.get('dividendosAcciones').touched">
+                Campo requerido
+              </mat-error>     
+          </div>
+        </div>
+      </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <!--**************-->
+
+    <li *ngIf="opcionAcciones">
+
+        <h3>Valor de dividendos distribuidos durante el 2019</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >       
+              <mat-label>Valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorDividendosAcciones">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorDividendosAcciones | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>  
+
+      
+      <h3>Retención en la fuente por el pago de dividendos durante el 2019 </h3>  
+      <div class="container">
+        <div class="row">
+
+           <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Retención</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencionDividendos">
+            </mat-form-field>
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencionDividendos.valor3 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>   
+
+    </li>
+
+<!--**************-->      
+    </ul>
+    </form>
+   
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="acciones($event)"
+    mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+  </button>
+  </mat-dialog-actions>
+   
+  
+  
+  

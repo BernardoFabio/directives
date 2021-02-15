@@ -1,0 +1,174 @@
+<h2 mat-dialog-title>DEDUCCION POR DEPENDIENTES
+    <mat-icon matTooltip="Debes ingresar la información por cada dependiente a reportar. Se recomienda tener el número de documento a mano.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+      <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Cuántas personas dependientes reportarás en en tu Declaración de Renta del año 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoDependientes($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>   
+    
+    <h5>Puedes reportar como dependientes a tus hijos menores de 18 años, o mayores de 18 y menores de 23 que estén estudiando, por lo cual debes tener el certificado de estudio como soporte.
+     Si tu dependiente es de otro clase, debes tener un Certificado de Dependencia Económica. Este documento puede expedirlo un contador público, o de ser el caso, Medicina Legal para dar fe de que 
+     esa persona depende económicamente de ti, ya sea porque en el 2019 tuvo ingresos anuales inferiores a $8.910.000 o por que sufre de alguna discapacidad física o psicológica.</h5>
+ 
+                      <form [formGroup]="contactForm"(ngSubmit)="dependientesForm($event)">                        
+                        <ol>
+                          <li>
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text" 
+                                      formControlName="dependiente1">                 
+                                    </mat-form-field> 
+                                    <mat-error *ngIf="contactForm.get('dependiente1').hasError('required')
+                                    && contactForm.get('dependiente1').touched" >
+                                      Campo requerido
+                                    </mat-error> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_1">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+
+                          <li *ngIf="dependiente2">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text"formControlName="dependiente2">                
+                                    </mat-form-field> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_2">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+
+                          <li *ngIf="dependiente3">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text" formControlName="dependiente3">                                                  
+                                    </mat-form-field> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_3">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+
+                          <li *ngIf="dependiente4">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text" formControlName="dependiente4">                                                       
+                                    </mat-form-field> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_4">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+
+                          <li *ngIf="dependiente5">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text" formControlName="dependiente5">                                                      
+                                    </mat-form-field> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_5">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+                          
+                          <li *ngIf="dependiente6">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text" formControlName="dependiente6">                                                       
+                                    </mat-form-field> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_6">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+
+                          <li *ngIf="dependiente7">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                  <mat-form-field class="example-form-field">            
+                                      <mat-label>Nombre del Dependiente:</mat-label>
+                                      <input matInput type="text" formControlName="dependiente7">                                                      
+                                    </mat-form-field> 
+                                </div>
+                                <div class="col-sm">
+                                  <mat-form-field appearance="">
+                                      <mat-label>Parentezco</mat-label>
+                                      <mat-select formControlName="dependiente_7">
+                                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>                 
+                                </div>
+                            </div>
+                          </li>
+                      </ol> 
+                    </form>                      
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="dependientesForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+

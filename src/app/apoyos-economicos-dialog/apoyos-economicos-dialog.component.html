@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Certificado de Pagos por Apoyos Económicos para Educación Financiados con Recursos Públicos
+    <mat-icon matTooltip="Ingresa el valor correspondiente indicado.">description</mat-icon>
+    </h2>
+    <mat-dialog-content class="mat-typography">
+    
+      <form [formGroup]="contactForm"(ngSubmit)="apoyosEconomicosForm($event)">
+        <ul>
+        <li>
+            <h3>Ingresa el valor del apoyo económico para educación que recibiste durante el 2019, asociado a este salario:</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="apoyosEconomicos">
+                  </mat-form-field>   
+                  <mat-error *ngIf="contactForm.get('apoyosEconomicos').hasError('required')
+                  && contactForm.get('apoyosEconomicos').touched" >
+                    Campo requerido
+                  </mat-error>                     
+                       
+                </div>
+
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.apoyosEconomicos | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+        </ul>    
+      </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Salir</button>
+      <button mat-button type="submit" (click)="apoyosEconomicosForm($event)"[disabled]="contactForm.invalid"
+      mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+    </button>
+    </mat-dialog-actions>

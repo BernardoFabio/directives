@@ -1,0 +1,339 @@
+<h2 mat-dialog-title>INFORMACIÓN RECIBO DEL IMPUESTO PREDIAL 
+    <mat-icon matTooltip="Debes ingresar los valores requeridos por cada bien raíz  de manera individual">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <br>
+
+      <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Cuántos bienes inmuebles aparecían a tu nombre a 31 de diciembre de 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoNumeroPredial($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+    <br>
+
+<!--**************************Start Inmueble 1*************************--> 
+<form [formGroup]="contactForm" (ngSubmit)="predial($event)">
+
+    <ol class="inmueble1">
+     <h2 class="color" style="text-align: center;"><strong>Bien Raiz No.1</strong></h2> 
+
+     <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Viviste en este bien raíz?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select formControlName="vivirBienRaizPredial">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('vivirBienRaizPredial').hasError('required')
+              && contactForm.get('vivirBienRaizPredial').touched" >
+                Campo requerido
+              </mat-error> 
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este bien raíz?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoPredialUno($event)" formControlName="titularBienRaizPredial">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularBienRaizPredial').hasError('required')
+              && contactForm.get('titularBienRaizPredial').touched" >
+                Campo requerido
+              </mat-error> 
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="predialUno">
+        <h3>¿Cuál es el porcentaje  de este bien inmueble que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">          
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"formControlName="porcentajeBienRaizPredial">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentajeBienRaizPredial | number:"2.1-2"}}%</p>
+            </div>      
+          </div>    
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+
+    <h3><strong>Valor fiscal #3: Recibo del Impuesto Predial</strong></h3>
+    
+      <li>
+        <h3>Avalúo catastral del año 2019 por el 100% de la propiedad:</h3>  
+        <div class="container">
+          <div class="row">         
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Valor avalúo</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number" formControlName="avaluoPredial">
+              </mat-form-field>        
+            </div>
+      
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.avaluoPredial | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+      
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>      
+</ol>
+</form>
+<!--**************************Finish Inmueble 1*************************--> 
+<!--**************************Start Inmueble 2**************************--> 
+
+  <form [formGroup]="contactForm" (ngSubmit)="predial($event)">
+
+    <ol *ngIf="numeroPredial2">
+      <h2 class="color" style="text-align: center;"><strong>Bien Raiz No.2</strong></h2>     
+     <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Viviste en este bien raíz?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select formControlName="vivirBienRaizPredial2">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('vivirBienRaizPredial2').hasError('required')
+              && contactForm.get('vivirBienRaizPredial2').touched" >
+                Campo requerido
+              </mat-error> 
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este bien raíz?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoPredialUno($event)" formControlName="titularBienRaizPredial2">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularBienRaizPredial2').hasError('required')
+              && contactForm.get('titularBienRaizPredial2').touched" >
+                Campo requerido
+              </mat-error> 
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="predialUno">
+        <h3>¿Cuál es el porcentaje  de este bien inmueble que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">          
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"formControlName="porcentajeBienRaizPredial2">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentajeBienRaizPredial2 | number:"2.1-2"}}%</p>
+            </div>      
+          </div>    
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+
+    <h3><strong>Valor fiscal #3: Recibo del Impuesto Predial</strong></h3>
+    
+      <li>
+        <h3>Avalúo catastral del año 2019 por el 100% de la propiedad:</h3>  
+        <div class="container">
+          <div class="row">         
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Valor avalúo</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number" formControlName="avaluoPredial2">
+              </mat-form-field>        
+            </div>
+      
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.avaluoPredial2 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+      
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>      
+</ol>
+</form>
+  
+<!--****************************finish Inmueble2*******************--> 
+
+
+<!--**************************Start Inmueble 3**************************--> 
+  <form [formGroup]="contactForm" (ngSubmit)="predial($event)">
+    <ol *ngIf="numeroPredial3">
+      <h2 class="color" style="text-align: center;"><strong>Bien Raiz No.3</strong></h2>
+    
+     <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Viviste en este bien raíz?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select formControlName="vivirBienRaizPredial3">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('vivirBienRaizPredial3').hasError('required')
+              && contactForm.get('vivirBienRaizPredial3').touched" >
+                Campo requerido
+              </mat-error> 
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este bien raíz?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoPredialUno($event)" formControlName="titularBienRaizPredial3">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularBienRaizPredial3').hasError('required')
+              && contactForm.get('titularBienRaizPredial3').touched" >
+                Campo requerido
+              </mat-error> 
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="predialUno">
+        <h3>¿Cuál es el porcentaje  de este bien inmueble que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">          
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"formControlName="porcentajeBienRaizPredial3">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentajeBienRaizPredial3 | number:"2.1-2"}}%</p>
+            </div>      
+          </div>    
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+
+    <h3><strong>Valor fiscal #3: Recibo del Impuesto Predial</strong></h3>
+    
+      <li>
+        <h3>Avalúo catastral del año 2019 por el 100% de la propiedad:</h3>  
+        <div class="container">
+          <div class="row">         
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Valor avalúo</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number" formControlName="avaluoPredial3">
+              </mat-form-field>        
+            </div>
+      
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.avaluoPredial3 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+      
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>      
+</ol>
+</form>
+  
+
+<!--****************************finish Inmueble3*******************-->  
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="predial($event)"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+  
+  
+  

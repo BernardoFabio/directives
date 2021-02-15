@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Certificado de Pago dentro de Proyectos Científicos Avalados por Colciencias
+    <mat-icon matTooltip="Por favor contesta las siguientes preguntas.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <br>
+
+    <form [formGroup]="contactForm"(ngSubmit)="colcienciasForm($event)">    
+    <ol>
+       <li>
+         <div class="container">
+           <div class="row">    
+             <div class="col-sm">
+               <h3>¿La totalidad del salario que recibiste durante el 2019 está relacionado con la participación en proyectos científicos avalados por Colciencias?</h3>  
+               </div> 
+               <div class="col-sm">          
+               <mat-form-field appearance="">
+                   <mat-label>Seleccione</mat-label>
+                   <mat-select (selectionChange)="eventoColciencias($event)"
+                   formControlName="colciencias">
+                     <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                   </mat-select>
+                 </mat-form-field> 
+                 <mat-error *ngIf="contactForm.get('colciencias').hasError('required')
+                 && contactForm.get('colciencias').touched" >
+                   Campo requerido
+                 </mat-error> 
+               </div>    
+             </div>
+           </div>
+       </li>
+       <mat-divider></mat-divider>
+       <br>
+   
+       <div *ngIf="colciencias">
+           <h3>
+            Ingresa el valor de la porción de este ingreso que recibiste durante el 2019 relacionado con la participación en proyectos científicos avalados por Colciencias:</h3>  
+         <div class="container">
+           <div class="row">           
+       
+             <div class="col-sm">
+               <mat-form-field >         
+                 <mat-label>Porcentaje</mat-label>
+                 <input matInput placeholder="Ej.50%" type="number"
+                 formControlName="valorColciencias">
+               </mat-form-field>        
+             </div>
+       
+             <div class="col-sm">
+               <div class="container3">
+                 <p>{{contactForm.value.valorColciencias | number:"2.1-2"}}%</p>
+               </div>      
+             </div>
+       
+           </div>
+         </div>
+         <mat-divider></mat-divider>       
+       </div>
+          
+   </ol>
+   </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="colcienciasForm($event)"[disabled]="contactForm.invalid"
+    mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+  </button>
+  </mat-dialog-actions>
+
+

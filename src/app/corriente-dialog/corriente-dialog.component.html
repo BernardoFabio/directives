@@ -1,0 +1,131 @@
+<h2 mat-dialog-title>INFORMACIÓN DE CUENTA CORRIENTE(S) 
+    <mat-icon matTooltip="Debes ingresar los valores totales de todas tus cuentas corrientes">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="contactForm" (ngSugmit)="corriente($event)">
+  
+    <ul>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <li>
+      <h3>Saldo a 31 dic 2019 - Totales</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Saldo Total </mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="saldoCorriente">
+          </mat-form-field>
+          <mat-error *ngIf="contactForm.get('saldoCorriente').hasError('required')
+          && contactForm.get('saldoCorriente').touched" >
+            Campo requerido
+          </mat-error>         
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.saldoCorriente | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+    
+    <li>
+      <h3>Rendimientos financieros o intereses pagados -Totales</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Rendimientos</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="interesesCorriente">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('interesesCorriente').hasError('required')
+          && contactForm.get('saldoCorriente').touched">
+            Campo requerido
+          </mat-error>         
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.saldoCorriente | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li> 
+  
+    <li>
+      <h3>Valor retención en la fuente renta - Totales</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Retención</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="retencionCorriente">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('retencionCorriente').hasError('required')
+          && contactForm.get('retencionCorriente').touched">
+            Campo requerido
+          </mat-error>         
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencionCorriente | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li> 
+    
+    <li>
+      <h3>Valor GMF - Totales</h3><h6>(Gravamen Movimientos Financieros ó 4 x 1000)</h6> 
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>*Este valor es opcional</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="GMFCorriente">
+          </mat-form-field>         
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.GMFCorriente | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li> 
+  
+    </ul>
+  </form>
+   
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="corriente($event)"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+  </mat-dialog-actions>
+  
+  
+  

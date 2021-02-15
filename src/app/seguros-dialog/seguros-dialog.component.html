@@ -1,0 +1,262 @@
+<h2 mat-dialog-title>SEGUROS
+    <mat-icon matTooltip="Debes ingresar los valores totales recibidos a tu favor por la reclamación y pago de seguros en el año 2019.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+ 
+<ol>
+    <h3>Por favor selecciona la opción que aplique para tu caso:</h3>
+    <br>
+<h3><strong>Seguro de Vida</strong></h3>
+    <li>
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Durante el 2019 recibiste pagos por concepto de Seguros de Vida?</h4>
+          </div>
+          <div class="col-sm">
+            <mat-radio-group aria-label="Select an option">
+              <mat-slide-toggle [(ngModel)]="seguroVida">
+              </mat-slide-toggle>
+            </mat-radio-group>  
+          </div>         
+        </div>
+    </li>
+    <mat-divider></mat-divider>     
+    
+<ul *ngIf="seguroVida">
+  <form [formGroup]="contactForm"(ngSubmit)="segurosForm($event)">
+    <li>
+    <h4>Valor recibido por el seguro de vida:</h4>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >       
+            <mat-label>Ingresa un Valor</mat-label>
+            <input matInput placeholder="" type="number"
+            formControlName="valorSegurosVida">
+          </mat-form-field>        
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.valorSegurosVida | number:"2.1-2"}}</p>
+          </div>      
+        </div> 
+      </div>
+    </div>
+    </li>
+
+    <li>
+        <h4>Valor recibido por amparos adicionales al seguro de vida:</h4>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >       
+                <mat-label>Ingresa un Valor</mat-label>
+                <input matInput placeholder="" type="number"
+                formControlName="amparosAdicionales">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.amparosAdicionales | number:"2.1-2"}}</p>
+              </div>      
+            </div> 
+          </div>
+        </div>
+        </li>
+
+        <li>
+            <h4>Retención en la fuente que te practicaron:</h4>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >       
+                    <mat-label>Ingresa un Valor</mat-label>
+                    <input matInput placeholder="" type="number"
+                    formControlName="retencionVida">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.retencionVida | number:"2.1-2"}}</p>
+                  </div>      
+                </div> 
+              </div>
+            </div>
+            </li>
+
+          </form>
+        </ul>
+        <br>
+      
+
+<h3><strong>Seguro Daño Emergente</strong></h3>
+ <li>
+    <div class="row">
+    <div class="col-sm">
+      <h4>¿Durante el 2019 recibiste pagos por concepto de Seguro por Daño Emergente?</h4>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle [(ngModel)]="seguroDano">
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>
+</li>
+  <mat-divider></mat-divider>          
+  <br>
+
+  <ul *ngIf="seguroDano">
+    <form [formGroup]="contactForm"(ngSubmit)="segurosForm($event)">
+    <li>
+    <h4>Valor recibido por el seguro de daño emergente:</h4>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >       
+            <mat-label>Ingresa un Valor</mat-label>
+            <input matInput placeholder="" type="number"
+            formControlName="valorSeguroDano">
+          </mat-form-field>        
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.valorSeguroDano | number:"2.1-2"}}</p>
+          </div>      
+        </div> 
+      </div>
+    </div>
+    </li>
+    </form>
+
+        <li>
+            <div class="row">
+              <div class="col-sm">
+                <h4>¿utilizaste este dinero para reemplazar o reparar el bien que tuvo daños?</h4>
+              </div>
+              <div class="col-sm">
+                <mat-radio-group aria-label="Select an option">
+                  <mat-slide-toggle [(ngModel)]="seguroDano2">
+                  </mat-slide-toggle>
+                </mat-radio-group>           
+              </div>         
+            </div>
+        </li>
+        <mat-divider></mat-divider>     
+
+        <div *ngIf="seguroDano2">
+          <form [formGroup]="contactForm"(ngSubmit)="segurosForm($event)">        
+            <h4>Monto que utilizaste para reemplazar o reparar el bien:</h4>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >       
+                    <mat-label>Ingresa un Valor</mat-label>
+                    <input matInput placeholder="" type="number"
+                    formControlName="montoReparar">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.montoReparar | number:"2.1-2"}}</p>
+                  </div>      
+                </div> 
+              </div>
+            </div>
+            </form>
+        </div>
+
+        <form [formGroup]="contactForm"(ngSubmit)="segurosForm($event)">
+        <li>
+            <h4>Retención en la fuente que te practicaron:</h4>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >       
+                    <mat-label>Ingresa un Valor</mat-label>
+                    <input matInput placeholder="" type="number"
+                    formControlName="retencionDano">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.retencionDano | number:"2.1-2"}}</p>
+                  </div>      
+                </div> 
+              </div>
+            </div>
+            </li>
+            </form>
+         
+        </ul> 
+
+<h3><strong>Seguro Lucro Cesante</strong></h3>
+  <li>
+  <div class="row">
+    <div class="col-sm">
+      <h3>¿Durante el 2019 recibiste pagos por concepto de Seguros de Lucro Cesante?</h3>
+    </div>
+    <div class="col-sm">
+      <mat-radio-group aria-label="Select an option">
+        <mat-slide-toggle [(ngModel)]="seguroDano3">
+        </mat-slide-toggle>
+      </mat-radio-group>           
+    </div>
+  </div>
+ </li>
+  <mat-divider></mat-divider>          
+  <br>  
+
+  <ul *ngIf="seguroDano3">
+    <form [formGroup]="contactForm"(ngSubmit)="segurosForm($event)">
+    <li>
+    <h4>Monto que recibiste por lucro cesante:</h4>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >       
+            <mat-label>Ingresa un Valor</mat-label>
+            <input matInput placeholder="" type="number"
+            formControlName="montoLucroCesante">
+          </mat-form-field>        
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.montoLucroCesante | number:"2.1-2"}}</p>
+          </div>      
+        </div> 
+      </div>
+    </div>
+    </li>
+
+<li>
+    <h4>Retención en la fuente que te practicaron por este pago:</h4>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >       
+            <mat-label>Ingresa un Valor</mat-label>
+            <input matInput placeholder="" type="number"
+            formControlName="retencionLucroCesante">
+          </mat-form-field>        
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.retencionLucroCesante | number:"2.1-2"}}</p>
+          </div>      
+        </div> 
+      </div>
+    </div>
+    </li>
+    </form>
+</ul>
+
+</ol> 
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="segurosForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>

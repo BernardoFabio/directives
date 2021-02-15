@@ -1,0 +1,189 @@
+<h2 mat-dialog-title>PRESTAMOS "DE" Y "A"TERCEROS
+    <mat-icon matTooltip="Recuerda que las deudas deben estar soportadas en documentos autenticados notarialmente">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="contactForm" (ngSubmit)="prestamos($event)">
+ 
+    <ol>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <li>
+      <h3>¿Alguién te debe dinero?</h3>  
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoPrestamosTerceros($event)">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>      
+          </div>
+        </div>
+      </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="prestamosTerceros">
+
+        <h3>Saldo de tu(s) préstamo(s) a 31 de diciembre de 2019:</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Saldo total</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="saldoPrestamos">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('saldoPrestamos').hasError('required')
+            && contactForm.get('saldoPrestamos').touched" >
+              Campo requerido
+            </mat-error>       
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.saldoPrestamos | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>     
+      
+      
+      <h3>¿Recibiste intereses por este(os) préstamo(s) durante el 2019?</h3>  
+        <div class="container">
+          <div class="row">    
+            <div class="col-sm">
+              <mat-form-field appearance="">
+                  <mat-label>Seleccione</mat-label>
+                  <mat-select (selectionChange)="eventoPrestamosTerceros1($event)">
+                    <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                  </mat-select>
+                </mat-form-field>      
+            </div>
+          </div>
+        </div>
+      <mat-divider></mat-divider>
+      <br>
+    </div>
+
+   
+    <div *ngIf="prestamosTerceros1">
+      <h3>Intereses recibidos durante el 2019</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Saldo intereses</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="interesesPrestamos">
+            </mat-form-field>   
+            <mat-error *ngIf="contactForm.get('interesesPrestamos').hasError('required')
+            && contactForm.get('interesesPrestamos').touched" >
+              Campo requerido
+            </mat-error>      
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.interesesPrestamos | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <br>
+
+
+      <h3>Retención en la fuente que te practicaron durante el 2019</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Saldo retención en la fuente</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencionPrestamos">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencionPrestamos | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div> 
+
+
+    <li>
+        <h3>¿Le debes dinero a alguién?</h3>  
+        <div class="container">
+          <div class="row">    
+            <div class="col-sm">
+              <mat-form-field appearance="">
+                  <mat-label>Seleccione</mat-label>
+                  <mat-select (selectionChange)="eventoPrestamosTerceros2($event)">
+                    <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                  </mat-select>
+                </mat-form-field>      
+            </div>
+          </div>
+        </div>
+      </li>
+      <mat-divider></mat-divider>
+      <br>
+  
+      <div *ngIf="prestamosTerceros2">
+  
+          <h3>Saldo  de tu(s) deuda(s) a 31 de diciembre de 2019</h3>  
+        <div class="container">
+          <div class="row">       
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Saldo total</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="saldoDeudas">
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('saldoDeudas').hasError('required')
+              && contactForm.get('saldoDeudas').touched">
+                Campo requerido
+              </mat-error>       
+            </div>
+      
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.saldoDeudas | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+      
+          </div>
+        </div>
+        <mat-divider></mat-divider>       
+     
+      </div> 
+   
+     </ol>
+    </form>   
+      
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="prestamos($event)"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+  
+  
+  

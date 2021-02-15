@@ -1,0 +1,282 @@
+<h2 mat-dialog-title>AHORROS AFC
+    <mat-icon matTooltip="Debes ingresar los valores requeridos, si no tienes la información no selecciones la opción.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+<h3>Por favor diligencia la siguiente información:
+<h5>(Entendemos lo dispendioso que puede resultar para ti llenar la información, por lo cual puedes simplemente adjuntar el certificado 
+     como archivo adjunto.)</h5>
+</h3>
+
+<form [formGroup]="contactForm"(ngSubmit)="AFCForm($event)">
+<ul>
+
+  <h3><strong>APORTES EN EL AÑO</strong></h3>
+
+ <li>       
+  <h3>Aportes con retención contingente:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC1">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC1 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Aportes sin retención contingente:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC2">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC2 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Traslados provenientes de fondos de pensiones voluntarias y/o cuentas AFC:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC3">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC3 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<h3><strong>RETIROS EN EL AÑO</strong></h3>
+
+<li>       
+  <h3>Retiros con destinación vivienda y/o cumplimiento del periodo de permanencia:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC4">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC4 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Retiros diferentes de vivienda con retención contingente:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC5">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC5 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Retiros diferentes de vivienda sin retención contingente:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC6">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC6 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Traslados realizados desde la cuenta AFC a fondos de pensiones y/o cuentas AFC:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC7">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC7 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<h3><strong>RETENCIÓN EN LA FUENTE PRACTICADA EN EL AÑO</strong></h3>
+
+<li>       
+  <h3>Retención sobre retiros de capital gravado:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC8">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC8 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Retención sobre rendimientos financieros de retiros gravados:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC9">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC9 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Gravamen movimiento financiero-GMF- en el año:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC10">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC10 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Intereses pagados en el año:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC11">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC11 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+<li>       
+  <h3>Saldo a 31 de diciembre de 2019:</h3>  
+ <div class="container">
+   <div class="row">        
+     <div class="col-sm">
+       <mat-form-field >         
+         <mat-label>Ingrese un valor</mat-label>
+         <input matInput placeholder="" type="number"
+         formControlName="AFC12">
+       </mat-form-field>        
+     </div>
+     <div class="col-sm">
+       <div class="container3">
+         <p>${{contactForm.value.AFC12 | number:"2.1-2"}}</p>
+       </div>      
+     </div>
+   </div>
+ </div>
+ <mat-divider></mat-divider>       
+</li>
+
+</ul>
+</form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="AFCForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+

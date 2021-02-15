@@ -1,0 +1,701 @@
+<h2 mat-dialog-title>FONDO DE EMPLEADOS 
+  <mat-icon matTooltip="Debes ingresar los valores requeridos por cada Fondo de Empleados al que te encuentres afiliado.">description</mat-icon>
+</h2>
+<mat-dialog-content class="mat-typography">
+
+      <div class="container" style="text-align: center;">
+      <div class="row">
+        <div class="col-sm">
+          <h4>¿De cuantos Fondos de Empleados hiciste parte durante el año 2019?</h4>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione</mat-label>
+            <mat-select (selectionChange)="eventoFondoEmpleados($event)">
+              <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+            </mat-select>
+          </mat-form-field>                       
+      </div>
+    </div>
+  </div>
+
+<!--**************************start fondoEmpleados 1*************************--> 
+  <form [formGroup]="contactForm" (ngSubmit)="fondoEmpleados($event)">
+<ul>
+  <h2 class="color" style="text-align: center;"><strong>Fondo de Empleados #1</strong></h2> 
+
+      <h3><strong> Saldos a favor del Asociado</strong></h3>
+      <li>
+        <h3>Aportes:</h3>  
+        <div class="container">
+          <div class="row">       
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="aportesFondoEmpleados">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.aportesFondoEmpleados | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li> 
+      
+      <li>
+       <h3>Ahorros:</h3>  
+          <div class="container">
+            <div class="row">       
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="ahorrosFondoEmpleados">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.ahorrosFondoEmpleados | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </li> 
+
+      <li>
+          <h3>CDTs:</h3>  
+             <div class="container">
+               <div class="row">       
+                 <div class="col-sm">
+                   <mat-form-field >         
+                     <mat-label>Ingresa valor</mat-label>
+                     <input matInput placeholder="Ingresa un valor" type="number"
+                     formControlName="CDTFondoEmpleados">
+                   </mat-form-field>        
+                 </div>
+                 <div class="col-sm">
+                   <div class="container3">
+                     <p>${{contactForm.value.CDTFondoEmpleados | number:"2.1-2"}}</p>
+                   </div>      
+                 </div>
+               </div>
+             </div>
+             <mat-divider></mat-divider>
+           </li> 
+
+           <li>
+              <h3>Intereses por pagar ahorros:</h3>  
+                 <div class="container">
+                   <div class="row">       
+                     <div class="col-sm">
+                       <mat-form-field >         
+                         <mat-label>Ingresa valor</mat-label>
+                         <input matInput placeholder="Ingresa un valor" type="number"
+                         formControlName="interesesPagarAhorrosFondoEmpleados">
+                       </mat-form-field>        
+                     </div>
+                     <div class="col-sm">
+                       <div class="container3">
+                         <p>${{contactForm.value.interesesPagarAhorrosFondoEmpleados | number:"2.1-2"}}</p>
+                       </div>      
+                     </div>
+                   </div>
+                 </div>
+                 <mat-divider></mat-divider>
+               </li> 
+
+      <h3><strong> Saldos por cobrar al Asociado</strong></h3>
+
+           <li>
+              <h3>Créditos:</h3>  
+                 <div class="container">
+                   <div class="row">       
+                     <div class="col-sm">
+                       <mat-form-field >         
+                         <mat-label>Ingresa valor</mat-label>
+                         <input matInput placeholder="Ingresa un valor" type="number"
+                         formControlName="creditosFondoEmpleados">
+                       </mat-form-field>        
+                     </div>
+                     <div class="col-sm">
+                       <div class="container3">
+                         <p>${{contactForm.value.creditosFondoEmpleados | number:"2.1-2"}}</p>
+                       </div>      
+                     </div>
+                   </div>
+                 </div>
+                 <mat-divider></mat-divider>
+               </li> 
+                   
+       <li>
+           <h3>Intereses por cobrar de los créditos:</h3>  
+                 <div class="container">
+                   <div class="row">       
+                     <div class="col-sm">
+                       <mat-form-field >         
+                         <mat-label>Ingresa valor</mat-label>
+                         <input matInput placeholder="Ingresa un valor" type="number"
+                         formControlName="interesesCobrarCreditosFondoEmpleados">
+                       </mat-form-field>        
+                     </div>
+                     <div class="col-sm">
+                       <div class="container3">
+                         <p>${{contactForm.value.interesesCobrarCreditosFondoEmpleados | number:"2.1-2"}}</p>
+                       </div>      
+                     </div>
+                   </div>
+                 </div>
+                 <mat-divider></mat-divider>
+               </li> 
+
+               <h3><strong>Movimiento anual</strong></h3>
+
+               <li>
+                  <h3>Rendimientos financieros (intereses) abonados en cuenta:</h3>  
+                     <div class="container">
+                       <div class="row">       
+                         <div class="col-sm">
+                           <mat-form-field >         
+                             <mat-label>Ingresa valor</mat-label>
+                             <input matInput placeholder="Ingresa un valor" type="number"
+                             formControlName="interesesAbonadosFondoEmpleados">
+                           </mat-form-field>        
+                         </div>
+                         <div class="col-sm">
+                           <div class="container3">
+                             <p>${{contactForm.value.interesesAbonadosFondoEmpleados | number:"2.1-2"}}</p>
+                           </div>      
+                         </div>
+                       </div>
+                     </div>
+                     <mat-divider></mat-divider>
+                   </li> 
+
+                   <li>
+                      <h3>Rendimientos financieros (intereses) CDTs:</h3>  
+                         <div class="container">
+                           <div class="row">       
+                             <div class="col-sm">
+                               <mat-form-field >         
+                                 <mat-label>Ingresa valor</mat-label>
+                                 <input matInput placeholder="Ingresa un valor" type="number"
+                                 formControlName="rendimientosCDT">
+                               </mat-form-field>        
+                             </div>
+                             <div class="col-sm">
+                               <div class="container3">
+                                 <p>${{contactForm.value.rendimientosCDT | number:"2.1-2"}}</p>
+                               </div>      
+                             </div>
+                           </div>
+                         </div>
+                         <mat-divider></mat-divider>
+                       </li> 
+
+                       <li>
+                          <h3>Retención en la fuente por rendimientos financieros:</h3>  
+                             <div class="container">
+                               <div class="row">       
+                                 <div class="col-sm">
+                                   <mat-form-field >         
+                                     <mat-label>Ingresa valor</mat-label>
+                                     <input matInput placeholder="Ingresa un valor" type="number"
+                                     formControlName="retencionRendimientosFondoEmpleados">
+                                   </mat-form-field>        
+                                 </div>
+                                 <div class="col-sm">
+                                   <div class="container3">
+                                     <p>${{contactForm.value.retencionRendimientosFondoEmpleados | number:"2.1-2"}}</p>
+                                   </div>      
+                                 </div>
+                               </div>
+                             </div>
+                             <mat-divider></mat-divider>
+                           </li> 
+           
+                           <li>
+                              <h3>Gravamen por Movimientos Financieros (GMF - 4 x 1000):</h3>  
+                                 <div class="container">
+                                   <div class="row">       
+                                     <div class="col-sm">
+                                       <mat-form-field >         
+                                         <mat-label>Ingresa valor</mat-label>
+                                         <input matInput placeholder="Ingresa un valor" type="number"
+                                         formControlName="GMFFondoEmpleados">
+                                       </mat-form-field>        
+                                     </div>
+                                     <div class="col-sm">
+                                       <div class="container3">
+                                         <p>${{contactForm.value.GMFFondoEmpleados | number:"2.1-2"}}</p>
+                                       </div>      
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <mat-divider></mat-divider>
+                               </li>    
+                          
+ </ul>
+</form>
+<!--**************************finish fondoEmpleados 1*************************--> 
+
+<!--**************************Start fondoEmpleados 2*************************--> 
+<form [formGroup]="contactForm" (ngSubmit)="fondoEmpleados($event)" *ngIf="fondoEmpleados2">
+
+  <h2 class="color" style="text-align: center;"><strong>Fondo de Empleados #2</strong></h2> 
+    <ul>
+       <h3><strong> Saldos a favor del Asociado</strong></h3>
+            <li>
+              <h3>Aportes:</h3>  
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="aportesFondoEmpleados_1">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.aportesFondoEmpleados_1 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li> 
+            
+            <li>
+             <h3>Ahorros:</h3>  
+                <div class="container">
+                  <div class="row">       
+                    <div class="col-sm">
+                      <mat-form-field >         
+                        <mat-label>Ingresa valor</mat-label>
+                        <input matInput placeholder="Ingresa un valor" type="number"
+                        formControlName="ahorrosFondoEmpleados_1">
+                      </mat-form-field>        
+                    </div>
+                    <div class="col-sm">
+                      <div class="container3">
+                        <p>${{contactForm.value.ahorrosFondoEmpleados_1 | number:"2.1-2"}}</p>
+                      </div>      
+                    </div>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+              </li> 
+    
+            <li>
+                <h3>CDTs:</h3>  
+                   <div class="container">
+                     <div class="row">       
+                       <div class="col-sm">
+                         <mat-form-field >         
+                           <mat-label>Ingresa valor</mat-label>
+                           <input matInput placeholder="Ingresa un valor" type="number"
+                           formControlName="CDTFondoEmpleados_1">
+                         </mat-form-field>        
+                       </div>
+                       <div class="col-sm">
+                         <div class="container3">
+                           <p>${{contactForm.value.CDTFondoEmpleados_1 | number:"2.1-2"}}</p>
+                         </div>      
+                       </div>
+                     </div>
+                   </div>
+                   <mat-divider></mat-divider>
+                 </li> 
+    
+                 <li>
+                    <h3>Intereses por pagar ahorros:</h3>  
+                       <div class="container">
+                         <div class="row">       
+                           <div class="col-sm">
+                             <mat-form-field >         
+                               <mat-label>Ingresa valor</mat-label>
+                               <input matInput placeholder="Ingresa un valor" type="number"
+                               formControlName="interesesPagarAhorrosFondoEmpleados_1">
+                             </mat-form-field>        
+                           </div>
+                           <div class="col-sm">
+                             <div class="container3">
+                               <p>${{contactForm.value.interesesPagarAhorrosFondoEmpleados_1 | number:"2.1-2"}}</p>
+                             </div>      
+                           </div>
+                         </div>
+                       </div>
+                       <mat-divider></mat-divider>
+                     </li> 
+    
+            <h3><strong> Saldos por cobrar al Asociado</strong></h3>
+      
+                 <li>
+                    <h3>Créditos:</h3>  
+                       <div class="container">
+                         <div class="row">       
+                           <div class="col-sm">
+                             <mat-form-field >         
+                               <mat-label>Ingresa valor</mat-label>
+                               <input matInput placeholder="Ingresa un valor" type="number"
+                               formControlName="creditosFondoEmpleados_1">
+                             </mat-form-field>        
+                           </div>
+                           <div class="col-sm">
+                             <div class="container3">
+                               <p>${{contactForm.value.creditosFondoEmpleados_1 | number:"2.1-2"}}</p>
+                             </div>      
+                           </div>
+                         </div>
+                       </div>
+                       <mat-divider></mat-divider>
+                     </li> 
+                         
+             <li>
+                 <h3>Intereses por cobrar de los créditos:</h3>  
+                       <div class="container">
+                         <div class="row">       
+                           <div class="col-sm">
+                             <mat-form-field >         
+                               <mat-label>Ingresa valor</mat-label>
+                               <input matInput placeholder="Ingresa un valor" type="number"
+                               formControlName="interesesCobrarCreditosFondoEmpleados_1">
+                             </mat-form-field>        
+                           </div>
+                           <div class="col-sm">
+                             <div class="container3">
+                               <p>${{contactForm.value.interesesCobrarCreditosFondoEmpleados_1 | number:"2.1-2"}}</p>
+                             </div>      
+                           </div>
+                         </div>
+                       </div>
+                       <mat-divider></mat-divider>
+                     </li> 
+    
+                     <h3><strong>Movimiento anual</strong></h3>
+    
+                     <li>
+                        <h3>Rendimientos financieros (intereses) abonados en cuenta:</h3>  
+                           <div class="container">
+                             <div class="row">       
+                               <div class="col-sm">
+                                 <mat-form-field >         
+                                   <mat-label>Ingresa valor</mat-label>
+                                   <input matInput placeholder="Ingresa un valor" type="number"
+                                   formControlName="interesesAbonadosFondoEmpleados_1">
+                                 </mat-form-field>        
+                               </div>
+                               <div class="col-sm">
+                                 <div class="container3">
+                                   <p>${{contactForm.value.interesesAbonadosFondoEmpleados_1 | number:"2.1-2"}}</p>
+                                 </div>      
+                               </div>
+                             </div>
+                           </div>
+                           <mat-divider></mat-divider>
+                         </li> 
+    
+                         <li>
+                            <h3>Rendimientos financieros (intereses) CDTs:</h3>  
+                               <div class="container">
+                                 <div class="row">       
+                                   <div class="col-sm">
+                                     <mat-form-field >         
+                                       <mat-label>Ingresa valor</mat-label>
+                                       <input matInput placeholder="Ingresa un valor" type="number"
+                                       formControlName="rendimientosCDT_1">
+                                     </mat-form-field>        
+                                   </div>
+                                   <div class="col-sm">
+                                     <div class="container3">
+                                       <p>${{contactForm.value.rendimientosCDT_1 | number:"2.1-2"}}</p>
+                                     </div>      
+                                   </div>
+                                 </div>
+                               </div>
+                               <mat-divider></mat-divider>
+                             </li> 
+    
+                             <li>
+                                <h3>Retención en la fuente por rendimientos financieros:</h3>  
+                                   <div class="container">
+                                     <div class="row">       
+                                       <div class="col-sm">
+                                         <mat-form-field >         
+                                           <mat-label>Ingresa valor</mat-label>
+                                           <input matInput placeholder="Ingresa un valor" type="number"
+                                           formControlName="retencionRendimientosFondoEmpleados_1">
+                                         </mat-form-field>        
+                                       </div>
+                                       <div class="col-sm">
+                                         <div class="container3">
+                                           <p>${{contactForm.value.retencionRendimientosFondoEmpleados_1 | number:"2.1-2"}}</p>
+                                         </div>      
+                                       </div>
+                                     </div>
+                                   </div>
+                                   <mat-divider></mat-divider>
+                                 </li> 
+                 
+                                 <li>
+                                    <h3>Gravamen por Movimientos Financieros (GMF - 4 x 1000):</h3>  
+                                       <div class="container">
+                                         <div class="row">       
+                                           <div class="col-sm">
+                                             <mat-form-field >         
+                                               <mat-label>Ingresa valor</mat-label>
+                                               <input matInput placeholder="Ingresa un valor" type="number"
+                                               formControlName="GMFFondoEmpleados_1">
+                                             </mat-form-field>        
+                                           </div>
+                                           <div class="col-sm">
+                                             <div class="container3">
+                                               <p>${{contactForm.value.GMFFondoEmpleados_1 | number:"2.1-2"}}</p>
+                                             </div>      
+                                           </div>
+                                         </div>
+                                       </div>
+                                       <mat-divider></mat-divider>
+                                     </li>    
+                                
+       </ul>
+      </form>
+
+<!--**************************finish fondoEmpleados 2*************************--> 
+<!--**************************Start fondoEmpleados 3*************************--> 
+<form [formGroup]="contactForm" (ngSubmit)="fondoEmpleados($event)" *ngIf="fondoEmpleados3">
+  
+<h2 class="color" style="text-align: center;"><strong>Fondo de Empleados #3</strong></h2> 
+      <ul>
+         <h3><strong> Saldos a favor del Asociado</strong></h3>
+              <li>
+                <h3>Aportes:</h3>  
+                <div class="container">
+                  <div class="row">       
+                    <div class="col-sm">
+                      <mat-form-field >         
+                        <mat-label>Ingresa valor</mat-label>
+                        <input matInput placeholder="Ingresa un valor" type="number"
+                        formControlName="aportesFondoEmpleados_2">
+                      </mat-form-field>        
+                    </div>
+                    <div class="col-sm">
+                      <div class="container3">
+                        <p>${{contactForm.value.aportesFondoEmpleados_2 | number:"2.1-2"}}</p>
+                      </div>      
+                    </div>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+              </li> 
+              
+              <li>
+               <h3>Ahorros:</h3>  
+                  <div class="container">
+                    <div class="row">       
+                      <div class="col-sm">
+                        <mat-form-field >         
+                          <mat-label>Ingresa valor</mat-label>
+                          <input matInput placeholder="Ingresa un valor" type="number"
+                          formControlName="ahorrosFondoEmpleados_2">
+                        </mat-form-field>        
+                      </div>
+                      <div class="col-sm">
+                        <div class="container3">
+                          <p>${{contactForm.value.ahorrosFondoEmpleados_2 | number:"2.1-2"}}</p>
+                        </div>      
+                      </div>
+                    </div>
+                  </div>
+                  <mat-divider></mat-divider>
+                </li> 
+      
+              <li>
+                  <h3>CDTs:</h3>  
+                     <div class="container">
+                       <div class="row">       
+                         <div class="col-sm">
+                           <mat-form-field >         
+                             <mat-label>Ingresa valor</mat-label>
+                             <input matInput placeholder="Ingresa un valor" type="number"
+                             formControlName="CDTFondoEmpleados_2">
+                           </mat-form-field>        
+                         </div>
+                         <div class="col-sm">
+                           <div class="container3">
+                             <p>${{contactForm.value.CDTFondoEmpleados_2 | number:"2.1-2"}}</p>
+                           </div>      
+                         </div>
+                       </div>
+                     </div>
+                     <mat-divider></mat-divider>
+                   </li> 
+      
+                   <li>
+                      <h3>Intereses por pagar ahorros:</h3>  
+                         <div class="container">
+                           <div class="row">       
+                             <div class="col-sm">
+                               <mat-form-field >         
+                                 <mat-label>Ingresa valor</mat-label>
+                                 <input matInput placeholder="Ingresa un valor" type="number"
+                                 formControlName="interesesPagarAhorrosFondoEmpleados_2">
+                               </mat-form-field>        
+                             </div>
+                             <div class="col-sm">
+                               <div class="container3">
+                                 <p>${{contactForm.value.interesesPagarAhorrosFondoEmpleados_2 | number:"2.1-2"}}</p>
+                               </div>      
+                             </div>
+                           </div>
+                         </div>
+                         <mat-divider></mat-divider>
+                       </li> 
+      
+              <h3><strong> Saldos por cobrar al Asociado</strong></h3>
+        
+                   <li>
+                      <h3>Créditos:</h3>  
+                         <div class="container">
+                           <div class="row">       
+                             <div class="col-sm">
+                               <mat-form-field >         
+                                 <mat-label>Ingresa valor</mat-label>
+                                 <input matInput placeholder="Ingresa un valor" type="number"
+                                 formControlName="creditosFondoEmpleados_2">
+                               </mat-form-field>        
+                             </div>
+                             <div class="col-sm">
+                               <div class="container3">
+                                 <p>${{contactForm.value.creditosFondoEmpleados_2 | number:"2.1-2"}}</p>
+                               </div>      
+                             </div>
+                           </div>
+                         </div>
+                         <mat-divider></mat-divider>
+                       </li> 
+                           
+               <li>
+                   <h3>Intereses por cobrar de los créditos:</h3>  
+                         <div class="container">
+                           <div class="row">       
+                             <div class="col-sm">
+                               <mat-form-field >         
+                                 <mat-label>Ingresa valor</mat-label>
+                                 <input matInput placeholder="Ingresa un valor" type="number"
+                                 formControlName="interesesCobrarCreditosFondoEmpleados_2">
+                               </mat-form-field>        
+                             </div>
+                             <div class="col-sm">
+                               <div class="container3">
+                                 <p>${{contactForm.value.interesesCobrarCreditosFondoEmpleados_2 | number:"2.1-2"}}</p>
+                               </div>      
+                             </div>
+                           </div>
+                         </div>
+                         <mat-divider></mat-divider>
+                       </li> 
+      
+                       <h3><strong>Movimiento anual</strong></h3>
+      
+                       <li>
+                          <h3>Rendimientos financieros (intereses) abonados en cuenta:</h3>  
+                             <div class="container">
+                               <div class="row">       
+                                 <div class="col-sm">
+                                   <mat-form-field >         
+                                     <mat-label>Ingresa valor</mat-label>
+                                     <input matInput placeholder="Ingresa un valor" type="number"
+                                     formControlName="interesesAbonadosFondoEmpleados_2">
+                                   </mat-form-field>        
+                                 </div>
+                                 <div class="col-sm">
+                                   <div class="container3">
+                                     <p>${{contactForm.value.interesesAbonadosFondoEmpleados_2 | number:"2.1-2"}}</p>
+                                   </div>      
+                                 </div>
+                               </div>
+                             </div>
+                             <mat-divider></mat-divider>
+                           </li> 
+      
+                           <li>
+                              <h3>Rendimientos financieros (intereses) CDTs:</h3>  
+                                 <div class="container">
+                                   <div class="row">       
+                                     <div class="col-sm">
+                                       <mat-form-field >         
+                                         <mat-label>Ingresa valor</mat-label>
+                                         <input matInput placeholder="Ingresa un valor" type="number"
+                                         formControlName="rendimientosCDT_2">
+                                       </mat-form-field>        
+                                     </div>
+                                     <div class="col-sm">
+                                       <div class="container3">
+                                         <p>${{contactForm.value.rendimientosCDT_2 | number:"2.1-2"}}</p>
+                                       </div>      
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <mat-divider></mat-divider>
+                               </li> 
+      
+                               <li>
+                                  <h3>Retención en la fuente por rendimientos financieros:</h3>  
+                                     <div class="container">
+                                       <div class="row">       
+                                         <div class="col-sm">
+                                           <mat-form-field >         
+                                             <mat-label>Ingresa valor</mat-label>
+                                             <input matInput placeholder="Ingresa un valor" type="number"
+                                             formControlName="retencionRendimientosFondoEmpleados_2">
+                                           </mat-form-field>        
+                                         </div>
+                                         <div class="col-sm">
+                                           <div class="container3">
+                                             <p>${{contactForm.value.retencionRendimientosFondoEmpleados_2 | number:"2.1-2"}}</p>
+                                           </div>      
+                                         </div>
+                                       </div>
+                                     </div>
+                                     <mat-divider></mat-divider>
+                                   </li> 
+                   
+                                   <li>
+                                      <h3>Gravamen por Movimientos Financieros (GMF - 4 x 1000):</h3>  
+                                         <div class="container">
+                                           <div class="row">       
+                                             <div class="col-sm">
+                                               <mat-form-field >         
+                                                 <mat-label>Ingresa valor</mat-label>
+                                                 <input matInput placeholder="Ingresa un valor" type="number"
+                                                 formControlName="GMFFondoEmpleados_2">
+                                               </mat-form-field>        
+                                             </div>
+                                             <div class="col-sm">
+                                               <div class="container3">
+                                                 <p>${{contactForm.value.GMFFondoEmpleados_2 | number:"2.1-2"}}</p>
+                                               </div>      
+                                             </div>
+                                           </div>
+                                         </div>
+                                         <mat-divider></mat-divider>
+                                       </li>                                        
+         </ul>
+        </form>
+    
+<!--**************************finish fondoEmpleados 3*************************--> 
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+<button mat-button mat-dialog-close>Salir</button>
+<button mat-button type="submit" (click)="fondoEmpleados($event)"
+mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+ 
+

@@ -1,0 +1,145 @@
+<h2 mat-dialog-title>INFORMACIÓN OTROS PRODUCTOS DE CREDITO
+    <mat-icon matTooltip="Debes ingresar los valores totales de tus créditos diferentes a créditos hiptecarios o leasing habitacional">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="contactForm" (ngSubmit)="otrosCreditos($event)">
+  
+    <ul>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <li>
+      <h3>¿Eres el único titular de este crédito?</h3>  
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoOtrosCreditos($event)"
+                formControlName="titularOtrosCreditos">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field> 
+              <mat-error *ngIf="contactForm.get('titularOtrosCreditos').hasError('required')
+          && contactForm.get('titularOtrosCreditos').touched" >
+            Campo requerido
+          </mat-error>        
+          </div>
+        </div>
+      </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <li *ngIf="opcionOtrosCreditos">
+
+        <h3>¿Cuál es el porcentaje que te corresponde de este crédito?</h3>  
+      <div class="container">
+        <div class="row">         
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+               formControlName="porcentajeOtrosCreditos">
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('porcentajeOtrosCreditos').hasError('required')
+            && contactForm.get('porcentajeOtrosCreditos').touched" >
+              Campo requerido
+            </mat-error>             
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentajeOtrosCreditos | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </li>
+
+    <li>
+      <h3>Saldo a 31 dic 2019 - Totales</h3>  
+      <div class="container">
+        <div class="row">          
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Saldo Total </mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="saldoOtrosCreditos">
+            </mat-form-field>
+            <mat-error *ngIf="contactForm.get('saldoOtrosCreditos').hasError('required')
+            && contactForm.get('saldoOtrosCreditos').touched" >
+              Campo requerido
+            </mat-error>                 
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+           <p>${{contactForm.value.saldoOtrosCreditos | number:"2.1-2"}}</p>
+            </div>      
+          </div>  
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+    
+    <li>
+      <h3>Valor total deducible (Intereses Pagados)-Totales</h3>  
+      <div class="container">
+        <div class="row">      
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Rendimientos</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="deduciblesOtrosCreditos">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('deduciblesOtrosCreditos').hasError('required')
+            && contactForm.get('deduciblesOtrosCreditos').touched">
+              Campo requerido
+            </mat-error>              
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+            <p>${{contactForm.value.deduciblesOtrosCreditos | number:"2.1-2"}}</p>            
+            </div>      
+          </div>  
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li> 
+    
+    <li>
+      <h3>Valor GMF - Totales</h3><h6>(Gravamen Movimientos Financieros ó 4 x 1000)</h6>
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>*Esta información es opcional</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="GMFOtrosCreditos">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+            <p>${{contactForm.value.GMFOtrosCreditos | number:"2.1-2"}}</p>                
+            </div>      
+          </div>    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li> 
+  
+    </ul>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="otrosCreditos($event)"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+ 

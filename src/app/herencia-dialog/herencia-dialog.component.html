@@ -1,0 +1,243 @@
+<h2 mat-dialog-title>HERENCIA Ó LEGADO Y DONACIÓN
+    <mat-icon matTooltip="Debes ingresar los valores totales percibidos por este concepto.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+  
+    <form [formGroup]="contactForm"(ngSubmit)="herenciaForm($event)">
+    <ol>
+     <h3>Por favor responde las siguientes preguntas:</h3>
+     <h2><strong>Herencia o Legado</strong></h2>
+      
+      <!--**************-->
+     <li>
+      <h3>¿Durante el 2019 recibiste bienes inmuebles o bienes raíces como herencia o legado por muerte del causante propietario?</h3>  
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoHerenciaDialog($event)"
+                formControlName="inmueblesHerencia">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>   
+              <mat-error *ngIf="contactForm.get('inmueblesHerencia').hasError('required')
+              && contactForm.get('inmueblesHerencia').touched">
+                Campo requerido
+              </mat-error>    
+          </div>
+        </div>
+      </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <!--**************-->
+<div *ngIf="opcionHerencia">
+<ul>
+
+<li>
+    <h3>¿Eres cónyuge supérsite (sobreviviente) o heredero del causante?</h3>  
+            <div class="container">
+              <div class="row">    
+                <div class="col-sm">
+                  <mat-form-field appearance="">
+                      <mat-label>Seleccione</mat-label>
+                      <mat-select formControlName="conyugeSupersite">
+                        <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>      
+                </div>
+              </div>
+            </div>
+          <mat-divider></mat-divider>
+          <br>
+        </li>
+
+        <li>
+            <h3>¿Te fue entregado un bien inmueble urbano o rural como herencia o legado durante el 2019?</h3>  
+                    <div class="container">
+                      <div class="row">    
+                        <div class="col-sm">
+                          <mat-form-field appearance="">
+                              <mat-label>Seleccione</mat-label>
+                              <mat-select (selectionChange)="eventoHerenciaDialog2($event)"
+                              formControlName="inmuebleUrbanoRural">
+                                <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>      
+                        </div>
+                      </div>
+                    </div>
+                  <mat-divider></mat-divider>
+                  <br>
+                </li>
+
+<div *ngIf="opcionHerencia2">
+    <h3>Porcentaje del bien inmueble que te fue asignado como herencia o legado durante el 2019:</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >       
+              <mat-label>Ingresa un Valor</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentajeInmueble">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>%{{contactForm.value.porcentajeInmueble | number:"2.1-2"}}</p>
+            </div>      
+          </div> 
+        </div>
+      </div>
+
+      <h3>Valor del inmueble registrado por el causante en su última declaración de renta:</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >       
+              <mat-label>Ingresa un Valor</mat-label>
+              <input matInput placeholder="" type="number"
+              formControlName="valorInmueble">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorInmueble | number:"2.1-2"}}</p>
+            </div>      
+          </div> 
+        </div>
+      </div>
+
+        <h3>¿Selecciona el tipo de bien raíz que te entregaron como herencia o legado durante el 2019?</h3>  
+                <div class="container">
+                  <div class="row">    
+                    <div class="col-sm">
+                      <mat-form-field appearance="">
+                          <mat-label>Seleccione</mat-label>
+                          <mat-select formControlName="tipoBienRaiz">
+                            <mat-option *ngFor="let tip of tipos" [value]="tip.codigo">{{tip.texto}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>      
+                    </div>
+                  </div>
+                </div>
+              <mat-divider></mat-divider>
+              <br>
+
+         </div>
+
+</ul>  
+</div>
+
+<li>
+    <h3>¿Recibiste bienes distintos  a inmuebles o bienes raíces a título de herencia o legado?</h3>  
+    <div class="container">
+      <div class="row">    
+        <div class="col-sm">
+          <mat-form-field appearance="">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoHerenciaDialog3($event)"
+              formControlName="bienesDistintos">
+                <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>      
+        </div>
+      </div>
+    </div>
+  </li>
+  <mat-divider></mat-divider>
+  <br>
+
+  <div *ngIf="opcionHerencia3">
+  <h3>Ingresa el valor de los bienes, distintos a inmuebles, que recibiste como herencia o legado durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >       
+          <mat-label>Ingresa un Valor</mat-label>
+          <input matInput placeholder="" type="number"
+          formControlName="valorBienesDistintos">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.valorBienesDistintos | number:"2.1-2"}}</p>
+        </div>      
+      </div> 
+    </div>
+  </div>
+</div> 
+<!--**************-->  
+<h2><strong>Donaciones</strong></h2>
+
+<li>
+  <h3>¿Durante el 2019 recibiste bienes donados o a título gratuito por parte de una persona viva?</h3>  
+  <div class="container">
+    <div class="row">    
+      <div class="col-sm">
+        <mat-form-field appearance="">
+            <mat-label>Seleccione</mat-label>
+            <mat-select (selectionChange)="eventoHerenciaDialog4($event)"
+            formControlName="donaciones">
+              <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+            </mat-select>
+          </mat-form-field>      
+      </div>
+    </div>
+  </div>
+</li>
+<mat-divider></mat-divider>
+<br>
+
+<div *ngIf="opcionHerencia4">
+<h3>Valor total recibido como donación durante el 2019:</h3>  
+<div class="container">
+  <div class="row">        
+    <div class="col-sm">
+      <mat-form-field >       
+        <mat-label>Ingresa un Valor</mat-label>
+        <input matInput placeholder="" type="number"
+        formControlName="valorDonaciones">
+      </mat-form-field>        
+    </div>
+    <div class="col-sm">
+      <div class="container3">
+        <p>${{contactForm.value.valorDonaciones | number:"2.1-2"}}</p>
+      </div>      
+    </div> 
+  </div>
+</div>
+</div> 
+
+<li>
+<h3>Valor de la retención en la fuente que te practicaron durante el 2019:</h3>  
+<div class="container">
+  <div class="row">        
+    <div class="col-sm">
+      <mat-form-field >       
+        <mat-label>Ingresa un Valor</mat-label>
+        <input matInput placeholder="" type="number"
+        formControlName="valorRetencion">
+      </mat-form-field>        
+    </div>
+    <div class="col-sm">
+      <div class="container3">
+        <p>${{contactForm.value.valorRetencion | number:"2.1-2"}}</p>
+      </div>      
+    </div> 
+  </div>
+</div>
+</li>
+</ol>
+</form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="herenciaForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+

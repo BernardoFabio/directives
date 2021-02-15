@@ -1,0 +1,752 @@
+<h2 mat-dialog-title>Arrendamiento de Otros Bienes
+    <mat-icon matTooltip="Debes ingresar la información por cada bien arrendado en el 2019 y del cual percibiste ingresos, de manera individual.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <br>
+
+    <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿De cuantos bienes ubicados en la categoría de "otros bienes", es decir, diferentes a inmuebles, vehículos y maquinaria, tales como derechos de propiedad intelectual, etc., obtuviste ingresos durante el año 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoArrendamientoOtrosBienes($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <!--*****************start arrendamiento Otros Bienes 1*****************-->
+  <ul>
+    <h2 class="color" style="text-align: center;"><strong> Bien No.1</strong></h2> 
+  
+  <h3><strong>Ingresos</strong></h3>
+  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+  <li>
+    <h3>Ingresos totales producto del cobro de arrendamiento del "bien" durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">     
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="ingresosArrendamientoOtrosBienes">
+        </mat-form-field>   
+        <mat-error *ngIf="contactForm.get('ingresosArrendamientoOtrosBienes').hasError('required')
+        && contactForm.get('ingresosArrendamientoOtrosBienes').touched">
+          Campo requerido
+        </mat-error>         
+        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.ingresosArrendamientoOtrosBienes | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>        
+  </li>
+  
+  <li>
+    <h3>Retención en la fuente que te practicaron durante el 2019 sobre estos ingresos:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="retencionArrendamiento">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.retencionArrendamiento | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+  </li>
+  </form>
+  <br>
+  
+  <h3><strong>Costos y Gastos Deducibles</strong></h3>
+  <h4>Selecciona los gastos que tuviste durante el 2019 para generar estos ingresos:</h4>
+  <br>
+  
+  <li>
+  <h4>¿Durante el 2019 realizaste alguna(s) reparación del "bien"?</h4>
+  <mat-slide-toggle [(ngModel)]="reparaciones"></mat-slide-toggle>
+  <br>
+  </li>
+  <mat-divider></mat-divider>
+  
+  <div *ngIf= "reparaciones">
+  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+    <h3>Valor de los gastos pagados por reparaciones:</h3>  
+  <div class="container">
+    <div class="row">       
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="reparaciones">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.reparaciones | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  </form>
+  <mat-divider></mat-divider>       
+  </div>
+  
+     <li>
+        <h4>¿Durante el 2019 pagaste Impuesto de Industria y Comercio -ICA-?</h4>
+        <mat-slide-toggle [(ngModel)]="ICA"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "ICA">
+          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+            <h3>Valor del ICA pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="ICA">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.ICA | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          </form>
+          <mat-divider></mat-divider>       
+        </div>
+    
+    <li>
+        <h4>¿Durante el 2019 pagaste Impuesto de Avisos y Tableros?</h4>
+        <mat-slide-toggle [(ngModel)]="avisosTableros"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "avisosTableros">
+          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+            <h3>Valor del impuesto A.y T. pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="AyT">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.AyT | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          </form>
+          <mat-divider></mat-divider>       
+        </div>
+  
+        <li>
+            <h4>¿Durante el 2019 realizaste pagos por la administración del "bien"?</h4>
+            <mat-slide-toggle [(ngModel)]="administracion"></mat-slide-toggle>
+            <br>
+            </li>
+            <mat-divider></mat-divider>
+            
+            <div *ngIf= "administracion">
+              <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                <h3>Cuotas de administración pagadas:</h3>  
+              <div class="container">
+                <div class="row">          
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Valor administración:</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="administracion">
+                    </mat-form-field>        
+                  </div>            
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.administracion | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              </form>
+              <mat-divider></mat-divider>       
+            </div>
+  
+            <li>
+                <h4>¿Durante el 2019 pagaste alguna póliza de seguros para el "bien"? </h4>
+                <mat-slide-toggle [(ngModel)]="seguros"></mat-slide-toggle>
+                <br>
+                </li>
+                <mat-divider></mat-divider>
+                
+                <div *ngIf= "seguros">
+                  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                    <h3>Valor seguros:</h3>  
+                  <div class="container">
+                    <div class="row">          
+                      <div class="col-sm">
+                        <mat-form-field >         
+                          <mat-label>Valor pagado:</mat-label>
+                          <input matInput placeholder="Ingresa un valor" type="number"
+                          formControlName="seguros">
+                        </mat-form-field>        
+                      </div>            
+                      <div class="col-sm">
+                        <div class="container3">
+                          <p>${{contactForm.value.seguros | number:"2.1-2"}}</p>
+                        </div>      
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                  <mat-divider></mat-divider>       
+                </div>    
+                
+                    <li>
+                        <h4>¿Durante el 2019 pagaste mantenimiento del "bien"? </h4>
+                        <mat-slide-toggle [(ngModel)]="mantenimiento"></mat-slide-toggle>
+                        <br>
+                        </li>
+                        <mat-divider></mat-divider>
+                        
+                        <div *ngIf= "mantenimiento">
+                          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                            <h3>Valor mantenimiento:</h3>  
+                          <div class="container">
+                            <div class="row">          
+                              <div class="col-sm">
+                                <mat-form-field >         
+                                  <mat-label>Valor pagado:</mat-label>
+                                  <input matInput placeholder="Ingresa un valor" type="number"
+                                  formControlName="mantenimiento">
+                                </mat-form-field>        
+                              </div>            
+                              <div class="col-sm">
+                                <div class="container3">
+                                  <p>${{contactForm.value.mantenimiento | number:"2.1-2"}}</p>
+                                </div>      
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                          <mat-divider></mat-divider>       
+                        </div>       
+       </ul>
+    <!--*****************finish arrendamientoVehículo 1*****************-->
+    <!--*****************start arrendamientoVehículo 2*****************-->
+    <ul *ngIf="arrendamientoOtrosBienes2">
+        <h2 class="color" style="text-align: center;"><strong>Bien No.2</strong></h2>
+  
+  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+  <li>
+    <h3>Ingresos totales producto del cobro de arrendamiento del "bien" durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">     
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="ingresosArrendamientoOtrosBienes_1">
+        </mat-form-field>   
+        <mat-error *ngIf="contactForm.get('ingresosArrendamientoOtrosBienes_1').hasError('required')
+        && contactForm.get('ingresosArrendamientoOtrosBienes_1').touched">
+          Campo requerido
+        </mat-error>         
+        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.ingresosArrendamientoOtrosBienes_1 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>        
+  </li>
+  
+  <li>
+    <h3>Retención en la fuente que te practicaron durante el 2019 sobre estos ingresos:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="retencionArrendamiento_1">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.retencionArrendamiento_1 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+  </li>
+  </form>
+  <br>
+  
+  <h3><strong>Costos y Gastos Deducibles</strong></h3>
+  <h4>Selecciona los gastos que tuviste durante el 2019 para generar estos ingresos:</h4>
+  <br>
+  
+  <li>
+  <h4>¿Durante el 2019 realizaste alguna(s) reparación al "bien"?</h4>
+  <mat-slide-toggle [(ngModel)]="reparaciones_1"></mat-slide-toggle>
+  <br>
+  </li>
+  <mat-divider></mat-divider>
+  
+  <div *ngIf= "reparaciones_1">
+  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+    <h3>Valor de los gastos pagados por reparaciones:</h3>  
+  <div class="container">
+    <div class="row">       
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="reparaciones_1">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.reparaciones_1 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  </form>
+  <mat-divider></mat-divider>       
+  </div>
+  
+    <li>
+        <h4>¿Durante el 2019 pagaste Impuesto de Industria y Comercio -ICA-?</h4>
+        <mat-slide-toggle [(ngModel)]="ICA_1"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "ICA_1">
+          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+            <h3>Valor del ICA pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="ICA_1">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.ICA_1 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          </form>
+          <mat-divider></mat-divider>       
+        </div>
+    
+    <li>
+        <h4>¿Durante el 2019 pagaste Impuesto de Avisos y Tableros?</h4>
+        <mat-slide-toggle [(ngModel)]="avisosTableros_1"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "avisosTableros_1">
+          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+            <h3>Valor del impuesto A.y T. pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="AyT_1">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.AyT_1 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          </form>
+          <mat-divider></mat-divider>       
+        </div>
+  
+        <li>
+            <h4>¿Durante el 2019 realizaste pagos de administración del "bien"?</h4>
+            <mat-slide-toggle [(ngModel)]="administracion_1"></mat-slide-toggle>
+            <br>
+            </li>
+            <mat-divider></mat-divider>
+            
+            <div *ngIf= "administracion_1">
+              <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                <h3>Cuotas de administración pagadas:</h3>  
+              <div class="container">
+                <div class="row">          
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Valor administración:</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="administracion_1">
+                    </mat-form-field>        
+                  </div>            
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.administracion_1 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              </form>
+              <mat-divider></mat-divider>       
+            </div>
+  
+            <li>
+                <h4>¿Durante el 2019 pagaste alguna póliza de seguros para el "bien"? </h4>
+                <mat-slide-toggle [(ngModel)]="seguros_1"></mat-slide-toggle>
+                <br>
+                </li>
+                <mat-divider></mat-divider>
+                
+                <div *ngIf= "seguros_1">
+                  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                    <h3>Valor seguros:</h3>  
+                  <div class="container">
+                    <div class="row">          
+                      <div class="col-sm">
+                        <mat-form-field >         
+                          <mat-label>Valor pagado:</mat-label>
+                          <input matInput placeholder="Ingresa un valor" type="number"
+                          formControlName="seguros_1">
+                        </mat-form-field>        
+                      </div>            
+                      <div class="col-sm">
+                        <div class="container3">
+                          <p>${{contactForm.value.seguros_1 | number:"2.1-2"}}</p>
+                        </div>      
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                  <mat-divider></mat-divider>       
+                </div>    
+              
+                    <li>
+                        <h4>¿Durante el 2019 pagaste mantenimiento del "bien"? </h4>
+                        <mat-slide-toggle [(ngModel)]="mantenimiento_1"></mat-slide-toggle>
+                        <br>
+                        </li>
+                        <mat-divider></mat-divider>
+                        
+                        <div *ngIf= "mantenimiento_1">
+                          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                            <h3>Valor mantenimiento:</h3>  
+                          <div class="container">
+                            <div class="row">          
+                              <div class="col-sm">
+                                <mat-form-field >         
+                                  <mat-label>Valor pagado:</mat-label>
+                                  <input matInput placeholder="Ingresa un valor" type="number"
+                                  formControlName="mantenimiento_1">
+                                </mat-form-field>        
+                              </div>            
+                              <div class="col-sm">
+                                <div class="container3">
+                                  <p>${{contactForm.value.mantenimiento_1 | number:"2.1-2"}}</p>
+                                </div>      
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                          <mat-divider></mat-divider>       
+                        </div>                                              
+                  
+    </ul>
+    <!--*****************finish arrendamientoVehículos 2*****************-->
+  
+    <!--*****************start arrendamientoVehículos 3*****************-->
+    <ul *ngIf="arrendamientoOtrosBienes3">
+    <h2 class="color" style="text-align: center;"><strong>Bien No.3</strong></h2> 
+  
+  <h3><strong>Ingresos</strong></h3>
+  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+  <li>
+    <h3>Ingresos totales producto del cobro de arrendamiento del "bien" durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">     
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="ingresosArrendamientoOtrosBienes_2">
+        </mat-form-field>   
+        <mat-error *ngIf="contactForm.get('ingresosArrendamientoOtrosBienes_2').hasError('required')
+        && contactForm.get('ingresosArrendamientoOtrosBienes_2').touched">
+          Campo requerido
+        </mat-error>         
+        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.ingresosArrendamientoOtrosBienes_2 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>        
+  </li>
+  
+  <li>
+    <h3>Retención en la fuente que te practicaron durante el 2019 sobre estos ingresos:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="retencionArrendamiento_2">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.retencionArrendamiento_2 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+  </li>
+  </form>
+  <br>
+  
+  <h3><strong>Costos y Gastos Deducibles</strong></h3>
+  <h4>Selecciona los gastos que tuviste durante el 2019 para generar estos ingresos:</h4>
+  <br>
+  
+  <li>
+  <h4>¿Durante el 2019 realizaste alguna(s) reparación al "bien"?</h4>
+  <mat-slide-toggle [(ngModel)]="reparaciones_2"></mat-slide-toggle>
+  <br>
+  </li>
+  <mat-divider></mat-divider>
+  
+  <div *ngIf= "reparaciones_2">
+  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+    <h3>Valor de los gastos pagados por reparaciones:</h3>  
+  <div class="container">
+    <div class="row">       
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="reparaciones_2">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.reparaciones_2 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  </form>
+  <mat-divider></mat-divider>       
+  </div>
+  
+    <li>
+        <h4>¿Durante el 2019 pagaste Impuesto de Industria y Comercio -ICA-?</h4>
+        <mat-slide-toggle [(ngModel)]="ICA_2"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "ICA_2">
+          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+            <h3>Valor del ICA pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="ICA_2">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.ICA_2 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          </form>
+          <mat-divider></mat-divider>       
+        </div>
+    
+    <li>
+        <h4>¿Durante el 2019 pagaste Impuesto de Avisos y Tableros?</h4>
+        <mat-slide-toggle [(ngModel)]="avisosTableros_2"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "avisosTableros_2">
+          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+            <h3>Valor del impuesto A.y T. pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="AyT_2">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.AyT_2 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          </form>
+          <mat-divider></mat-divider>       
+        </div>
+  
+        <li>
+            <h4>¿Durante el 2019 realizaste pagos de administración del "bien"?</h4>
+            <mat-slide-toggle [(ngModel)]="administracion_2"></mat-slide-toggle>
+            <br>
+            </li>
+            <mat-divider></mat-divider>
+            
+            <div *ngIf= "administracion_2">
+              <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                <h3>Cuotas de administración pagadas:</h3>  
+              <div class="container">
+                <div class="row">          
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Valor administración:</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="administracion_2">
+                    </mat-form-field>        
+                  </div>            
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.administracion_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              </form>
+              <mat-divider></mat-divider>       
+            </div>
+  
+            <li>
+                <h4>¿Durante el 2019 pagaste alguna póliza de seguros para el "bien"? </h4>
+                <mat-slide-toggle [(ngModel)]="seguros_2"></mat-slide-toggle>
+                <br>
+                </li>
+                <mat-divider></mat-divider>
+                
+                <div *ngIf= "seguros_2">
+                  <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                    <h3>Valor seguros:</h3>  
+                  <div class="container">
+                    <div class="row">          
+                      <div class="col-sm">
+                        <mat-form-field >         
+                          <mat-label>Valor pagado:</mat-label>
+                          <input matInput placeholder="Ingresa un valor" type="number"
+                          formControlName="seguros_2">
+                        </mat-form-field>        
+                      </div>            
+                      <div class="col-sm">
+                        <div class="container3">
+                          <p>${{contactForm.value.seguros_2 | number:"2.1-2"}}</p>
+                        </div>      
+                      </div>
+                    </div>
+                  </div>
+                  </form>
+                  <mat-divider></mat-divider>       
+                </div>    
+                
+                                  
+                    <li>
+                        <h4>¿Durante el 2019 pagaste mantenimiento del "bien"? </h4>
+                        <mat-slide-toggle [(ngModel)]="mantenimiento_2"></mat-slide-toggle>
+                        <br>
+                        </li>
+                        <mat-divider></mat-divider>
+                        
+                        <div *ngIf= "mantenimiento_2">
+                          <form [formGroup]="contactForm"(ngSubmit)="arrendamientoForm($event)">
+                            <h3>Valor mantenimiento:</h3>  
+                          <div class="container">
+                            <div class="row">          
+                              <div class="col-sm">
+                                <mat-form-field >         
+                                  <mat-label>Valor pagado:</mat-label>
+                                  <input matInput placeholder="Ingresa un valor" type="number"
+                                  formControlName="mantenimiento_2">
+                                </mat-form-field>        
+                              </div>            
+                              <div class="col-sm">
+                                <div class="container3">
+                                  <p>${{contactForm.value.mantenimiento_2 | number:"2.1-2"}}</p>
+                                </div>      
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                          <mat-divider></mat-divider>       
+                        </div>                                 
+                  
+  </ul>
+    <!--*****************finish arrendamientoVehículos 3*****************-->
+  
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="arrendamientoForm($event)"[disabled]="contactForm.invalid"
+    mat-flat-button color="primary">Guardar respuestas
+  </button>
+  </mat-dialog-actions>

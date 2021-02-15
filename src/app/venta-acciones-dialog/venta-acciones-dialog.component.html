@@ -1,0 +1,94 @@
+<h2 mat-dialog-title>VENTA DE ACCIONES, CUOTAS O PARTES 
+    <mat-icon matTooltip="Debes ingresar los valores totales de tus ventas de acciones en sociedades Comerciales durante el año 2019.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+  
+    <form [formGroup]="contactForm"(ngSubmit)="ventaAccionesForm($event)">
+    <ul>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <!--**************-->
+     <li>
+      <h3>Valor de venta de tus acciones:</h3>  
+      <div class="container">
+        <div class="row">          
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVentaAcciones">
+            </mat-form-field>   
+            <mat-error *ngIf="contactForm.get('valorVentaAcciones').hasError('required')
+              && contactForm.get('valorVentaAcciones').touched">
+                Campo requerido
+              </mat-error>     
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVentaAcciones | number:"2.1-2"}}</p>
+            </div>      
+          </div>    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+     <!--**************-->
+
+<li>
+  <h3>Selecciona la fecha(Aprox.) en que vendiste estas acciones?</h3>  
+  <div class="container">
+    <div class="row">
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>Selecciona una fecha</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="fechaVenta">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-error *ngIf="contactForm.get('fechaVenta').hasError('required')
+              && contactForm.get('fechaVenta').touched">
+                Campo requerido
+       </mat-error>   
+    </div>
+  </div>
+  <mat-divider></mat-divider>  
+</li>
+ <!--**************-->
+      
+     <li>
+    <h3>Retención en la fuente practicada por la venta: </h3>  
+      <div class="container">
+        <div class="row">
+
+           <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Retención</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencion">
+            </mat-form-field>
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencion | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>  
+    </li>
+<!--**************--> 
+    </ul>
+  </form>
+   
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="ventaAccionesForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+  
+  

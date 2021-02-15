@@ -1,0 +1,121 @@
+ 
+    <h5>Si en el año gravable 2019 cumpliste con alguna de las siguientes condiciones,
+        estás obligado a presentar la Declaración de Renta Personas Naturales Residentes por dicha vigencia.
+    </h5>
+    <br>
+            <ol>
+              
+            <div class="row">
+                <div class="col-sm-0.5">
+                    <mat-icon>home</mat-icon>
+                </div>
+               <div class="col-sm">
+                  <h4>¿Tener un patrimonio bruto superior a 4.500 - UVT ($154.215.000), a 31 de diciembre de 2019.?</h4>
+                   </div>
+                      <div class="col-sm-3">
+                      <mat-radio-group labelPosition="before">
+                        <mat-radio-button value="1" (click)="openSnackBar(message.value,action.value)">Si</mat-radio-button>
+                        <mat-radio-button value="2">No</mat-radio-button>
+                      </mat-radio-group>           
+                   </div>         
+              </div>
+        
+            <mat-divider></mat-divider>
+      
+         
+              <div class="row">
+                <div class="col-sm-0.5">
+                    <mat-icon>leaderboard</mat-icon>
+                </div>
+                 <div class="col-sm">                    
+                    <h4>Haber obtenido ingresos brutos iguales o superiores a 1.400 UVT ($47.978.000), durante el año 2019.</h4>
+                     </div>
+                        <div class="col-sm-3">
+                        <mat-radio-group labelPosition="before">
+                <mat-radio-button value="1" (click)="openSnackBar(message.value, action.value)">Si</mat-radio-button>
+                <mat-radio-button value="2">No</mat-radio-button>
+                        </mat-radio-group>           
+                     </div>         
+                </div>
+              <mat-divider></mat-divider>
+      
+                <div class="row">
+                    <div class="col-sm-0.5">
+                        <mat-icon>account_balance_wallet</mat-icon>
+                    </div>
+                   <div class="col-sm">                    
+                      <h4>Haber realizado consumos mediante tarjeta de crédito superiores a 1.400 UVT ($47.978.000), durante el año 2019.</h4>
+                       </div>
+                          <div class="col-sm-3">
+                          <mat-radio-group labelPosition="before">
+                            <mat-radio-button value="1"(click)="openSnackBar(message.value, action.value)">Si</mat-radio-button>
+                            <mat-radio-button value="2">No</mat-radio-button>
+                          </mat-radio-group>           
+                       </div>         
+                  </div>
+                <mat-divider></mat-divider>
+      
+                <div class="row">
+                    <div class="col-sm-0.5">
+                        <mat-icon>local_mall</mat-icon>
+                    </div>
+                   <div class="col-sm">
+                      <h4>Haber realizado compras y consumos totales superiores a 1.400 UVT ($47.978.000), durante el año 2019.</h4>
+                       </div>
+                          <div class="col-sm-3">
+                          <mat-radio-group labelPosition="before">
+                            <mat-radio-button value="1" (click)="openSnackBar(message.value,action.value)">Si</mat-radio-button>
+                            <mat-radio-button value="2">No</mat-radio-button>
+                          </mat-radio-group>           
+                       </div>         
+                  </div>
+                <mat-divider></mat-divider>
+      
+                <div class="row">
+                    <div class="col-sm-0.5">
+                        <mat-icon>account_balance</mat-icon>
+                    </div>
+                     <div class="col-sm">
+                        <h4>Haber realizado consignaciones bancarias, depósitos o inversiones financieras por valor total acumulado superior a 1.400 UVT ($47.978.000), durante el año 2019.</h4>
+                         </div>
+                            <div class="col-sm-3">
+                            <mat-radio-group labelPosition="before">
+                                <mat-radio-button value="1"(click)="openSnackBar(message.value,action.value)">Si</mat-radio-button>
+                                <mat-radio-button value="2">No</mat-radio-button>
+                            </mat-radio-group>           
+                         </div>         
+                    </div>
+                  <mat-divider></mat-divider>
+      
+                    <div class="row">
+                        <div class="col-sm-0.5">
+                            <mat-icon>point_of_sale</mat-icon>
+                        </div>
+                       <div class="col-sm">
+                          <h4>Ser responsable del impuesto sobre las ventas (IVA) al cierre del año gravable 2019.</h4>
+                           </div>
+                              <div class="col-sm-3">
+                              <mat-radio-group labelPosition="before">
+                                <mat-radio-button value="1" (click)="openSnackBar(message.value,action.value)">Si</mat-radio-button>
+                                <mat-radio-button value="2">No</mat-radio-button>
+                              </mat-radio-group>           
+                           </div>         
+                      </div>
+                
+                  </ol>
+                    <mat-divider></mat-divider>     
+                    
+                    <!--***************snackbar************-->
+
+                    <mat-form-field style="display: none;">
+                        <mat-label>Message</mat-label>
+                        <input matInput value="Según tu elección, cumples con las condiciones y debes presentar Declaración de Renta por el año gravable 2019.
+                        Te invitamos a registrarte para que puedas continuar con el proceso de Declaración." #message>
+                      </mat-form-field>
+                      
+                      <mat-form-field style="display: none;">
+                        <mat-label>Action</mat-label>
+                        <input matInput value="Cerrar" #action>
+                      </mat-form-field>
+                
+                

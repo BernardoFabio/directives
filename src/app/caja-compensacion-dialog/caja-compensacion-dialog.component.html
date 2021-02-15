@@ -1,0 +1,69 @@
+<h2 mat-dialog-title>Certificado de Subsidio de Caja de Compensación
+    <mat-icon matTooltip="Debes ingresar los valores correspondientes a los pagos que te hayan realizado como subsidios a través de Cajas de Compensación.">description</mat-icon>
+    </h2>
+    <mat-dialog-content class="mat-typography">
+    
+      <form [formGroup]="contactForm"(ngSubmit)="cajaCompensacionForm($event)">
+        <ul>
+        <li>
+            <h3>Ingresa el valor del subsidio que recibiste durante el 2019, asociado a este salario</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="cajaCompensacion">
+                  </mat-form-field>    
+                  <mat-error *ngIf="contactForm.get('cajaCompensacion').hasError('required')
+                  && contactForm.get('cajaCompensacion').touched">
+                    Campo requerido
+                  </mat-error>      
+                </div>
+
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.cajaCompensacion | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+
+          <li>
+            <h3>Ingresa el valor de la retención en la fuente que te practicaron sobre este subsidio durante el 2019</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="retencionCajaCompensacion">
+                  </mat-form-field> 
+                  <mat-error *ngIf="contactForm.get('retencionCajaCompensacion').hasError('required')
+                  && contactForm.get('retencionCajaCompensacion').touched">
+                    Campo requerido
+                  </mat-error>       
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.retencionCajaCompensacion | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+
+        </ul>
+
+      </form>    
+            
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="cajaCompensacionForm($event)"[disabled]="contactForm.invalid"
+    mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+  </button>
+  </mat-dialog-actions>

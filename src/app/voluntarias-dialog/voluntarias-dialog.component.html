@@ -1,0 +1,560 @@
+<h2 mat-dialog-title>PENSIONES Y CESANTÍAS VOLUNTARIAS 
+    <mat-icon matTooltip="Debes ingresar los valores requeridos, si no tienes la información no selecciones la opción.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+<h3>Por favor selecciona la opción que corresponda:
+<h5>(Entendemos lo dispendioso que puede resultar para ti llenar la información, por lo cual puedes simplemente adjuntar el certificado 
+     como archivo adjunto.)</h5>
+</h3>
+<br>
+
+<ol>
+ <li> 
+    <div class="row">
+     <div class="col-sm">
+       <h4>¿Tuviste un fondo de pensiones voluntarias durante el 2019?</h4>
+     </div>
+     <div class="col-sm">
+       <mat-radio-group aria-label="Select an option">
+         <mat-slide-toggle [(ngModel)]="pension">
+         </mat-slide-toggle>
+       </mat-radio-group>           
+     </div>
+   </div>  
+   </li>
+   <mat-divider></mat-divider>
+   <br>
+
+<ul *ngIf="pension">
+
+    <h3><strong>Fondo de Pensiones voluntarias</strong></h3>
+
+    <form [formGroup]="contactForm"(ngSubmit)="pensionesVoluntariasForm($event)">
+  <li>       
+   <h3>Saldo a 31 de diciembre de 2019:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingrese un valor</mat-label>
+          <input matInput placeholder="" type="number"
+          formControlName="saldoPensionesVoluntarias">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.saldoPensionesVoluntarias | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+</li>
+
+<h3><strong>Aportes Efectuados durante el año</strong></h3>
+
+<li>       
+    <h3>Aportes realizados en el año con retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aportesRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aportesRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Aportes realizados en el año sin retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aportesSinRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aportesSinRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Aportes realizados años anteriores sin retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aportesAnosAnterioresSinRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aportesAnosAnterioresSinRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Aporte institucional consolidado con retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aporteInstitucionalRetencion">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aporteInstitucionalRetencion | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Aporte institucional consolidado sin retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aporteInstitucionalSinRetencion">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aporteInstitucionalSinRetencion | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Aportes realizados en el año:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aportesAno">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aportesAno | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Aportes consolidados en el año:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="aportesConsolidadosAno">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.aportesConsolidadosAno | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <h3><strong>Retiros</strong></h3>
+
+ <li>       
+    <h3>Retiro de aportes con destino a adquisicón de vivienda:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosVivienda">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosVivienda | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes con cumplimiento del requisito de pensión:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosPension">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosPension | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes con cumplimiento del requisito de permanencia:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosPermanencia">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosPermanencia | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes efectuados sin retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosSinRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosSinRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes sin el cumplimiento de requisitos legales, realizados en el 2019 sin retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosLegales2019sinRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosLegales2019sinRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ 
+ <li>       
+    <h3>Retiro de aportes sin el cumplimiento de requisitos legales, realizados antes del 2019 sin retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosLegalesAntes2019sinRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosLegalesAntes2019sinRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes efectuados con retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retiroAportesConRetencionContingente">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retiroAportesConRetencionContingente | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes sin el cumplimiento de requisitos legales, realizados en el 2019 con retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retiros2019SinRequisitosLegalesRetencion">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retiros2019SinRequisitosLegalesRetencion | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de aportes sin el cumplimiento de requisitos legales, realizados antes del 2019 con retención contingente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retirosAntes2019SinRequisitosLegalesRetencion">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retirosAntes2019SinRequisitosLegalesRetencion | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ 
+ <li>       
+    <h3>Retiro de rendimientos provenientes de aportes efectuados hasta el 31 de diciembre de 2012:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retiroRendimientosAportes2012">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retiroRendimientosAportes2012 | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de rendimientos provenientes de aportes efectuados después del 1 de enero de 2013:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retiroRendimientosAportesDespues2013">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retiroRendimientosAportesDespues2013 | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retiro de rendimientos sujetos a retención en la fuente:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retiroRendimientosConRetencion">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retiroRendimientosConRetencion | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <h3><strong>Retención en la Fuente</strong></h3>
+
+ 
+ <li>       
+    <h3>Retención contingente practicada:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retencionContingentePracticada">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retencionContingentePracticada | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+
+ <li>       
+    <h3>Retención en la fuente sobre rendimientos:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="retencionSobreRendimientos">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.retencionSobreRendimientos | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+</form>
+</ul>
+<br>
+
+ <!--*******************-->
+    <li> 
+    <div class="row">
+     <div class="col-sm">
+       <h4>¿Tuviste un fondo de cesantías durante el 2019?</h4>
+     </div>
+     <div class="col-sm">
+       <mat-radio-group aria-label="Select an option">
+         <mat-slide-toggle [(ngModel)]="cesantias">
+         </mat-slide-toggle>
+       </mat-radio-group>           
+     </div>
+   </div>  
+   </li> 
+
+<ul *ngIf="cesantias">
+  <form [formGroup]="contactForm"(ngSubmit)="pensionesVoluntariasForm($event)">
+ <li>       
+    <h3>Saldo Final a 31 de diciembre de 2019:</h3>  
+   <div class="container">
+     <div class="row">        
+       <div class="col-sm">
+         <mat-form-field >         
+           <mat-label>Ingrese un valor</mat-label>
+           <input matInput placeholder="" type="number"
+           formControlName="cesantias">
+         </mat-form-field>        
+       </div>
+       <div class="col-sm">
+         <div class="container3">
+           <p>${{contactForm.value.cesantias | number:"2.1-2"}}</p>
+         </div>      
+       </div>
+     </div>
+   </div>
+   <mat-divider></mat-divider>       
+ </li>
+ </form>
+
+</ul>
+
+</ol>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="pensionesVoluntariasForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+

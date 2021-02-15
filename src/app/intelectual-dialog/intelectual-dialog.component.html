@@ -1,0 +1,1026 @@
+
+<h2 mat-dialog-title>Honorarios, Servicios o Comisiones como Independiente -Factor INTELECTUAl Y OTROS.
+
+    <mat-icon matTooltip="Debes ingresar la información por cada contrato ejecutado individualmente">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <br>
+
+    <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Cuántos contratos de estas características realizaste durante el año 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoContratosIntelectual($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <!--*****************start intelectual 1*****************-->
+
+    <ul>
+      <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+
+    <h2 class="color" style="text-align: center;"><strong>Contrato No.1</strong></h2> 
+
+    <li>
+    <h3>Valor de honorarios percibidos por este contrato durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">     
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="valorHonorariosIntelectual">
+        </mat-form-field>  
+        <mat-error *ngIf="contactForm.get('valorHonorariosIntelectual').hasError('required')
+        && contactForm.get('valorHonorariosIntelectual').touched" >
+          Campo requerido
+        </mat-error>        
+        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.valorHonorariosIntelectual | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+</li>
+
+<li>
+    <h3>Valor de la retención en la fuente que te practicaron durante el 2019 por estos ingresos:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="valorRetencion">
+        </mat-form-field> 
+        <mat-error *ngIf="contactForm.get('valorRetencion').hasError('required')
+        && contactForm.get('valorRetencion').touched" >
+          Campo requerido
+        </mat-error>       
+      </div>     
+
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.valorRetencion | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+</li>
+<br>
+
+</form>
+
+<h3><strong>Gastos Deducibles de este Ingreso</strong></h3>
+<h4>¿Tuviste alguno de los siguientes gastos relacionados exclusivamente con la generación de estos ingresos por honorarios durante el 2019?</h4>
+
+<li>
+<h4>¿Gastos de nómina?</h4>
+<mat-slide-toggle [(ngModel)]="gastosNomina"></mat-slide-toggle>
+<br>
+<mat-divider></mat-divider>
+</li>
+
+<div *ngIf= "gastosNomina">
+  <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+    <h3>Ingresa el valor pagado por concepto de gastos de nómina:</h3>  
+  <div class="container">
+    <div class="row">         
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="interesesNomina">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.interesesNomina | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>   
+  </form>    
+</div>
+
+<li>
+<h4>¿Honorarios?</h4>
+<mat-slide-toggle [(ngModel)]="honorarios"></mat-slide-toggle>
+<br>
+</li>
+<mat-divider></mat-divider>
+
+<div *ngIf= "honorarios">
+  <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+  <h3>Valor de los honorarios pagados como gasto:</h3>  
+  <div class="container">
+    <div class="row">       
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="honorariosGasto">
+        </mat-form-field>        
+      </div>
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.honorariosGasto | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>  
+  </form>     
+</div>
+
+    <li>
+    <h4>¿Impuesto Predial del lugar de trabajo?</h4>
+    <mat-slide-toggle [(ngModel)]="predial"></mat-slide-toggle>
+    <br>
+    </li>
+    <mat-divider></mat-divider>
+    
+    <div *ngIf= "predial">
+      <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+      <h3>Valor del Impuesto Predial pagado:</h3>  
+      <div class="container">
+        <div class="row">          
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="predial">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.predial | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider> 
+      </form>      
+    </div>
+
+    <li>
+        <h4>¿Impuesto de Industria y Comercio -ICA-?</h4>
+        <mat-slide-toggle [(ngModel)]="ICA"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "ICA">
+          <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+            <h3>Valor del ICA pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="ICA">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.ICA | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider> 
+          </form>      
+        </div>
+    
+    <li>
+        <h4>¿Impuesto de Avisos y Tableros?</h4>
+        <mat-slide-toggle [(ngModel)]="avisosTableros"></mat-slide-toggle>
+        <br>
+        </li>
+        <mat-divider></mat-divider>
+        
+        <div *ngIf= "avisosTableros">
+          <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+            <h3>Valor del impuesto A.y T. pagado:</h3>  
+          <div class="container">
+            <div class="row">          
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="AyT">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.AyT | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>  
+          </form>    
+        </div>
+
+        <li>
+            <h4>¿Arrendamiento del lugar de trabajo?</h4>
+            <mat-slide-toggle [(ngModel)]="arrendamientoTrabajo"></mat-slide-toggle>
+            <br>
+            </li>
+            <mat-divider></mat-divider>
+            
+            <div *ngIf= "arrendamientoTrabajo">
+              <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                <h3>Arrendamiento del lugar de trabajo:</h3>  
+              <div class="container">
+                <div class="row">          
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Valor arrendamiento pagado:</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="arrendamientoTrabajo">
+                    </mat-form-field>        
+                  </div>            
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.arrendamientoTrabajo | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              </form>      
+            </div>
+
+            <li>
+                <h4>¿Seguros del lugar y muebles de trabajo?</h4>
+                <mat-slide-toggle [(ngModel)]="segurosTrabajo"></mat-slide-toggle>
+                <br>
+                </li>
+                <mat-divider></mat-divider>
+                
+                <div *ngIf= "segurosTrabajo">
+                  <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                    <h3>Valor seguros/muebles pagado:</h3>  
+                  <div class="container">
+                    <div class="row">          
+                      <div class="col-sm">
+                        <mat-form-field >         
+                          <mat-label>Valor pagado:</mat-label>
+                          <input matInput placeholder="Ingresa un valor" type="number"
+                          formControlName="seguros">
+                        </mat-form-field>        
+                      </div>            
+                      <div class="col-sm">
+                        <div class="container3">
+                          <p>${{contactForm.value.seguros | number:"2.1-2"}}</p>
+                        </div>      
+                      </div>
+                    </div>
+                  </div>
+                  <mat-divider></mat-divider>
+                  </form>       
+                </div>
+   
+                <li>
+                    <h4>¿Otros Gastos?</h4>
+                    <mat-slide-toggle [(ngModel)]="otrosGastos"></mat-slide-toggle>
+                    <br>
+                    </li>
+                    <mat-divider></mat-divider>
+                    
+                    <div *ngIf= "otrosGastos">
+                      <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                        <h3>Otros gastos pagados:</h3>  
+                      <div class="container">
+                        <div class="row">          
+                          <div class="col-sm">
+                            <mat-form-field >         
+                              <mat-label>Valor pagado:</mat-label>
+                              <input matInput placeholder="Ingresa un valor" type="number"
+                              formControlName="otrosGastos">
+                            </mat-form-field>        
+                          </div>            
+                          <div class="col-sm">
+                            <div class="container3">
+                              <p>${{contactForm.value.otrosGastos | number:"2.1-2"}}</p>
+                            </div>      
+                          </div>
+                        </div>
+                      </div>
+                      <mat-divider></mat-divider>     
+                    </form>
+                    </div>  
+                    <br>
+                                       
+            <h3><strong>Selecciona las condiciones que se cumplieron en este trabajo que tuviste durante el 2019 </strong></h3>
+            <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+            <li>
+              <h4>¿Recibiste estos honorarios por tu participación en proyectos científicos avalados por Colciencias durante el 2019?</h4>
+              <mat-slide-toggle formControlName="colciencias"></mat-slide-toggle>
+              <br>
+              </li>
+            <mat-divider></mat-divider>
+
+            <li>
+              <h4>¿Recibiste estos honorarios por tu trabajo para la ONU o alguno de sus organismos especializados durante el 2019? Por Ej: el Banco Mundial, el Banco Interamericano de Desarrollo, etc.</h4>
+              <mat-slide-toggle formControlName="ONU"></mat-slide-toggle>
+              <br>
+              </li>
+            <mat-divider></mat-divider>
+
+            <li>
+              <h4>¿Para la realización del trabajo con el cual generaste estos honorarios, contrataste a dos o más personas por más de 90 días durante el 2019?</h4>
+              <mat-slide-toggle formControlName="noventaDias"></mat-slide-toggle>
+              <br>
+              </li>
+            <mat-divider></mat-divider>  
+          </form>                
+       </ul>
+    <!--*****************finish intelectual 1*****************-->
+        <!--****************start intelectual 2*****************-->
+    <ul *ngIf="intelectual2">
+        <h2 class="color" style="text-align: center;"><strong>Contrato No.2</strong></h2> 
+             
+        <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+      
+          <li>
+          <h3>Valor de honorarios percibidos por este contrato durante el 2019:</h3>  
+        <div class="container">
+          <div class="row">     
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa un valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="valorHonorarios_1">
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('valorHonorarios_1').hasError('required')
+              && contactForm.get('valorHonorarios_1').touched" >
+                Campo requerido
+              </mat-error>        
+              
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.valorHonorarios_1 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>       
+      </li>
+      
+      <li>
+          <h3>Valor de la retención en la fuente que te practicaron durante el 2019 por estos ingresos:</h3>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa un valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="valorRetencion_1">
+              </mat-form-field> 
+              <mat-error *ngIf="contactForm.get('valorRetencion_1').hasError('required')
+              && contactForm.get('valorRetencion_1').touched" >
+                Campo requerido
+              </mat-error>       
+            </div>     
+      
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.valorRetencion_1 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>       
+      </li>
+      <br>
+      
+      </form>
+      
+      <h3><strong>Gastos Deducibles de este Ingreso</strong></h3>
+      <h4>¿Tuviste alguno de los siguientes gastos relacionados exclusivamente con la generación de estos ingresos por honorarios durante el 2019?</h4>
+      
+      <li>
+      <h4>¿Gastos de nómina?</h4>
+      <mat-slide-toggle [(ngModel)]="gastosNomina_1"></mat-slide-toggle>
+      <br>
+      <mat-divider></mat-divider>
+      </li>
+      
+      <div *ngIf= "gastosNomina_1">
+        <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+          <h3>Ingresa el valor pagado por concepto de gastos de nómina:</h3>  
+        <div class="container">
+          <div class="row">         
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa un valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="interesesNomina_1">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.interesesNomina_1 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>   
+        </form>    
+      </div>
+      
+      <li>
+      <h4>¿Honorarios?</h4>
+      <mat-slide-toggle [(ngModel)]="honorarios_1"></mat-slide-toggle>
+      <br>
+      </li>
+      <mat-divider></mat-divider>
+      
+      <div *ngIf= "honorarios_1">
+        <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+        <h3>Valor de los honorarios pagados como gasto:</h3>  
+        <div class="container">
+          <div class="row">       
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa un valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="honorariosGasto_1">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.honorariosGasto_1 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>  
+        </form>     
+      </div>
+      
+          <li>
+          <h4>¿Impuesto Predial del lugar de trabajo?</h4>
+          <mat-slide-toggle [(ngModel)]="predial_1"></mat-slide-toggle>
+          <br>
+          </li>
+          <mat-divider></mat-divider>
+          
+          <div *ngIf= "predial_1">
+            <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+            <h3>Valor del Impuesto Predial pagado:</h3>  
+            <div class="container">
+              <div class="row">          
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="predial_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.predial_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider> 
+            </form>      
+          </div>
+      
+          <li>
+              <h4>¿Impuesto de Industria y Comercio -ICA-?</h4>
+              <mat-slide-toggle [(ngModel)]="ICA_1"></mat-slide-toggle>
+              <br>
+              </li>
+              <mat-divider></mat-divider>
+              
+              <div *ngIf= "ICA_1">
+                <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                  <h3>Valor del ICA pagado:</h3>  
+                <div class="container">
+                  <div class="row">          
+                    <div class="col-sm">
+                      <mat-form-field >         
+                        <mat-label>Ingresa un valor</mat-label>
+                        <input matInput placeholder="Ingresa un valor" type="number"
+                        formControlName="ICA_1">
+                      </mat-form-field>        
+                    </div>
+                    <div class="col-sm">
+                      <div class="container3">
+                        <p>${{contactForm.value.ICA_1 | number:"2.1-2"}}</p>
+                      </div>      
+                    </div>
+                  </div>
+                </div>
+                <mat-divider></mat-divider> 
+                </form>      
+              </div>
+          
+          <li>
+              <h4>¿Impuesto de Avisos y Tableros?</h4>
+              <mat-slide-toggle [(ngModel)]="avisosTableros_1"></mat-slide-toggle>
+              <br>
+              </li>
+              <mat-divider></mat-divider>
+              
+              <div *ngIf= "avisosTableros_1">
+                <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                  <h3>Valor del impuesto A.y T. pagado:</h3>  
+                <div class="container">
+                  <div class="row">          
+                    <div class="col-sm">
+                      <mat-form-field >         
+                        <mat-label>Ingresa un valor</mat-label>
+                        <input matInput placeholder="Ingresa un valor" type="number"
+                        formControlName="AyT_1">
+                      </mat-form-field>        
+                    </div>
+                    <div class="col-sm">
+                      <div class="container3">
+                        <p>${{contactForm.value.AyT_1 | number:"2.1-2"}}</p>
+                      </div>      
+                    </div>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>  
+                </form>    
+              </div>
+      
+              <li>
+                  <h4>¿Arrendamiento del lugar de trabajo?</h4>
+                  <mat-slide-toggle [(ngModel)]="arrendamientoTrabajo_1"></mat-slide-toggle>
+                  <br>
+                  </li>
+                  <mat-divider></mat-divider>
+                  
+                  <div *ngIf= "arrendamientoTrabajo_1">
+                    <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                      <h3>Arrendamiento del lugar de trabajo:</h3>  
+                    <div class="container">
+                      <div class="row">          
+                        <div class="col-sm">
+                          <mat-form-field >         
+                            <mat-label>Valor arrendamiento pagado:</mat-label>
+                            <input matInput placeholder="Ingresa un valor" type="number"
+                            formControlName="arrendamientoTrabajo_1">
+                          </mat-form-field>        
+                        </div>            
+                        <div class="col-sm">
+                          <div class="container3">
+                            <p>${{contactForm.value.arrendamientoTrabajo_1 | number:"2.1-2"}}</p>
+                          </div>      
+                        </div>
+                      </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    </form>      
+                  </div>
+      
+                  <li>
+                      <h4>¿Seguros del lugar y muebles de trabajo?</h4>
+                      <mat-slide-toggle [(ngModel)]="segurosTrabajo_1"></mat-slide-toggle>
+                      <br>
+                      </li>
+                      <mat-divider></mat-divider>
+                      
+                      <div *ngIf= "segurosTrabajo_1">
+                        <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                          <h3>Valor seguros/muebles pagado:</h3>  
+                        <div class="container">
+                          <div class="row">          
+                            <div class="col-sm">
+                              <mat-form-field >         
+                                <mat-label>Valor pagado:</mat-label>
+                                <input matInput placeholder="Ingresa un valor" type="number"
+                                formControlName="seguros_1">
+                              </mat-form-field>        
+                            </div>            
+                            <div class="col-sm">
+                              <div class="container3">
+                                <p>${{contactForm.value.seguros_1 | number:"2.1-2"}}</p>
+                              </div>      
+                            </div>
+                          </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        </form>       
+                      </div>
+         
+                      <li>
+                          <h4>¿Otros Gastos?</h4>
+                          <mat-slide-toggle [(ngModel)]="otrosGastos_1"></mat-slide-toggle>
+                          <br>
+                          </li>
+                          <mat-divider></mat-divider>
+                          
+                          <div *ngIf= "otrosGastos_1">
+                            <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                              <h3>Otros gastos pagados:</h3>  
+                            <div class="container">
+                              <div class="row">          
+                                <div class="col-sm">
+                                  <mat-form-field >         
+                                    <mat-label>Valor pagado:</mat-label>
+                                    <input matInput placeholder="Ingresa un valor" type="number"
+                                    formControlName="otrosGastos_1">
+                                  </mat-form-field>        
+                                </div>            
+                                <div class="col-sm">
+                                  <div class="container3">
+                                    <p>${{contactForm.value.otrosGastos_1 | number:"2.1-2"}}</p>
+                                  </div>      
+                                </div>
+                              </div>
+                            </div>
+                            <mat-divider></mat-divider>     
+                          </form>
+                          </div>  
+                          <br>
+                                             
+                  <h3><strong>Selecciona las condiciones que se cumplieron en este trabajo que tuviste durante el 2019 </strong></h3>
+                  <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                  <li>
+                    <h4>¿Recibiste estos honorarios por tu participación en proyectos científicos avalados por Colciencias durante el 2019?</h4>
+                    <mat-slide-toggle formControlName="colciencias_1"></mat-slide-toggle>
+                    <br>
+                    </li>
+                  <mat-divider></mat-divider>
+      
+                  <li>
+                    <h4>¿Recibiste estos honorarios por tu trabajo para la ONU o alguno de sus organismos especializados durante el 2019? Por Ej: el Banco Mundial, el Banco Interamericano de Desarrollo, etc.</h4>
+                    <mat-slide-toggle formControlName="ONU_1"></mat-slide-toggle>
+                    <br>
+                    </li>
+                  <mat-divider></mat-divider>
+      
+                  <li>
+                    <h4>¿Para la realización del trabajo con el cual generaste estos honorarios, contrataste a dos o más personas por más de 90 días durante el 2019?</h4>
+                    <mat-slide-toggle formControlName="noventaDias_1"></mat-slide-toggle>
+                    <br>
+                    </li>
+                  <mat-divider></mat-divider>  
+                </form>        
+           
+    </ul>
+<!--****************finish intelectual 2*****************-->
+<!--****************start intelectual 3*****************-->
+
+<ul *ngIf="intelectual3">
+    <h2 class="color" style="text-align: center;"><strong>Contrato No.3</strong></h2> 
+
+    <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+      
+      <li>
+      <h3>Valor de honorarios percibidos por este contrato durante el 2019:</h3>  
+    <div class="container">
+      <div class="row">     
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="valorHonorarios_2">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('valorHonorarios_2').hasError('required')
+          && contactForm.get('valorHonorarios_2').touched" >
+            Campo requerido
+          </mat-error>        
+          
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.valorHonorarios_2 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>       
+  </li>
+  
+  <li>
+      <h3>Valor de la retención en la fuente que te practicaron durante el 2019 por estos ingresos:</h3>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="valorRetencion_2">
+          </mat-form-field> 
+          <mat-error *ngIf="contactForm.get('valorRetencion_2').hasError('required')
+          && contactForm.get('valorRetencion_2').touched" >
+            Campo requerido
+          </mat-error>       
+        </div>     
+  
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.valorRetencion_2 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>       
+  </li>
+  <br>
+  
+  </form>
+  
+  <h3><strong>Gastos Deducibles de este Ingreso</strong></h3>
+  <h4>¿Tuviste alguno de los siguientes gastos relacionados exclusivamente con la generación de estos ingresos por honorarios durante el 2019?</h4>
+  
+  <li>
+  <h4>¿Gastos de nómina?</h4>
+  <mat-slide-toggle [(ngModel)]="gastosNomina_2"></mat-slide-toggle>
+  <br>
+  <mat-divider></mat-divider>
+  </li>
+  
+  <div *ngIf= "gastosNomina_2">
+    <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+      <h3>Ingresa el valor pagado por concepto de gastos de nómina:</h3>  
+    <div class="container">
+      <div class="row">         
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="interesesNomina_2">
+          </mat-form-field>        
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.interesesNomina_2 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>   
+    </form>    
+  </div>
+  
+  <li>
+  <h4>¿Honorarios?</h4>
+  <mat-slide-toggle [(ngModel)]="honorarios_2"></mat-slide-toggle>
+  <br>
+  </li>
+  <mat-divider></mat-divider>
+  
+  <div *ngIf= "honorarios_2">
+    <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+    <h3>Valor de los honorarios pagados como gasto:</h3>  
+    <div class="container">
+      <div class="row">       
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="honorariosGasto_2">
+          </mat-form-field>        
+        </div>
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.honorariosGasto_2 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>  
+    </form>     
+  </div>
+  
+      <li>
+      <h4>¿Impuesto Predial del lugar de trabajo?</h4>
+      <mat-slide-toggle [(ngModel)]="predial_2"></mat-slide-toggle>
+      <br>
+      </li>
+      <mat-divider></mat-divider>
+      
+      <div *ngIf= "predial_2">
+        <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+        <h3>Valor del Impuesto Predial pagado:</h3>  
+        <div class="container">
+          <div class="row">          
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa un valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="predial_2">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.predial_2 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider> 
+        </form>      
+      </div>
+  
+      <li>
+          <h4>¿Impuesto de Industria y Comercio -ICA-?</h4>
+          <mat-slide-toggle [(ngModel)]="ICA_2"></mat-slide-toggle>
+          <br>
+          </li>
+          <mat-divider></mat-divider>
+          
+          <div *ngIf= "ICA_2">
+            <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+              <h3>Valor del ICA pagado:</h3>  
+            <div class="container">
+              <div class="row">          
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="ICA_2">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.ICA_2 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider> 
+            </form>      
+          </div>
+      
+      <li>
+          <h4>¿Impuesto de Avisos y Tableros?</h4>
+          <mat-slide-toggle [(ngModel)]="avisosTableros_2"></mat-slide-toggle>
+          <br>
+          </li>
+          <mat-divider></mat-divider>
+          
+          <div *ngIf= "avisosTableros_2">
+            <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+              <h3>Valor del impuesto A.y T. pagado:</h3>  
+            <div class="container">
+              <div class="row">          
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="AyT_2">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.AyT_2 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>  
+            </form>    
+          </div>
+  
+          <li>
+              <h4>¿Arrendamiento del lugar de trabajo?</h4>
+              <mat-slide-toggle [(ngModel)]="arrendamientoTrabajo_2"></mat-slide-toggle>
+              <br>
+              </li>
+              <mat-divider></mat-divider>
+              
+              <div *ngIf= "arrendamientoTrabajo_2">
+                <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                  <h3>Arrendamiento del lugar de trabajo:</h3>  
+                <div class="container">
+                  <div class="row">          
+                    <div class="col-sm">
+                      <mat-form-field >         
+                        <mat-label>Valor arrendamiento pagado:</mat-label>
+                        <input matInput placeholder="Ingresa un valor" type="number"
+                        formControlName="arrendamientoTrabajo_2">
+                      </mat-form-field>        
+                    </div>            
+                    <div class="col-sm">
+                      <div class="container3">
+                        <p>${{contactForm.value.arrendamientoTrabajo_2 | number:"2.1-2"}}</p>
+                      </div>      
+                    </div>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+                </form>      
+              </div>
+  
+              <li>
+                  <h4>¿Seguros del lugar y muebles de trabajo?</h4>
+                  <mat-slide-toggle [(ngModel)]="segurosTrabajo_2"></mat-slide-toggle>
+                  <br>
+                  </li>
+                  <mat-divider></mat-divider>
+                  
+                  <div *ngIf= "segurosTrabajo_2">
+                    <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                      <h3>Valor seguros/muebles pagado:</h3>  
+                    <div class="container">
+                      <div class="row">          
+                        <div class="col-sm">
+                          <mat-form-field >         
+                            <mat-label>Valor pagado:</mat-label>
+                            <input matInput placeholder="Ingresa un valor" type="number"
+                            formControlName="seguros_2">
+                          </mat-form-field>        
+                        </div>            
+                        <div class="col-sm">
+                          <div class="container3">
+                            <p>${{contactForm.value.seguros_2 | number:"2.1-2"}}</p>
+                          </div>      
+                        </div>
+                      </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    </form>       
+                  </div>
+     
+                  <li>
+                      <h4>¿Otros Gastos?</h4>
+                      <mat-slide-toggle [(ngModel)]="otrosGastos_2"></mat-slide-toggle>
+                      <br>
+                      </li>
+                      <mat-divider></mat-divider>
+                      
+                      <div *ngIf= "otrosGastos_2">
+                        <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+                          <h3>Otros gastos pagados:</h3>  
+                        <div class="container">
+                          <div class="row">          
+                            <div class="col-sm">
+                              <mat-form-field >         
+                                <mat-label>Valor pagado:</mat-label>
+                                <input matInput placeholder="Ingresa un valor" type="number"
+                                formControlName="otrosGastos_2">
+                              </mat-form-field>        
+                            </div>            
+                            <div class="col-sm">
+                              <div class="container3">
+                                <p>${{contactForm.value.otrosGastos_2 | number:"2.1-2"}}</p>
+                              </div>      
+                            </div>
+                          </div>
+                        </div>
+                        <mat-divider></mat-divider>     
+                      </form>
+                      </div>  
+                      <br>
+                                         
+              <h3><strong>Selecciona las condiciones que se cumplieron en este trabajo que tuviste durante el 2019 </strong></h3>
+              <form [formGroup]="contactForm" (ngSubmit)="intelectualForm($event)">
+              <li>
+                <h4>¿Recibiste estos honorarios por tu participación en proyectos científicos avalados por Colciencias durante el 2019?</h4>
+                <mat-slide-toggle formControlName="colciencias_2"></mat-slide-toggle>
+                <br>
+                </li>
+              <mat-divider></mat-divider>
+  
+              <li>
+                <h4>¿Recibiste estos honorarios por tu trabajo para la ONU o alguno de sus organismos especializados durante el 2019? Por Ej: el Banco Mundial, el Banco Interamericano de Desarrollo, etc.</h4>
+                <mat-slide-toggle formControlName="ONU_2"></mat-slide-toggle>
+                <br>
+                </li>
+              <mat-divider></mat-divider>
+  
+              <li>
+                <h4>¿Para la realización del trabajo con el cual generaste estos honorarios, contrataste a dos o más personas por más de 90 días durante el 2019?</h4>
+                <mat-slide-toggle formControlName="noventaDias_2"></mat-slide-toggle>
+                <br>
+                </li>
+              <mat-divider></mat-divider>  
+            </form>           
+       
+</ul>
+        <!--****************finish intelectual 3*****************-->
+
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Salir</button>
+        <button mat-button type="submit" [disabled]="contactForm.invalid"
+        (click)="intelectualForm($event)"
+        mat-flat-button color="primary" >Guardar respuestas
+      </button>
+      </mat-dialog-actions>

@@ -1,0 +1,544 @@
+<h2 mat-dialog-title>VENTA DE BIENES RAÍCES
+    <mat-icon matTooltip="Debes ingresar los valores requeridos por cada bien raíz vendido durante el año 2019">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+      <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Cuántos bienes raíces inmuebles, como casas, lotes, apartamentos, etc. vendiste durante el año 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoNumeroInmueble($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+    <br>
+
+<!--**************************Start Inmueble 1*************************--> 
+    <ol>
+     <h2 class="color" style="text-align: center;"><strong>Inmueble No.1</strong></h2> 
+
+<form [formGroup]="contactForm"(ngSubmit)="ventaBienRaizForm($event)">
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este vehículo?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoInmuebleUno($event)"
+                formControlName="titularBienRaiz">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularBienRaiz').hasError('required')
+              && contactForm.get('titularBienRaiz').touched">
+                Campo requerido
+              </mat-error>  
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="inmuebleUno">
+        <h3>¿Cuál es el porcentaje  de la propiedad del vehículo que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentaje">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentaje | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+   
+    <li>
+     <h3>Ingresa el valor de venta:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVenta">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('valorVenta').hasError('required')
+            && contactForm.get('valorVenta').touched">
+              Campo requerido
+            </mat-error>
+                
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVenta | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider> 
+           
+    <li>
+        <h3>¿Fecha de venta aproximada?</h3>  
+        <div class="container">
+          <div class="row">            
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Selecciona una fecha</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaVenta">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('fechaVenta').hasError('required')
+            && contactForm.get('fechaVenta').touched">
+              Campo requerido
+            </mat-error>           
+          </div>                  
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+        <br>
+
+        <h2><strong>Gastos Notariales</strong></h2>
+
+        <li>
+          <h3>Retención en la fuente practicada por estos ingresos:</h3>  
+          <div class="container">
+            <div class="row">       
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="retencion">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.retencion | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+        </li>
+          <mat-divider></mat-divider>    
+
+          <li>
+            <h3>Otros Gastos de venta:</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="otrosGastos">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.otrosGastos | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </li>
+            <mat-divider></mat-divider> 
+
+            <h2><strong>Recibo Impuesto Predial 2019</strong></h2>
+
+            <li>
+              <h3>Avalúo Catastral año 2019:</h3>  
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa un valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="avaluoPredial">
+                    </mat-form-field> 
+                    <mat-error *ngIf="contactForm.get('avaluoPredial').hasError('required')
+                    && contactForm.get('avaluoPredial').touched">
+                      Campo requerido
+                    </mat-error>
+
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.avaluoPredial | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+            </li>
+              <mat-divider></mat-divider>
+            </form>
+            </ol>
+<!--**************************Finish Inmueble 1*************************--> 
+
+<!--**************************Start Inmueble 2**************************--> 
+<ol *ngIf="numeroInmueble2">
+  <h2 class="color" style="text-align: center;"><strong>Inmueble No.2</strong></h2> 
+
+  <form [formGroup]="contactForm"(ngSubmit)="ventaBienRaizForm($event)">
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este vehículo?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoInmuebleUno($event)"
+                formControlName="titularBienRaiz_1">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularBienRaiz_1').hasError('required')
+              && contactForm.get('titularBienRaiz_1').touched">
+                Campo requerido
+              </mat-error>  
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="inmuebleUno">
+        <h3>¿Cuál es el porcentaje  de la propiedad del vehículo que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentaje_1">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentaje_1 | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+   
+    <li>
+     <h3>Ingresa el valor de venta:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVenta_1">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('valorVenta_1').hasError('required')
+            && contactForm.get('valorVenta_1').touched">
+              Campo requerido
+            </mat-error>
+                
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVenta_1 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider> 
+           
+    <li>
+        <h3>¿Fecha de venta aproximada?</h3>  
+        <div class="container">
+          <div class="row">            
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Selecciona una fecha</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaVenta_1">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('fechaVenta_1').hasError('required')
+            && contactForm.get('fechaVenta_1').touched">
+              Campo requerido
+            </mat-error>           
+          </div>                  
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+        <br>
+
+        <h2><strong>Gastos Notariales</strong></h2>
+
+        <li>
+          <h3>Retención en la fuente practicada por estos ingresos:</h3>  
+          <div class="container">
+            <div class="row">       
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="retencion_1">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.retencion_1 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+        </li>
+          <mat-divider></mat-divider>    
+
+          <li>
+            <h3>Otros Gastos de venta:</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="otrosGastos_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.otrosGastos_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </li>
+            <mat-divider></mat-divider> 
+
+            <h2><strong>Recibo Impuesto Predial 2019</strong></h2>
+
+            <li>
+              <h3>Avalúo Catastral año 2019:</h3>  
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa un valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="avaluoPredial_1">
+                    </mat-form-field> 
+                    <mat-error *ngIf="contactForm.get('avaluoPredial_1').hasError('required')
+                    && contactForm.get('avaluoPredial_1').touched">
+                      Campo requerido
+                    </mat-error>
+
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.avaluoPredial_1 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+            </li>
+              <mat-divider></mat-divider>
+            </form>        
+</ol>
+<!--****************************finish Inmueble 2*******************--> 
+
+<!--**************************Start Inmueble 3**************************--> 
+<ol *ngIf="numeroInmueble3">
+  <h2 class="color" style="text-align: center;"><strong>Inmueble No.3</strong></h2> 
+
+  <form [formGroup]="contactForm"(ngSubmit)="ventaBienRaizForm($event)">
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Eres el único titular de este vehículo?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoInmuebleUno($event)"
+                formControlName="titularBienRaiz_2">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field>  
+              <mat-error *ngIf="contactForm.get('titularBienRaiz_2').hasError('required')
+              && contactForm.get('titularBienRaiz_2').touched">
+                Campo requerido
+              </mat-error>  
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="inmuebleUno">
+        <h3>¿Cuál es el porcentaje  de la propiedad del vehículo que te corresponde?</h3>  
+      <div class="container">
+        <div class="row">        
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentaje_2">
+            </mat-form-field>        
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentaje_2 | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+   
+    <li>
+     <h3>Ingresa el valor de venta:</h3>  
+      <div class="container">
+        <div class="row">       
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVenta_2">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('valorVenta_2').hasError('required')
+            && contactForm.get('valorVenta_2').touched">
+              Campo requerido
+            </mat-error>
+                
+          </div>
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVenta_2 | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </li>
+      <mat-divider></mat-divider> 
+           
+    <li>
+        <h3>¿Fecha de venta aproximada?</h3>  
+        <div class="container">
+          <div class="row">            
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Selecciona una fecha</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="fechaVenta_2">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('fechaVenta_2').hasError('required')
+            && contactForm.get('fechaVenta_2').touched">
+              Campo requerido
+            </mat-error>           
+          </div>                  
+      </div>
+      </li>
+      <mat-divider></mat-divider>
+        <br>
+
+        <h2><strong>Gastos Notariales</strong></h2>
+
+        <li>
+          <h3>Retención en la fuente practicada por estos ingresos:</h3>  
+          <div class="container">
+            <div class="row">       
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="retencion_2">
+                </mat-form-field>        
+              </div>
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.retencion_2 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+        </li>
+          <mat-divider></mat-divider>    
+
+          <li>
+            <h3>Otros Gastos de venta:</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="otrosGastos_2">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.otrosGastos_2 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+          </li>
+            <mat-divider></mat-divider> 
+
+            <h2><strong>Recibo Impuesto Predial 2019</strong></h2>
+
+            <li>
+              <h3>Avalúo Catastral año 2019:</h3>  
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa un valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="avaluoPredial_2">
+                    </mat-form-field> 
+                    <mat-error *ngIf="contactForm.get('avaluoPredial_2').hasError('required')
+                    && contactForm.get('avaluoPredial_2').touched">
+                      Campo requerido
+                    </mat-error>
+
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.avaluoPredial_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+            </li>
+              <mat-divider></mat-divider>
+            </form>   
+</ol>
+<!--****************************finish Inmueble 3*******************-->  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="ventaBienRaizForm($event)"
+  mat-flat-button color="primary">Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+  

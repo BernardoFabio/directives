@@ -1,0 +1,151 @@
+<h2 mat-dialog-title>INFORMACIÓN CRÉDITO HIPOTECARIO O LEASING HABITACIONAL 
+    <mat-icon matTooltip="Debes ingresar los valores totales de todos tus créditos hipotecarios o de leasing habitacional">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+  
+    <form [formGroup]="contactForm" (ngSubmit)="hipotecarios($event)">
+    <ul>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <li>
+      <h3>¿Eres el único titular de este crédito hipotecario o leasing habitacional?</h3>  
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoCreditoHipotecario($event)"
+                formControlName="titularHipotecarios">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field> 
+              <mat-error *ngIf="contactForm.get('titularHipotecarios').hasError('required')
+          && contactForm.get('titularHipotecarios').touched" >
+            Campo requerido
+          </mat-error>       
+          </div>
+        </div>
+      </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <li *ngIf="opcionCreditoHipotecario">
+
+        <h3>¿Cuál es el porcentaje que te corresponde de este crédito hipotecario o leasing habitacional?</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Porcentaje</mat-label>
+              <input matInput placeholder="Ej.50%" type="number"
+              formControlName="porcentajeHipotecarios">
+            </mat-form-field> 
+            <mat-error *ngIf="contactForm.get('porcentajeHipotecarios').hasError('required')
+            && contactForm.get('porcentajeHipotecarios').touched" >
+              Campo requerido
+            </mat-error>       
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>{{contactForm.value.porcentajeHipotecarios | number:"2.1-2"}}%</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </li>
+    
+    <li>
+      <h3>Saldo a 31 dic 2019 - Totales</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Saldo Total </mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="saldoHipotecarios">
+            </mat-form-field>
+            <mat-error *ngIf="contactForm.get('saldoHipotecarios').hasError('required')
+            && contactForm.get('saldoHipotecarios').touched" >
+              Campo requerido
+            </mat-error>                 
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+           <p>${{contactForm.value.saldoHipotecarios | number:"2.1-2"}}</p>
+            </div>      
+          </div>  
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+    
+    <li>
+      <h3>Valor total deducible (Intereses Pagados)-Totales</h3>  
+      <div class="container">
+        <div class="row">      
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Rendimientos</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="deduciblesHipotecarios">
+            </mat-form-field>  
+            <mat-error *ngIf="contactForm.get('deduciblesHipotecarios').hasError('required')
+            && contactForm.get('deduciblesHipotecarios').touched">
+              Campo requerido
+            </mat-error>              
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+            <p>${{contactForm.value.deduciblesHipotecarios | number:"2.1-2"}}</p>            
+            </div>      
+          </div>  
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li> 
+    
+    <li>
+      <h3>Valor GMF - Totales</h3><h6>(Gravamen Movimientos Financieros ó 4 x 1000)</h6>
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>*Esta información es opcional</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="GMFHipotecarios">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+            <p>${{contactForm.value.GMFHipotecarios | number:"2.1-2"}}</p>
+                
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+  
+    </ul>
+  </form>
+   
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="hipotecarios($event)"
+    mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+  </button>
+  </mat-dialog-actions>
+  
+  

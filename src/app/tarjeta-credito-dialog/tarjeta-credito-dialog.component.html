@@ -1,0 +1,99 @@
+<h2 mat-dialog-title>CERTIFICADOS PRODUCTOS DE CRÉDITO - TARJETAS DE CRÉDITO
+    <mat-icon matTooltip="Debes ingresar los valores totales de todas tus tarjetas de crédito">description</mat-icon>
+</h2>
+  
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="contactForm" (ngSubmit)="tarjeta($event)">
+  <ul>
+   <h4>Por favor responde las siguientes preguntas:</h4>
+    
+    <li>
+    <h3>Saldo a 31 dic 2019 - Totales</h3>  
+    <div class="container">
+      <div class="row">           
+  
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Saldo Total </mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="saldoTarjeta">
+          </mat-form-field>
+          <mat-error *ngIf="contactForm.get('saldoTarjeta').hasError('required')
+          && contactForm.get('saldoTarjeta').touched" >
+            Campo requerido
+          </mat-error>                 
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+         <p>${{contactForm.value.saldoTarjeta | number:"2.1-2"}}</p>
+          </div>      
+        </div>  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li>
+  
+  <li>
+    <h3>Rendimientos financieros o intereses pagados -Totales</h3>  
+    <div class="container">
+      <div class="row">      
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Rendimientos</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="interesesTarjeta">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('interesesTarjeta').hasError('required')
+          && contactForm.get('interesesTarjeta').touched">
+            Campo requerido
+          </mat-error>              
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+          <p>${{contactForm.value.interesesTarjeta | number:"2.1-2"}}</p>            
+          </div>      
+        </div>  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li> 
+  
+  <li>
+    <h3>Valor GMF - Totales</h3><h6>(Gravamen Movimientos Financieros ó 4 x 1000)</h6>
+    <div class="container">
+      <div class="row">           
+  
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>*Esta información es opcional</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="GMFTarjeta">
+          </mat-form-field>        
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+          <p>${{contactForm.value.GMFTarjeta | number:"2.1-2"}}</p>
+              
+          </div>      
+        </div>
+  
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </li>
+  </ul>
+</form>
+ 
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="tarjeta($event)"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+
+  

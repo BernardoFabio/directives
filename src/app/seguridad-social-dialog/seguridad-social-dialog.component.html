@@ -1,0 +1,223 @@
+<h2 mat-dialog-title>PAGOS POR CONCEPTO DE SEGURIDAD SOCIAL 
+    <mat-icon matTooltip="Debes ingresar los valores requeridos por cada pago realizado, si no lo
+    tienes deja la casilla en blanco.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+    <ol>
+    <h4>Selecciona los pagos realizados por concepto de pagos a seguridad social como independiente:</h4>    
+    <mat-divider></mat-divider>
+    <br>
+
+
+     <li type="square"> 
+     <div class="row">
+      <div class="col-sm">
+        <h4>Salud</h4>
+      </div>
+      <div class="col-sm">
+        <mat-radio-group aria-label="Select an option">
+          <mat-slide-toggle [(ngModel)]="seguridadSocial1">
+          </mat-slide-toggle>
+        </mat-radio-group>           
+      </div>
+    </div>  
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <ul>
+    <li *ngIf="seguridadSocial1">
+      <form [formGroup]="contactForm"(ngSubmit)="seguridadSocialForm($event)">
+        <h4>Total aportes Salud:</h4>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >       
+                <mat-label>Ingresa un Valor</mat-label>
+                <input matInput placeholder="" type="number"
+                formControlName="salud">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.salud | number:"2.1-2"}}</p>
+              </div>      
+            </div> 
+          </div>
+        </div>
+      </form>
+        </li>
+    </ul>
+  
+     <li type="square"> 
+     <div class="row">
+      <div class="col-sm">
+        <h4>Pensión</h4>
+      </div>
+      <div class="col-sm">
+        <mat-radio-group aria-label="Select an option">
+          <mat-slide-toggle [(ngModel)]="seguridadSocial2">
+          </mat-slide-toggle>
+        </mat-radio-group>           
+      </div>
+    </div>  
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <ul>
+    <li *ngIf="seguridadSocial2">
+      <form [formGroup]="contactForm"(ngSubmit)="seguridadSocialForm($event)">
+        <h4>Total aportes Pensión:</h4>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >       
+                <mat-label>Ingresa un Valor</mat-label>
+                <input matInput placeholder="" type="number"
+                formControlName="pension">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.pension | number:"2.1-2"}}</p>
+              </div>      
+            </div> 
+          </div>
+        </div>
+        </form>
+        </li>
+    </ul>
+  
+    <li type="square"> 
+      <div class="row">
+       <div class="col-sm">
+         <h4>ARL</h4>
+       </div>
+       <div class="col-sm">
+         <mat-radio-group aria-label="Select an option">
+           <mat-slide-toggle [(ngModel)]="seguridadSocial3">
+           </mat-slide-toggle>
+         </mat-radio-group>           
+       </div>
+     </div>  
+     </li>
+     <mat-divider></mat-divider>
+     <br>
+
+     <ul>
+     <li *ngIf="seguridadSocial3">
+      <form [formGroup]="contactForm"(ngSubmit)="seguridadSocialForm($event)">
+        <h4>Total aportes ARL:</h4>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >       
+                <mat-label>Ingresa un Valor</mat-label>
+                <input matInput placeholder="" type="number"
+                formControlName="ARL">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.ARL | number:"2.1-2"}}</p>
+              </div>      
+            </div> 
+          </div>
+        </div>
+        </form>
+        </li>
+    </ul>
+  
+     <li type="square"> 
+      <div class="row">
+       <div class="col-sm">
+         <h4>Caja de Compensación Familiar</h4>
+       </div>
+       <div class="col-sm">
+         <mat-radio-group aria-label="Select an option">
+           <mat-slide-toggle [(ngModel)]="seguridadSocial4">
+           </mat-slide-toggle>
+         </mat-radio-group>           
+       </div>
+     </div>  
+     </li>
+     <mat-divider></mat-divider>
+     <br>
+
+     <ul>
+     <li *ngIf="seguridadSocial4">
+      <form [formGroup]="contactForm"(ngSubmit)="seguridadSocialForm($event)">
+        <h4>Total aportes Caja de Compensación Familiar:</h4>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >       
+                <mat-label>Ingresa un Valor</mat-label>
+                <input matInput placeholder="" type="number"
+                formControlName="cajaCompensacionFamiliar">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.cajaCompensacionFamiliar | number:"2.1-2"}}</p>
+              </div>      
+            </div> 
+          </div>
+        </div>
+      </form>
+        </li>
+    </ul>
+  
+     <li type="square"> 
+      <div class="row">
+       <div class="col-sm">
+         <h4>Cesantías</h4>
+       </div>
+       <div class="col-sm">
+         <mat-radio-group aria-label="Select an option">
+           <mat-slide-toggle [(ngModel)]="seguridadSocial5">
+           </mat-slide-toggle>
+         </mat-radio-group>           
+       </div>
+     </div>  
+     </li>
+     <mat-divider></mat-divider>
+     <br>  
+
+     <ul>
+     <li *ngIf="seguridadSocial5">
+      <form [formGroup]="contactForm"(ngSubmit)="seguridadSocialForm($event)">
+        <h4>Total aportes Cesantías:</h4>  
+        <div class="container">
+          <div class="row">        
+            <div class="col-sm">
+              <mat-form-field >       
+                <mat-label>Ingresa un Valor</mat-label>
+                <input matInput placeholder="" type="number"
+                formControlName="cesantias">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.cesantias | number:"2.1-2"}}</p>
+              </div>      
+            </div> 
+          </div>
+        </div>
+        </form>
+        </li>
+    </ul>
+      
+    </ol>
+    
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="seguridadSocialForm($event)"
+    mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+  </button>
+  </mat-dialog-actions>
+  
+  

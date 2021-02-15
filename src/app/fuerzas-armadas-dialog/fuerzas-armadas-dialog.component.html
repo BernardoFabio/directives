@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Certificado Fuerzas Armadas
+    <mat-icon matTooltip="Esta información es importante porque permite tomar un valor como deducción, con el fin de disminuir tu impuesto de renta a pagar.">description</mat-icon>
+    </h2>
+    <mat-dialog-content class="mat-typography">
+    
+      <form [formGroup]="contactForm"(ngSubmit)="fuerzasArmadasForm($event)">
+        <ul>
+        <li>
+            <h3>Ingresa el valor de tu sueldo básico como miembro de las Fuerzas Militares durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="fuerzasArmadas">
+                  </mat-form-field>   
+                  <mat-error *ngIf="contactForm.get('fuerzasArmadas').hasError('required')
+                  && contactForm.get('fuerzasArmadas').touched" >
+                    Campo requerido
+                  </mat-error>      
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.fuerzasArmadas | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+        </ul>
+      </form>
+    
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Salir</button>
+        <button mat-button type="submit" (click)="fuerzasArmadasForm($event)"[disabled]="contactForm.invalid"
+        mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+      </button>
+      </mat-dialog-actions>

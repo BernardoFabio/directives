@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Certificado de Pagos por Indemnizaciones por Accidente de Trabajo o Enfermedad
+    <mat-icon matTooltip="Debes ingresar los valores correspondientes a los pagos que te hayan realizado como indemización por accidente laboral, enfermedad, etc.">description</mat-icon>
+    </h2>
+    <mat-dialog-content class="mat-typography">
+    
+      <form [formGroup]="contactForm"(ngSubmit)="accidenteLaboralForm($event)">
+        <ul>
+        <li>
+            <h3>Ingresa el valor de la indemnización por accidente de trabajo o enfermedad que recibiste durante el 2019, asociada a este salario</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="accidenteLaboral">
+                  </mat-form-field>  
+                  <mat-error *ngIf="contactForm.get('accidenteLaboral').hasError('required')
+                  && contactForm.get('accidenteLaboral').touched">
+                    Campo requerido
+                  </mat-error>       
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.accidenteLaboral | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+        </ul>
+
+      </form>
+    
+      
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="accidenteLaboralForm($event)"[disabled]="contactForm.invalid"
+    mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+  </button>
+  </mat-dialog-actions>

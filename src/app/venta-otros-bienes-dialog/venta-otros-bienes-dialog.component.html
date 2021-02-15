@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>OTRAS VENTAS
+    <mat-icon matTooltip="Debes ingresar los valores totales de tus ventas de bienes, pertenecientes a esta categoría, durante el año 2019, tales como: joyas, obras de arte, muebles, etc.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="contactForm">  
+    <ul>
+     <h4>Por favor responde las siguientes preguntas:</h4>
+      
+      <!--**************-->
+     <li>
+      <h3>Valor de venta de tus bienes:</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa un valor</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="valorVentaOtrosBienes">
+            </mat-form-field>    
+            <mat-error *ngIf="contactForm.get('valorVentaOtrosBienes').hasError('required')
+              && contactForm.get('valorVentaOtrosBienes').touched">
+                Campo requerido
+              </mat-error>    
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.valorVentaOtrosBienes | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </li>
+     <!--**************-->
+     <li>
+    <h3>Retención en la fuente practicada por la venta: </h3>  
+      <div class="container">
+        <div class="row">
+           <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Retención</mat-label>
+              <input matInput placeholder="Ingresa un valor" type="number"
+              formControlName="retencion">
+            </mat-form-field>
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.retencion | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>  
+    </li>
+<!--**************--> 
+    </ul>
+    </form>
+   
+   </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Salir</button>
+    <button mat-button type="submit" (click)="ventaOtrosBienesForm($event)"
+    mat-flat-button color="primary">Guardar respuestas
+  </button>
+  </mat-dialog-actions>
+  
+  

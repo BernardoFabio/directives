@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Certificado de Seguro por Muerte o Compensación por Muerte
+    <mat-icon matTooltip="Esta información relacionada con el pago de seguro por muerte o compensación por muerte de miembros de las fuerzas militares durante el 2019, permite tomar una deducción para disminuir el monto de tu impuesto de renta a pagar.">description</mat-icon>
+    </h2>
+    <mat-dialog-content class="mat-typography">
+    
+        <form [formGroup]="contactForm"(ngSubmit)="compensacionMuerteForm($event)">
+      <ul>
+        <li>
+            <h3>Ingresa el valor del seguro o compensación por muerte que recibiste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="compensacionMuerte">
+                  </mat-form-field>   
+                  <mat-error *ngIf="contactForm.get('compensacionMuerte').hasError('required')
+                  && contactForm.get('compensacionMuerte').touched" >
+                    Campo requerido
+                  </mat-error>                     
+                  
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.compensacionMuerte | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+        </ul>
+
+      </form>
+    
+ 
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Salir</button>
+      <button mat-button type="submit" (click)="compensacionMuerteForm($event)"[disabled]="contactForm.invalid"
+      mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+    </button>
+    </mat-dialog-actions>

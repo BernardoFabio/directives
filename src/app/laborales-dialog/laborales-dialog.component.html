@@ -1,0 +1,1293 @@
+<h2 mat-dialog-title>INGRESOS LABORALES -SALARIOS
+    <mat-icon matTooltip="Debes ingresar los valores requeridos por cada relación laboral que tuviste en el año 2019 de manera individual">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+
+      <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>¿Cuántos empleos con vínculación laboral tuviste a 31 de diciembre de 2019?</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoNumeroLaboral($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+
+<!--**************************Start Empleo 1*************************--> 
+<form [formGroup]="contactForm" (ngSubmit)="laborales($event)">
+
+<ul class="laboral1">
+
+     <h2 class="color" style="text-align: center;"><strong>Empleo #1</strong></h2> 
+
+     <li>          
+        <div class="container">
+          <div class="row">       
+            <div class="col-sm">
+                <h3>Casilla 30 del certificado 220(Fecha)</h3>
+                </div>
+                    <div class="col-sm">      
+                      <mat-form-field color="accent" appearance="">
+                        <mat-label>Mes/Día/Año</mat-label>
+                        <input matInput [matDatepicker]="picker1"
+                        formControlName="casilla30">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field> 
+                      <mat-error *ngIf="contactForm.get('casilla30').hasError('required')" >
+                        Campo requerido
+                      </mat-error>      
+                    </div>                   
+                </div>     
+            </div> 
+        </li> 
+      <mat-divider></mat-divider>  
+      <br>
+      
+      <li>          
+        <div class="container">
+          <div class="row">       
+            <div class="col-sm">
+                <h3>Casilla 31 del certificado 220 (Fecha)</h3>
+                </div>
+                    <div class="col-sm">      
+                      <mat-form-field color="accent" appearance="">
+                        <mat-label>Mes/Día/Año</mat-label>
+                        <input matInput [matDatepicker]="picker2"
+                        formControlName="casilla31">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>  
+                      <mat-error *ngIf="contactForm.get('casilla31').hasError('required')">
+                        Campo requerido
+                      </mat-error>     
+                    </div>              
+                </div>     
+            </div> 
+        </li> 
+      <mat-divider></mat-divider>
+      <br>
+
+      <h3><strong> Certificado 220 - Concepto de los ingresos</strong></h3>
+
+      <li>
+        <h3>Casilla 37: "Pagos por salarios o emolumentos eclesiásticos"</h3>  
+        <div class="container">
+          <div class="row">       
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla37">
+              </mat-form-field> 
+              <mat-error *ngIf="contactForm.get('casilla37').hasError('required')">
+                Campo requerido
+              </mat-error> 
+
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla37 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>      
+      
+      <li>
+        <h3>Casilla 38: "Pagos por honorarios"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla38">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla38 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>   
+      
+      <li>
+        <h3>Casilla 39: "Pagos por servicios"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla39">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla39 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>   
+      
+      <li>
+        <h3>Casilla 40: "Pagos por comisiones"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+               formControlName="casilla40">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla40 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li> 
+
+      <li>
+        <h3>Casilla 41: "Pagos por prestaciones sociales"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla41">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla41 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 42: "Pagos por viáticos"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla42">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla42 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 43: "Pagos por gastos de representación"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla43">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla43 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 44: "Pagos por compensaciones por el trabajo asociado cooperativo"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla44">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla44 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      
+      <li>
+        <h3>Casilla 45: "Otros pagos"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla45">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla45 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 46: "Cesantías e intereses de cesantías efectivamente pagadas, consignadas o reconocidas en el periodo"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla46">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla46 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 47: "Pensiones de jubilación, vejez o invalidez"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla47">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla47 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 48: "Total de ingresos brutos</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla48">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla48 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+      <br>
+
+      <h3><strong>Certificado 220 - Concepto de los aportes</strong></h3>     
+
+      <li>
+        <h3>Casilla 49: "Aportes obligatorios por salud"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla49">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla49 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 50: "Aportes obligatorios a fondos de pensiones y solidaridad pensional y aportes voluntarios al - RAIS"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla50">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla50 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 51: "Aportes voluntarios a fondos de pensiones voluntarios"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla51">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla51 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 52: "Aportes a cuentas AFC"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla52">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla52 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+      <li>
+        <h3>Casilla 53: "Valor de la retención en la fuente por rentas de trabajo y pensiones"</h3>  
+        <div class="container">
+          <div class="row">           
+            <div class="col-sm">
+              <mat-form-field >         
+                <mat-label>Ingresa valor</mat-label>
+                <input matInput placeholder="Ingresa un valor" type="number"
+                formControlName="casilla53">
+              </mat-form-field>        
+            </div>
+            <div class="col-sm">
+              <div class="container3">
+                <p>${{contactForm.value.casilla53 | number:"2.1-2"}}</p>
+              </div>      
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </li>     
+</ul>
+</form>
+<!--**************************Finish Empleo 1*************************--> 
+ 
+<!--**************************Start Empleo 2*********************************--> 
+<form [formGroup]="contactForm" (ngSubmit)="laborales($event)" *ngIf="numeroLaboral2">
+  <h2 class="color" style="text-align: center;"><strong>Empleo #2</strong></h2> 
+    <ul class="laboral1">    
+         <li>          
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                    <h3>Casilla 30 del certificado 220(Fecha)</h3>
+                    </div>
+                        <div class="col-sm">      
+                          <mat-form-field color="accent" appearance="">
+                            <mat-label>Mes/Día/Año</mat-label>
+                            <input matInput [matDatepicker]="picker1"
+                            formControlName="casilla30_1">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field> 
+                          <mat-error *ngIf="contactForm.get('casilla30_1').hasError('required')
+                          && contactForm.get('casilla30_1').touched" >
+                            Campo requerido
+                          </mat-error>      
+                        </div>                   
+                    </div>     
+                </div> 
+            </li> 
+          <mat-divider></mat-divider>  
+          <br>
+          
+          <li>          
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                    <h3>Casilla 31 del certificado 220 (Fecha)</h3>
+                    </div>
+                        <div class="col-sm">      
+                          <mat-form-field color="accent" appearance="">
+                            <mat-label>Mes/Día/Año</mat-label>
+                            <input matInput [matDatepicker]="picker2"
+                            formControlName="casilla31_1">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                          </mat-form-field>  
+                          <mat-error *ngIf="contactForm.get('casilla31_1').hasError('required')
+                          && contactForm.get('casilla31_1').touched" >
+                            Campo requerido
+                          </mat-error>     
+                        </div>              
+                    </div>     
+                </div> 
+            </li> 
+          <mat-divider></mat-divider>
+          <br>
+    
+          <h3><strong> Certificado 220 - Concepto de los ingresos</strong></h3>
+    
+          <li>
+            <h3>Casilla 37: "Pagos por salarios o emolumentos eclesiásticos"</h3>  
+            <div class="container">
+              <div class="row">       
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla37_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla37_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>      
+          
+          <li>
+            <h3>Casilla 38: "Pagos por honorarios"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla38_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla38_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>   
+          
+          <li>
+            <h3>Casilla 39: "Pagos por servicios"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla39_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla39_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>   
+          
+          <li>
+            <h3>Casilla 40: "Pagos por comisiones"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                   formControlName="casilla40_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla40_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li> 
+    
+          <li>
+            <h3>Casilla 41: "Pagos por prestaciones sociales"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla41_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla41_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 42: "Pagos por viáticos"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla42_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla42_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 43: "Pagos por gastos de representación"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla43_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla43_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 44: "Pagos por compensaciones por el trabajo asociado cooperativo"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla44_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla44_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          
+          <li>
+            <h3>Casilla 45: "Otros pagos"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla45_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla45_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 46: "Cesantías e intereses de cesantías efectivamente pagadas, consignadas o reconocidas en el periodo"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla46_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla46_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 47: "Pensiones de jubilación, vejez o invalidez"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla47_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla47_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 48: "Total de ingresos brutos</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla48_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla48_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+          <br>
+    
+          <h3><strong>Certificado 220 - Concepto de los aportes</strong></h3>     
+    
+          <li>
+            <h3>Casilla 49: "Aportes obligatorios por salud"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla49_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla49_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 50: "Aportes obligatorios a fondos de pensiones y solidaridad pensional y aportes voluntarios al - RAIS"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla50_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla50_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 51: "Aportes voluntarios a fondos de pensiones voluntarios"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla51_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla51_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 52: "Aportes a cuentas AFC"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla52_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla52_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+    
+          <li>
+            <h3>Casilla 53: "Valor de la retención en la fuente por rentas de trabajo y pensiones"</h3>  
+            <div class="container">
+              <div class="row">           
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="casilla53_1">
+                  </mat-form-field>        
+                </div>
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.casilla53_1 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>     
+    </ul>
+    </form> 
+
+<!--****************************finish Empleo 2*******************--> 
+
+<!--**************************Start Empleo 3**************************--> 
+  <form [formGroup]="contactForm" (ngSubmit)="laborales($event)" *ngIf="numeroLaboral3">
+    <h2 class="color" style="text-align: center;"><strong>Empleo #3</strong></h2> 
+      <ul class="laboral1">    
+           <li>          
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                      <h3>Casilla 30 del certificado 220(Fecha)</h3>
+                      </div>
+                          <div class="col-sm">      
+                            <mat-form-field color="accent" appearance="">
+                              <mat-label>Mes/Día/Año</mat-label>
+                              <input matInput [matDatepicker]="picker1"
+                              formControlName="casilla30_2">
+                              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                              <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field> 
+                            <mat-error *ngIf="contactForm.get('casilla30_2').hasError('required')
+                            && contactForm.get('casilla30_2').touched" >
+                              Campo requerido
+                            </mat-error>      
+                          </div>                   
+                      </div>     
+                  </div> 
+              </li> 
+            <mat-divider></mat-divider>  
+            <br>
+            
+            <li>          
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                      <h3>Casilla 31 del certificado 220 (Fecha)</h3>
+                      </div>
+                          <div class="col-sm">      
+                            <mat-form-field color="accent" appearance="">
+                              <mat-label>Mes/Día/Año</mat-label>
+                              <input matInput [matDatepicker]="picker2"
+                              formControlName="casilla31_2">
+                              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                              <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>  
+                            <mat-error *ngIf="contactForm.get('casilla31_2').hasError('required')
+                            && contactForm.get('casilla31_2').touched" >
+                              Campo requerido
+                            </mat-error>     
+                          </div>              
+                      </div>     
+                  </div> 
+              </li> 
+            <mat-divider></mat-divider>
+            <br>
+      
+            <h3><strong> Certificado 220 - Concepto de los ingresos</strong></h3>
+      
+            <li>
+              <h3>Casilla 37: "Pagos por salarios o emolumentos eclesiásticos"</h3>  
+              <div class="container">
+                <div class="row">       
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla37_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla37_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>      
+            
+            <li>
+              <h3>Casilla 38: "Pagos por honorarios"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla38_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla38_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>   
+            
+            <li>
+              <h3>Casilla 39: "Pagos por servicios"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla39_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla39_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>   
+            
+            <li>
+              <h3>Casilla 40: "Pagos por comisiones"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                     formControlName="casilla40_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla40_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li> 
+      
+            <li>
+              <h3>Casilla 41: "Pagos por prestaciones sociales"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla41_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla41_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 42: "Pagos por viáticos"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla42_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla42_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 43: "Pagos por gastos de representación"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla43_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla43_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 44: "Pagos por compensaciones por el trabajo asociado cooperativo"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla44_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla44_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            
+            <li>
+              <h3>Casilla 45: "Otros pagos"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla45_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla45_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 46: "Cesantías e intereses de cesantías efectivamente pagadas, consignadas o reconocidas en el periodo"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla46_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla46_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 47: "Pensiones de jubilación, vejez o invalidez"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla47_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla47_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 48: "Total de ingresos brutos</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla48_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla48_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+            <br>
+      
+            <h3><strong>Certificado 220 - Concepto de los aportes</strong></h3>     
+      
+            <li>
+              <h3>Casilla 49: "Aportes obligatorios por salud"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla49_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla49_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 50: "Aportes obligatorios a fondos de pensiones y solidaridad pensional y aportes voluntarios al - RAIS"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla50_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla50_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 51: "Aportes voluntarios a fondos de pensiones voluntarios"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla51_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla51_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 52: "Aportes a cuentas AFC"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla52_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla52_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>
+      
+            <li>
+              <h3>Casilla 53: "Valor de la retención en la fuente por rentas de trabajo y pensiones"</h3>  
+              <div class="container">
+                <div class="row">           
+                  <div class="col-sm">
+                    <mat-form-field >         
+                      <mat-label>Ingresa valor</mat-label>
+                      <input matInput placeholder="Ingresa un valor" type="number"
+                      formControlName="casilla53_2">
+                    </mat-form-field>        
+                  </div>
+                  <div class="col-sm">
+                    <div class="container3">
+                      <p>${{contactForm.value.casilla53_2 | number:"2.1-2"}}</p>
+                    </div>      
+                  </div>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </li>     
+      </ul>
+      </form>   
+
+<!--****************************finish Empleo 3*******************-->  
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="laborales($event)"[disabled]="contactForm.invalid"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>

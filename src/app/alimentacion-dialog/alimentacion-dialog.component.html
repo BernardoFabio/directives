@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>INFORMACIÓN PAGOS POR CONCEPTO DE ALIMENTACION
+    <mat-icon matTooltip="Debes ingresar todos los pagos realizados por este concepto en el año 2019.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <br>
+ <form [formGroup]="contactForm" (ngSubmit)="alimentacionForm($event)">
+    <ul>
+    <li>
+      <div class="container">
+        <div class="row">    
+          <div class="col-sm">
+            <h3>¿Conoces si el valor de los pagos por alimentación se encuentran reportados en el certificado(s) 220 del 2019 emitido(s) por tu(s) empleador(es)?</h3>  
+            </div> 
+            <div class="col-sm">          
+            <mat-form-field appearance="">
+                <mat-label>Seleccione</mat-label>
+                <mat-select (selectionChange)="eventoAlimentacion($event)"
+                formControlName="alimentacion">
+                  <mat-option *ngFor="let op of options" [value]="op.codigo">{{op.texto}}</mat-option>
+                </mat-select>
+              </mat-form-field> 
+              <mat-error *ngIf="contactForm.get('alimentacion').hasError('required')
+              && contactForm.get('alimentacion').touched">
+                Campo requerido
+              </mat-error>   
+            </div>    
+          </div>
+        </div>
+    </li>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div *ngIf="alimentacion">
+        <h3>Ingresa el valor de los pagos por alimentación que recibiste o que fueron hechos a tu favor durante el 2019:</h3>  
+      <div class="container">
+        <div class="row">           
+    
+          <div class="col-sm">
+            <mat-form-field >         
+              <mat-label>Ingresa valor</mat-label>
+              <input matInput placeholder="" type="number"
+              formControlName="alimentacionValue">
+            </mat-form-field>        
+          </div>
+    
+          <div class="col-sm">
+            <div class="container3">
+              <p>${{contactForm.value.alimentacionValue | number:"2.1-2"}}</p>
+            </div>      
+          </div>
+    
+        </div>
+      </div>
+      <mat-divider></mat-divider>       
+    </div>
+        
+</ul>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" (click)="alimentacionForm($event)"[disabled]="contactForm.invalid"
+  mat-flat-button color="primary" cdkFocusInitial>Guardar respuestas
+</button>
+</mat-dialog-actions>
+

@@ -1,0 +1,500 @@
+<h2 mat-dialog-title>PENSIONES
+
+    <mat-icon matTooltip="Debes ingresar la información por cada Pensión individualmente.">description</mat-icon>
+  </h2>
+  <mat-dialog-content class="mat-typography">
+    <br>
+
+    <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-sm">
+            <h4>Selecciona el número de pensiones por las cuales percibiste ingresos durante el año 2019:</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione</mat-label>
+              <mat-select (selectionChange)="eventoNumeroPensiones($event)">
+                <mat-option *ngFor="let numb of numbers" [value]="numb.codigo">{{numb.texto}}</mat-option>
+              </mat-select>
+            </mat-form-field>                       
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <!--*****************start Pensiones 1*****************-->
+<ul>
+    <h2 class="color" style="text-align: center;"><strong>Pensión No.1</strong></h2> 
+
+<form [formGroup]="contactForm" (ngSubmit)="pensiones">
+
+<h3><strong>Ingresos de la Pensión</strong></h3>
+    <li>
+    <h3>Ingresos totales  de esta pensión que recibiste durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">     
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="ingresosPensiones">
+        </mat-form-field>   
+        <mat-error *ngIf="contactForm.get('ingresosPensiones').hasError('required')
+        && contactForm.get('ingresosPensiones').touched" >
+          Campo requerido
+        </mat-error>       
+      </div>
+
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.ingresosPensiones | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+</li>
+<br>
+
+<h3><strong>Deducciones</strong></h3>
+
+<li>
+    <h3>Aportes a salud que realizaste durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="aportesSaludPensiones">
+        </mat-form-field>  
+        <mat-error *ngIf="contactForm.get('aportesSaludPensiones').hasError('required')
+        && contactForm.get('aportesSaludPensiones').touched" >
+          Campo requerido
+        </mat-error>       
+      </div>
+
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.aportesSaludPensiones | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+</li>
+<br>
+
+<li>
+  <h3>Contribuciones al Fondo de Solidaridad Pensional que realizaste durante el 2019:</h3>  
+<div class="container">
+  <div class="row">        
+    <div class="col-sm">
+      <mat-form-field >         
+        <mat-label>Ingresa un valor</mat-label>
+        <input matInput placeholder="Ingresa un valor" type="number"
+        formControlName="contribucionesSolidaridadPensiones">
+      </mat-form-field>  
+            
+    </div>
+
+    <div class="col-sm">
+      <div class="container3">
+        <p>${{contactForm.value.contribucionesSolidaridadPensiones | number:"2.1-2"}}</p>
+      </div>      
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>       
+</li>
+<br>
+
+<li>
+    <h3>Otras deducciones que realizaste durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="otrasDeduccionesPensiones">
+        </mat-form-field>  
+        <mat-error *ngIf="contactForm.get('otrasDeduccionesPensiones').hasError('required')
+        && contactForm.get('otrasDeduccionesPensiones').touched" >
+          Campo requerido
+        </mat-error>      
+      </div>
+
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.otrasDeduccionesPensiones | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+  </li>
+  <br>    
+  </form>
+       
+   </ul>
+    <!--*****************finish Pensiones 1*****************-->
+        <!--****************start Pensiones 2*****************-->
+    <ul *ngIf="pensiones2">
+        <h2 class="color" style="text-align: center;"><strong>Pensión No.2</strong></h2> 
+        
+<form [formGroup]="contactForm" (ngSubmit)="pensiones">
+
+  <h3><strong>Ingresos de la Pensión</strong></h3>
+      <li>
+      <h3>Ingresos totales  de esta pensión que recibiste durante el 2019:</h3>  
+    <div class="container">
+      <div class="row">     
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="ingresosPensiones_1">
+          </mat-form-field>   
+          <mat-error *ngIf="contactForm.get('ingresosPensiones_1').hasError('required')
+          && contactForm.get('ingresosPensiones_1').touched" >
+            Campo requerido
+          </mat-error>       
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.ingresosPensiones_1 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>       
+  </li>
+  <br>
+  
+  <h3><strong>Deducciones</strong></h3>
+  
+  <li>
+      <h3>Aportes a salud que realizaste durante el 2019:</h3>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="aportesSaludPensiones_1">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('aportesSaludPensiones_1').hasError('required')
+          && contactForm.get('aportesSaludPensiones_1').touched" >
+            Campo requerido
+          </mat-error>       
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.aportesSaludPensiones_1 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>       
+  </li>
+  <br>
+  
+  <li>
+    <h3>Contribuciones al Fondo de Solidaridad Pensional que realizaste durante el 2019:</h3>  
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm">
+        <mat-form-field >         
+          <mat-label>Ingresa un valor</mat-label>
+          <input matInput placeholder="Ingresa un valor" type="number"
+          formControlName="contribucionesSolidaridadPensiones_1">
+        </mat-form-field>  
+              
+      </div>
+  
+      <div class="col-sm">
+        <div class="container3">
+          <p>${{contactForm.value.contribucionesSolidaridadPensiones_1 | number:"2.1-2"}}</p>
+        </div>      
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>       
+  </li>
+  <br>
+  
+  <li>
+      <h3>Otras deducciones que realizaste durante el 2019:</h3>  
+    <div class="container">
+      <div class="row">        
+        <div class="col-sm">
+          <mat-form-field >         
+            <mat-label>Ingresa un valor</mat-label>
+            <input matInput placeholder="Ingresa un valor" type="number"
+            formControlName="otrasDeduccionesPensiones_1">
+          </mat-form-field>  
+          <mat-error *ngIf="contactForm.get('otrasDeduccionesPensiones_1').hasError('required')
+          && contactForm.get('otrasDeduccionesPensiones_1').touched" >
+            Campo requerido
+          </mat-error>      
+        </div>
+  
+        <div class="col-sm">
+          <div class="container3">
+            <p>${{contactForm.value.otrasDeduccionesPensiones_1 | number:"2.1-2"}}</p>
+          </div>      
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>       
+    </li>
+    <br>    
+    </form>
+
+    </ul>
+<!--****************finish Pensiones 2*****************-->
+ <!--****************start Pensiones 3*****************-->
+<ul *ngIf="pensiones3">
+        <h2 class="color" style="text-align: center;"><strong>Pensión No.3</strong></h2> 
+
+        <form [formGroup]="contactForm" (ngSubmit)="pensiones">
+
+          <h3><strong>Ingresos de la Pensión</strong></h3>
+              <li>
+              <h3>Ingresos totales  de esta pensión que recibiste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">     
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="ingresosPensiones_2">
+                  </mat-form-field>   
+                  <mat-error *ngIf="contactForm.get('ingresosPensiones_2').hasError('required')
+                  && contactForm.get('ingresosPensiones_2').touched" >
+                    Campo requerido
+                  </mat-error>       
+                </div>
+          
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.ingresosPensiones_2 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>       
+          </li>
+          <br>
+          
+          <h3><strong>Deducciones</strong></h3>
+          
+          <li>
+              <h3>Aportes a salud que realizaste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="aportesSaludPensiones_2">
+                  </mat-form-field>  
+                  <mat-error *ngIf="contactForm.get('aportesSaludPensiones_2').hasError('required')
+                  && contactForm.get('aportesSaludPensiones_2').touched" >
+                    Campo requerido
+                  </mat-error>       
+                </div>
+          
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.aportesSaludPensiones_2 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>       
+          </li>
+          <br>
+          
+          <li>
+            <h3>Contribuciones al Fondo de Solidaridad Pensional que realizaste durante el 2019:</h3>  
+          <div class="container">
+            <div class="row">        
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="contribucionesSolidaridadPensiones_2">
+                </mat-form-field>  
+                      
+              </div>
+          
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.contribucionesSolidaridadPensiones_2 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>       
+          </li>
+          <br>
+          
+          <li>
+              <h3>Otras deducciones que realizaste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="otrasDeduccionesPensiones_2">
+                  </mat-form-field>  
+                  <mat-error *ngIf="contactForm.get('otrasDeduccionesPensiones_2').hasError('required')
+                  && contactForm.get('otrasDeduccionesPensiones_2').touched" >
+                    Campo requerido
+                  </mat-error>      
+                </div>
+          
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.otrasDeduccionesPensiones_2 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>       
+            </li>
+            <br>    
+            </form>
+       
+</ul>
+<!--****************finish Pensiones 3*****************-->
+
+        <!--****************start Pensiones 4*****************-->
+<ul *ngIf="pensiones4">
+        <h2 class="color" style="text-align: center;"><strong>Pensión No.4</strong></h2> 
+
+        <form [formGroup]="contactForm" (ngSubmit)="pensiones">
+
+          <h3><strong>Ingresos de la Pensión</strong></h3>
+              <li>
+              <h3>Ingresos totales  de esta pensión que recibiste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">     
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="ingresosPensiones_3">
+                  </mat-form-field>   
+                  <mat-error *ngIf="contactForm.get('ingresosPensiones_3').hasError('required')
+                  && contactForm.get('ingresosPensiones_3').touched" >
+                    Campo requerido
+                  </mat-error>       
+                </div>
+          
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.ingresosPensiones_3 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>       
+          </li>
+          <br>
+          
+          <h3><strong>Deducciones</strong></h3>
+          
+          <li>
+              <h3>Aportes a salud que realizaste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="aportesSaludPensiones_3">
+                  </mat-form-field>  
+                  <mat-error *ngIf="contactForm.get('aportesSaludPensiones_3').hasError('required')
+                  && contactForm.get('aportesSaludPensiones_3').touched" >
+                    Campo requerido
+                  </mat-error>       
+                </div>
+          
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.aportesSaludPensiones_3 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>       
+          </li>
+          <br>
+          
+          <li>
+            <h3>Contribuciones al Fondo de Solidaridad Pensional que realizaste durante el 2019:</h3>  
+          <div class="container">
+            <div class="row">        
+              <div class="col-sm">
+                <mat-form-field >         
+                  <mat-label>Ingresa un valor</mat-label>
+                  <input matInput placeholder="Ingresa un valor" type="number"
+                  formControlName="contribucionesSolidaridadPensiones_3">
+                </mat-form-field>  
+                      
+              </div>
+          
+              <div class="col-sm">
+                <div class="container3">
+                  <p>${{contactForm.value.contribucionesSolidaridadPensiones_3 | number:"2.1-2"}}</p>
+                </div>      
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>       
+          </li>
+          <br>
+          
+          <li>
+              <h3>Otras deducciones que realizaste durante el 2019:</h3>  
+            <div class="container">
+              <div class="row">        
+                <div class="col-sm">
+                  <mat-form-field >         
+                    <mat-label>Ingresa un valor</mat-label>
+                    <input matInput placeholder="Ingresa un valor" type="number"
+                    formControlName="otrasDeduccionesPensiones_3">
+                  </mat-form-field>  
+                  <mat-error *ngIf="contactForm.get('otrasDeduccionesPensiones_3').hasError('required')
+                  && contactForm.get('otrasDeduccionesPensiones_3').touched" >
+                    Campo requerido
+                  </mat-error>      
+                </div>
+          
+                <div class="col-sm">
+                  <div class="container3">
+                    <p>${{contactForm.value.otrasDeduccionesPensiones_3 | number:"2.1-2"}}</p>
+                  </div>      
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>       
+            </li>
+            <br>    
+            </form>
+       
+</ul>
+<!--****************finish Pensiones 4*****************-->
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Salir</button>
+  <button mat-button type="submit" [disabled]="contactForm.invalid"
+  (click)="pensiones($event)"
+  mat-flat-button color="primary" >Guardar respuestas
+</button>
+</mat-dialog-actions>
